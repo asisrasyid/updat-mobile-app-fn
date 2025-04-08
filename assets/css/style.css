@@ -2556,7 +2556,7 @@ button.list_product_btn:hover {
 	margin-bottom: 6px;
 }
 
-.single_billing_inp input,
+/* .single_billing_inp input,
 .single_billing_inp textarea {
 	font-size: 14px;
 	width: 100%;
@@ -2565,7 +2565,7 @@ button.list_product_btn:hover {
 	border: 1px solid #e9e4e4;
 	border-radius: 3px;
 	margin-bottom: 5px;
-}
+} */
 
 .single_billing_inp input.right {
 	border: 1px solid #28a745;

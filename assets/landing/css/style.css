@@ -1,0 +1,358 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&family=Roboto:wght@400;500;700&display=swap');
+body {
+    font-family: 'Poppins', sans-serif;
+    font-weight: 400;
+    font-size: 16px;
+    line-height: 26px;
+    color: #2B2D42;
+    overflow-x: hidden;
+}
+
+button:focus,
+a:focus,
+input:focus,
+textarea,
+select {
+    outline: none;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+    font-family: 'Roboto', sans-serif;
+}
+
+a{
+    text-decoration: none;
+}
+
+.text-color {
+    color: #FD3D57 !important;
+}
+
+.section_title h2 {
+    font-size: 32px;
+    line-height: 48px;
+    text-align: center;
+    text-transform: capitalize;
+    margin-bottom: 28px;
+}
+
+.default_btn {
+    background: #FD3D57;
+    box-shadow: 0px 6px 20px rgba(253, 61, 87, 0.3);
+    border-radius: 3px;
+    padding: 12px 32px;
+    font-family: Roboto;
+    font-weight: 500;
+    font-size: 16px;
+    line-height: 24px;
+    color: #FFFFFF;
+    text-transform: uppercase;
+    border: 1px solid #FD3D57;
+    transition: .3s;
+}
+
+/*header*/
+.logo img {
+    width: 120px;
+}
+
+.menu a {
+    display: block;
+    color: #2B2D42;
+    font-weight: 500;
+    font-size: 16px;
+    line-height: 24px;
+    font-family: Roboto;
+    margin-right: 32px;
+    transition: .3s;
+}
+
+.menu a:last-child {
+}
+
+header {
+    padding: 16px 0;
+    position: absolute;
+    width: 100%;
+    left: 0;
+    top: 0;
+}
+
+/* Banner */
+.banner_img img {
+    width: 115%;
+}
+
+.landing_banner{
+    background-image: url(../images/landing-bg.jpg);
+    background-size: cover;
+    background-position: center;
+}
+
+.banner_content {
+    padding-top: 250px;
+    padding-bottom: 200px;
+}
+
+.banner_content h1 {
+    font-size: 38px;
+    line-height: 52px;
+    color: #2B2D42;
+    margin-bottom: 8px;
+}
+
+.default_btn:hover {
+    background: transparent;
+    color: #FD3D57;
+}
+
+.banner_content p {
+    font-size: 16px;
+    line-height: 24px;
+    color: #52575C;
+    margin-bottom: 32px;
+}
+
+.text-lg{
+    font-size: 20px;
+}
+
+.section_padding {
+    padding: 56px 0;
+}
+
+.section_padding_b {
+    padding-bottom: 56px;
+}
+
+.section_padding_t {
+    padding-top: 56px;
+}
+
+/* all pages */
+
+.isotop_btns{
+    display: flex;
+    justify-content: center;
+    margin-bottom: 32px;
+}
+
+.isotop_btns button{
+    font-family: Roboto;
+    font-style: normal;
+    font-weight: 500;
+    font-size: 16px;
+    line-height: 24px;
+    color: #2B2D42;
+    padding: 8px 24px;
+    border-radius: 3px;
+    border: 1px solid #FD3D57;
+    background: #FFF;
+    transition: .3s;
+}
+
+.isotop_btns button.active,.isotop_btns button:hover{
+    color: #ffffff;
+    background: #FD3D57;
+}
+
+.single_pages {
+    display: block;
+    box-shadow: 0px 10px 20px rgba(0, 0, 0, 0.04), 0px 2px 6px rgba(0, 0, 0, 0.04), 0px 0px 1px rgba(0, 0, 0, 0.04);
+    border-radius: 3px;
+    background: #fff;
+}
+
+.page_content h4 {
+    margin: 0;
+    font-size: 18px;
+    text-transform: capitalize;
+    text-align: center;
+    color: #2B2D42;
+}
+
+.page_img{
+    position: relative;
+}
+
+.prod_soh {
+    width: 100%;
+    height: 100%;
+    position: absolute;
+    left: 0;
+    top: 0;
+    background: rgba(43, 45, 66, 0.48);
+    opacity: 0;
+    transition: .5s;
+    -webkit-transition: .5s;
+    -moz-transition: .5s;
+    -ms-transition: .5s;
+    -o-transition: .5s;
+    font-size: 40px;
+    color: #fff;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.qk_view span {
+    margin-right: 5px;
+}
+
+.single_pages:hover .prod_soh {
+    opacity: 1;
+}
+
+.page_img img {
+    width: 100%;
+    height: 270px;
+    object-fit: cover;
+    object-position: top center;
+}
+
+.page_content {
+    padding: 12px;
+}
+
+/* theme foeature */
+.single_feature {
+    padding: 32px 16px;
+    box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.04), 0px 0px 2px rgba(0, 0, 0, 0.06), 0px 0px 1px rgba(0, 0, 0, 0.04);
+    border-radius: 3px;
+    text-align: center;
+}
+
+.feature_img img {
+    width: 70px;
+    height: 57px;
+    object-fit: contain;
+}
+
+.feature_content h4 {
+    font-size: 20px;
+    line-height: 24px;
+    margin-top: 20px;
+    margin-bottom: 5px;
+    text-transform: capitalize;
+}
+
+.feature_content p {
+    font-size: 14px;
+    line-height: 22px;
+    color: #464545;
+    margin-bottom: 0;
+}
+
+.footer_icon {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.footer_icon a {
+    width: 30px;
+    height: 30px;
+    border: 1px solid #464545;
+    font-size: 20px;
+    border-radius: 50%;
+    color: #464545;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 0 4px;
+}
+
+footer {
+    padding: 56px 0;
+    background: #fd3d571a;
+}
+
+/* device 1200px */
+@media (max-width: 1200px){
+    .banner_content {
+        padding-top: 160px;
+        padding-bottom: 120px;
+    }
+    .banner_content h1 {
+        font-size: 32px;
+        line-height: 42px;
+    }
+    .banner_img img {
+        width: 100%;
+    }
+}
+
+/* device 992px */
+@media (max-width: 992px){
+    .banner_content {
+        padding-top: 130px;
+        padding-bottom: 56px;
+    }
+    .navbar{
+        position: relative;
+    }
+    .menu {
+        position: absolute;
+        right: 0;
+        top: 100%;
+        background: #fff;
+        flex-direction: column;
+        width: 220px;
+        padding: 8px 0;
+        box-shadow: 0 0 10px #00000020;
+        border-radius: 3px;
+        opacity: 0;
+        visibility: hidden;
+        margin-top: 10px;
+        transition: .3s;
+    }
+    .menu.active{
+        opacity: 1;
+        visibility: visible;
+        margin-top: 0;
+    }
+    .menu a {
+        margin: 0;
+        padding: 6px 16px;
+    }
+    .menu a:hover {
+        background: #f5e6eb;
+    }
+    /* mobile bar */
+    .mobile_bar {
+        border: 1px solid #fd3d57;
+        height: 38px;
+        width: 38px;
+        align-items: center;
+        justify-content: center;
+        cursor: pointer;
+    }
+}
+
+/* device 768px */
+@media (max-width: 768px){
+    .default_btn {
+        padding: 10px 24px;
+    }
+    .section_title h2 {
+        font-size: 28px;
+        line-height: 36px;
+    }
+    .isotop_btns button {
+        padding: 4px 16px;
+        font-size: 14px;
+    }
+}
+
+/* device 480px */
+@media (max-width: 480px){
+    .default_btn {
+        padding: 10px 16px;
+        font-size: 14px;
+    }
+}
