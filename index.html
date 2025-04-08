@@ -91,7 +91,7 @@
 										<i class="las la-robot"></i>
 										Setting
 									</a>
-									<a href="login.html">
+									<a href="javascript:void(0)" id="LogOutSistem">
 										<i class="las la-power-off"></i>
 										Log out
 									</a>
@@ -593,5 +593,12 @@
 			}
 		
 		</script>
+		<script>
+					document.getElementById("LogOutSistem").addEventListener("click", function (e) {
+					  e.preventDefault();
+					  localStorage.clear();
+					  window.location.href = "index.html";
+					});
+				  </script>	
 	</body>
 </html>
