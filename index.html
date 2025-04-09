@@ -4,7 +4,7 @@
 		<meta charset="UTF-8" />
 		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
 		<title>Managament Finance</title>
-		<link rel="manifest" href="manifest.json" />
+		<link rel="manifest" href="/updat-mobile-app-fn/manifest.json" />
   		<meta name="theme-color" content="#4CAF50"/>
   		<link rel="icon" href="https://cdn-icons-png.flaticon.com/512/906/906334.png" />
 
@@ -572,11 +572,12 @@
 		<script src="assets/js/jquery.nice-select.min.js"></script>
 		<script src="assets/js/app.js"></script>
 		<script>
-		const spreadsheetUrl = "https://script.google.com/macros/s/AKfycbyBfKNeW5yhAyL8BdaJo6AhkbVfEPeorcqOMjPElrCCZJU9sQpCKpWwGAAqSYqKSqFw2g/exec?dataset=accdta"; // Ganti dgn URL kamu		
+		const spreadsheetUrl = "https://script.google.com/macros/s/AKfycbyBfKNeW5yhAyL8BdaJo6AhkbVfEPeorcqOMjPElrCCZJU9sQpCKpWwGAAqSYqKSqFw2g/exec?dataset=accdta"; 
 		const savedUser = localStorage.getItem('user');
     	const outputElements = document.querySelectorAll('.output');
 		if (savedUser) {
 			outputElements.forEach(el => el.textContent = savedUser);
+			$('.preloader').fadeOut(500, function(){ $('.preloader').remove(); } );
 		 }
 			else {
 				fetch(spreadsheetUrl)
@@ -585,20 +586,22 @@
 					const user = data.value || 'User Tidak Dikenal';
 					localStorage.setItem('user', user);
 					outputElements.forEach(el => el.textContent = user);
+					$('.preloader').fadeOut(500, function(){ $('.preloader').remove(); } );
 				})
 				.catch(err => {
 					console.error('Gagal mengambil data:', err);
 					outputElements.forEach(el => el.textContent = 'Gagal memuat data');
+					$('.preloader').fadeOut(500, function(){ $('.preloader').remove(); } );
 				});
 			}
 		
 		</script>
 		<script>
-					document.getElementById("LogOutSistem").addEventListener("click", function (e) {
-					  e.preventDefault();
-					  localStorage.clear();
-					  window.location.href = "index.html";
-					});
-				  </script>	
+			document.getElementById("LogOutSistem").addEventListener("click", function (e) {
+			  e.preventDefault(); 
+			  localStorage.clear(); 
+			  window.location.href = "index.html"; 
+			});
+		</script>	
 	</body>
 </html>
