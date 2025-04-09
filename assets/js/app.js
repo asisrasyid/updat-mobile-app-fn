@@ -7,7 +7,7 @@
 
     // hide perloader
     window.onload = function () {
-        $('.preloader').fadeOut(500, function(){ $('.preloader').remove(); } );
+        //$('.preloader').fadeOut(500, function(){ $('.preloader').remove(); } );
 
         // set color in localStorage
         lsPrimaryColor = window.localStorage.getItem("theme_primary_color")
