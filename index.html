@@ -579,21 +579,9 @@
 			outputElements.forEach(el => el.textContent = savedUser);
 			$('.preloader').fadeOut(500, function(){ $('.preloader').remove(); } );
 		 }
-			else {
-				fetch(spreadsheetUrl)
-				.then(response => response.json())
-				.then(data => {
-					const user = data.value || 'User Tidak Dikenal';
-					localStorage.setItem('user', user);
-					outputElements.forEach(el => el.textContent = user);
-					$('.preloader').fadeOut(500, function(){ $('.preloader').remove(); } );
-				})
-				.catch(err => {
-					console.error('Gagal mengambil data:', err);
-					outputElements.forEach(el => el.textContent = 'Gagal memuat data');
-					$('.preloader').fadeOut(500, function(){ $('.preloader').remove(); } );
-				});
-			}
+		 else {
+			window.location.href = "login.html"; 	
+		 }
 		
 		</script>
 		<script>
