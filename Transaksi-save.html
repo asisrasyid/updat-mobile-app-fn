@@ -109,6 +109,9 @@
 	</head>
 
 	<body>
+		<div id="loadingOverlay" style="display:none;">
+            <div class="spinner"></div>
+          </div>
 		<!-- Preloader -->
 		<div class="preloader">
 			<img src="assets/images/preloader.gif" alt="preloader" />
@@ -119,7 +122,7 @@
 			<button type="button" id="settings_toggler">
 				<i class="las la-cog"></i>
 			</button>
-			<h3>Themes settings</h3>
+			<h3>Settings</h3>
 
 			<h5>Primary Colors</h5>
 			<div class="setting_colors">
@@ -150,6 +153,12 @@
 				</button>
 				<button data-color="#44403c" class="second_4 change_sec_color">
 					<i class="icon las la-check"></i>
+				</button>
+			</div>
+            <h5>System shortcut</h5>
+			<div class="mt-2">                 
+				<button type="button" id="pembahruandata" class="btn btn-outline-primary">
+					 Reload
 				</button>
 			</div>
 		</div>
@@ -298,11 +307,11 @@
 				</h5>
 				<ul>
 					<li class="withsub">
-						<a href="javascript:void(0)"> Home </a>
+						<a href="javascript:void(0)"> Management </a>
 						<div class="submn">
-							<a href="index-1.html">Home 1</a>
-							<a href="index-2.html">Home 2</a>
-							<a href="index-3.html">Home 3</a>
+							<a href="index.html">Dashboard</a>
+							<a href="plan-saveing.html">Saveing-Plan</a>
+							<a href="budgeting-view.html">Budgeting</a>
 						</div>
 					</li>
 
@@ -518,27 +527,15 @@
 		<script src="assets/sweetalert2/sweetalert2.js"></script>
 		<script src="assets/js/app.js"></script>
 		<script>
-			const spreadsheetUrl3 = "https://script.google.com/macros/s/AKfycbyBfKNeW5yhAyL8BdaJo6AhkbVfEPeorcqOMjPElrCCZJU9sQpCKpWwGAAqSYqKSqFw2g/exec?dataset=accdta"; // Ganti dgn URL kamu		
+			const spreadsheetUrl = "https://script.google.com/macros/s/AKfycbyBfKNeW5yhAyL8BdaJo6AhkbVfEPeorcqOMjPElrCCZJU9sQpCKpWwGAAqSYqKSqFw2g/exec?dataset=accdta"; 
 			const savedUser = localStorage.getItem('user');
 			const outputElements = document.querySelectorAll('.output');
 			if (savedUser) {
 				outputElements.forEach(el => el.textContent = savedUser);
 			 }
-				else {
-					fetch(spreadsheetUrl3)
-					.then(response => response.json())
-					.then(data => {
-						const user = data.value || 'User Tidak Dikenal';
-						localStorage.setItem('user', user);
-						outputElements.forEach(el => el.textContent = user);
-						
-					})
-					.catch(err => {
-						console.error('Gagal mengambil data:', err);
-						outputElements.forEach(el => el.textContent = 'Gagal memuat data');
-						
-					});
-				}
+			 else {
+				window.location.href = "login.html"; 	
+			 }
 			
 			</script>
 		<script> 
@@ -591,11 +588,8 @@
 			  });
 			</script>
 			<script>
-			  const spreadsheetUrl = "https://script.google.com/macros/s/AKfycbyBfKNeW5yhAyL8BdaJo6AhkbVfEPeorcqOMjPElrCCZJU9sQpCKpWwGAAqSYqKSqFw2g/exec?dataset=bckdata"; // Ganti dgn URL kamu		
-		fetch(spreadsheetUrl)
-				.then(res => res.json())
-				.then(data => {
-				  const jenisDropdown = document.getElementById("JenisTransaksi");
+			function PenampilDropDown(data) {
+				const jenisDropdown = document.getElementById("JenisTransaksi");
 				  const kelompokDropdown = document.getElementById("keteranganDropdown");
 				  const enumDropdown = document.getElementById("enumDropdown");
 				  const sumberDropdown = document.getElementById("bySumber");
@@ -633,7 +627,6 @@
 					jenisDropdown.appendChild(opt);
 					$('.preloader').fadeOut(500, function(){ $('.preloader').remove(); } );
 				  });
-
 				  jenisDropdown.addEventListener("change", function () {
 					  const selectedJenis = this.value;
 					  inputJenis.value = selectedJenis; 
@@ -700,8 +693,39 @@
 					manualSumberInput.addEventListener("input", function () {
 						inputSumber.value = this.value;
 					});
-				});
-				</script>
+			}
+			function ambildaatadrop(){
+			const spreadsheetUrl = "https://script.google.com/macros/s/AKfycbyBfKNeW5yhAyL8BdaJo6AhkbVfEPeorcqOMjPElrCCZJU9sQpCKpWwGAAqSYqKSqFw2g/exec?dataset=bckdata";		
+			const datalocaldrop = localStorage.getItem('data-drop');
+			if(datalocaldrop) {
+				const prosesdata = JSON.parse(datalocaldrop);
+				PenampilDropDown(prosesdata);
+			} else {
+				fetch(spreadsheetUrl)
+			  		.then(res => res.json())
+			  		.then(data => {
+						localStorage.setItem('data-drop', JSON.stringify(data));
+						PenampilDropDown(data)
+						$('.preloader').fadeOut(500, function(){ $('.preloader').remove(); } );
+				})
+				.catch(err => console.error('Gagal ambil data:', err));
+			}
+			}
+			document.addEventListener('DOMContentLoaded', ambildaatadrop);
+			document.getElementById("pembahruandata").addEventListener("click", function(event) {
+            event.preventDefault();
+            document.getElementById("loadingOverlay").style.display = "flex";
+			const spreadsheetUrlSvdt = "https://script.google.com/macros/s/AKfycbyBfKNeW5yhAyL8BdaJo6AhkbVfEPeorcqOMjPElrCCZJU9sQpCKpWwGAAqSYqKSqFw2g/exec?dataset=bckdata";		
+			fetch(spreadsheetUrlSvdt) 
+                .then(res => res.json())
+                .then(res => {
+                  localStorage.setItem('data-drop', JSON.stringify(res));
+                  window.location.reload();
+                  //tampilkanDataKeUI(res.value);
+                })
+                .catch(err => {console.error('Gagal ambil data:', err); document.getElementById("loadingOverlay").style.display = "none";});
+        });
+			</script>
 				<script>
 					document.getElementById("LogOutSistem").addEventListener("click", function (e) {
 					  e.preventDefault(); 
