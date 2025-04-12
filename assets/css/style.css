@@ -1978,10 +1978,17 @@ button.list_product_btn:hover {
 	padding-bottom: 15px;
 }
 
+.single_shop_cart_index {
+	margin-top: 10px;
+	border: 1px solid #e9e4e4;
+	border-radius: 5px;
+	padding: 10px;
+	padding-bottom: 7px;
+}
+
 .single_shop_cart {
 	margin-top: 24px;
 }
-
 .cart_summary {
 	padding-bottom: 15px;
 }
