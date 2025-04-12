@@ -29,7 +29,7 @@
 			<button type="button" id="settings_toggler">
 				<i class="las la-cog"></i>
 			</button>
-			<h3>Themes settings</h3>
+			<h3>Settings</h3>
 
 			<h5>Primary Colors</h5>
 			<div class="setting_colors">
@@ -60,6 +60,12 @@
 				</button>
 				<button data-color="#44403c" class="second_4 change_sec_color">
 					<i class="icon las la-check"></i>
+				</button>
+			</div>
+            <h5>System shortcut</h5>
+			<div class="mt-2">                 
+				<button type="button" id="pembahruandata" class="btn btn-outline-primary">
+					 Reload
 				</button>
 			</div>
 		</div>
@@ -290,7 +296,7 @@
 													<p><strong class="output"></strong> dicatat ya Pengeluarannya</p>
 													<h1>Punya rencana Menabung? yuk buat!</h1>
 													<div class="hero_btn">
-														<a class="default_btn small rounded" href="shop-grid.html">Rencanan Tabungan</a>
+														<a class="default_btn small rounded" href="plan-saveing.html">Rencanan Tabungan</a>
 													</div>
 												</div>
 											</div>
@@ -327,21 +333,15 @@
 					</div>
 				</div>
 				<div class="col-xl-3">
-					<div class="banner_collection mt-5 pt-2 pt-xl-0 mt-xl-0 d-flex flex-xl-column flex-row gap-3">
-						<a href="#" class="single_bannercol">
-							<h4>Shoes Collection</h4>
-							<h5>30% off</h5>
-							<div class="bancol_img">
-								<img loading="lazy" src="assets/images/shoes-4.png" alt="shoes" />
+					<h2 class="section_title_2 mb-0">Saveing Plan</h2>
+					<div id="data-container" class="shop_cart_wrap wishlist single_shop_cart_index">
+					</div>
+					<div class="shop_cart_wrap wishlist single_shop_cart_index">
+						<div>
+							<div class="row justify-content-center">
+								<a class="default_btn small rounded" href="plan-saveing.html">Lihat Rencanan Tabungan</a>
 							</div>
-						</a>
-						<a href="#" class="single_bannercol">
-							<h4>Sunglasses Collection</h4>
-							<h5>20% off</h5>
-							<div class="bancol_img">
-								<img loading="lazy" src="assets/images/glass.png" alt="shoes" />
-							</div>
-						</a>
+						</div> 
 					</div>
 				</div>
 			</div>
@@ -577,7 +577,7 @@
     	const outputElements = document.querySelectorAll('.output');
 		if (savedUser) {
 			outputElements.forEach(el => el.textContent = savedUser);
-			$('.preloader').fadeOut(500, function(){ $('.preloader').remove(); } );
+			//$('.preloader').fadeOut(500, function(){ $('.preloader').remove(); } );
 		 }
 		 else {
 			window.location.href = "login.html"; 	
@@ -591,5 +591,76 @@
 			  window.location.href = "index.html"; 
 			});
 		</script>	
+		  <script> 
+			function formatRupiah(number) {
+				return Number(number).toLocaleString('id-ID');
+			}
+			function formatBulanTahun(dateStr) {
+				const bulan = [
+					'Januari', 'Februari', 'Maret', 'April', 'Mei', 'Juni',
+					'Juli', 'Agustus', 'September', 'Oktober', 'November', 'Desember'
+				];
+			  const date = new Date(dateStr);
+			  const namaBulan = bulan[date.getMonth()];
+			  const tahun = date.getFullYear();
+			  return `${namaBulan}-${tahun}`;
+			}
+				
+			function tampilkanDataKeUI(data) {
+			  const container = document.getElementById('data-container'); // pastikan kamu punya <div id="data-container"></div> di HTML-mu
+			  container.innerHTML = ''; // Kosongkan dulu
+			  const top3 = data.slice(0, 3);
+
+			  top3.forEach(item => {
+				const el = document.createElement('div');
+				el.className = 'd-flex align-items-center flex-wrap';
+				el.innerHTML = `
+				  <div class="cart_cont">
+					<a href="product-view.html"><h5>${item.judul}</h5></a>
+				  </div>
+				  <div class="page-wrap">  
+					<div class="meter">
+					  <span class="progress" style="width: ${item.persen_tercapai}%"></span>
+					  <div class="label">${item.persen_tercapai}% dari  ${formatRupiah(item.target_nominal)}</div>
+					</div>
+				  </div>
+				`;
+				container.appendChild(el);
+			  });
+			  $('.preloader').fadeOut(500, function(){ $('.preloader').remove(); } );
+			}
+			function ambilData() {
+				const dataLocal = localStorage.getItem('saving_plan_Index');
+				const spreadsheetUrlSvdt = "https://script.google.com/macros/s/AKfycbyBfKNeW5yhAyL8BdaJo6AhkbVfEPeorcqOMjPElrCCZJU9sQpCKpWwGAAqSYqKSqFw2g/exec?dataset=trgSave"; 
+	
+				if (dataLocal) {
+				  const parsedData = JSON.parse(dataLocal);
+				  tampilkanDataKeUI(parsedData);
+				} else {
+				  fetch(spreadsheetUrlSvdt) 
+					.then(res => res.json())
+					.then(res => {
+					  localStorage.setItem('saving_plan_Index', JSON.stringify(res.value));
+					  tampilkanDataKeUI(res.value);
+					})
+					.catch(err => console.error('Gagal ambil data:', err));
+				}
+			}
+			document.addEventListener('DOMContentLoaded', ambilData);
+			const submitButton = document.getElementById("pembahruandata");   
+			document.getElementById("pembahruandata").addEventListener("click", function(event) {
+				event.preventDefault();
+				document.getElementById("loadingOverlay").style.display = "flex";
+				const spreadsheetUrlSvdt = "https://script.google.com/macros/s/AKfycbyBfKNeW5yhAyL8BdaJo6AhkbVfEPeorcqOMjPElrCCZJU9sQpCKpWwGAAqSYqKSqFw2g/exec?dataset=trgSave"; 
+				fetch(spreadsheetUrlSvdt) 
+					.then(res => res.json())
+					.then(res => {
+					  localStorage.setItem('saving_plan_Index', JSON.stringify(res.value));
+					  window.location.reload();
+					  //tampilkanDataKeUI(res.value);
+					})
+					.catch(err => {console.error('Gagal ambil data:', err); document.getElementById("loadingOverlay").style.display = "none";});
+			});
+			</script>
 	</body>
 </html>
