@@ -19,10 +19,10 @@
 	</head>
 
 	<body>
-		<!-- Preloader -->
 		<div id="loadingOverlay" style="display:none;">
-			<div class="spinner"></div>
-		</div>
+            <div class="spinner"></div>
+          </div>
+		<!-- Preloader -->
 		<div class="preloader">
 			<img src="assets/images/preloader.gif" alt="preloader" />
 		</div>
@@ -342,7 +342,7 @@
 					<div class="shop_cart_wrap wishlist single_shop_cart_index">
 						<div>
 							<div class="row justify-content-center">
-								<a class="default_btn small rounded" href="plan-saveing.html">Lihat RencananTabungan</a>
+								<a class="default_btn small rounded" href="plan-saveing.html">Lihat Rencanan Tabungan</a>
 							</div>
 						</div> 
 					</div>
@@ -658,7 +658,7 @@
 				fetch(spreadsheetUrlSvdt) 
 					.then(res => res.json())
 					.then(res => {
-					  localStorage.setItem('saving_plan_Index', JSON.stringify(res.value));
+					  localStorage.setItem('saving_plan_Index', JSON.stringify(res));
 					  window.location.reload();
 					  //tampilkanDataKeUI(res.value);
 					})
