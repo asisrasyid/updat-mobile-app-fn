@@ -13,8 +13,14 @@
         lsPrimaryColor = window.localStorage.getItem("theme_primary_color")
         lsSecondaryColor = window.localStorage.getItem("theme_secondary_color")
 
-        if(lsPrimaryColor) root_theme.style.setProperty('--primary-color', lsPrimaryColor);
-        if(lsSecondaryColor) root_theme.style.setProperty('--secondary-color', lsSecondaryColor);   
+        if(lsPrimaryColor) {
+            root_theme.style.setProperty('--primary-color', lsPrimaryColor);
+            updateManifestThemeColor(lsPrimaryColor);
+        }
+        if(lsSecondaryColor) {
+            root_theme.style.setProperty('--secondary-color', lsSecondaryColor);
+            updateManifestThemeColor(lsSecondaryColor);
+        }   
         
         // checked active color
         $(`[data-color="${lsPrimaryColor}"]`).addClass('active')
