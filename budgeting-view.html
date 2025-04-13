@@ -1,0 +1,584 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="UTF-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+		<title>Budgeting Plan - Finance Management</title>
+		<link rel="manifest" href="/manifest.json" />
+		<meta name="theme-color" content="#18181b"/>
+		<link rel="icon" href="https://cdn-icons-png.flaticon.com/512/906/906334.png" />
+
+		<!-- all css -->
+		<link rel="stylesheet" href="assets/css/bootstrap.min.css" />
+		<link rel="stylesheet" href="assets/css/jquery-ui.css" />
+		<link rel="stylesheet" href="assets/css/slick.css" />
+		<link rel="stylesheet" href="assets/css/line-awesome.css" />
+		<link rel="stylesheet" href="assets/css/nice-select.css" />
+		<link rel="stylesheet" href="assets/css/style.css" />
+		<link rel="stylesheet" href="assets/css/responsive.css" />
+	</head>
+
+	<body>
+		<div id="loadingOverlay" style="display:none;">
+            <div class="spinner"></div>
+        </div>
+		<!-- Preloader -->
+		<!-- <div class="preloader">
+			<img src="assets/images/preloader.gif" alt="preloader" />
+		</div> -->
+
+		<!-- Settings -->
+		<div class="theme_settings">
+			<button type="button" id="settings_toggler">
+				<i class="las la-cog"></i>
+			</button>
+			<h3>Settings</h3>
+
+			<h5>Primary Colors</h5>
+			<div class="setting_colors">
+				<button data-color="#FD3D57" class="prime_1 change_prime_color">
+					<i class="icon las la-check"></i>
+				</button>
+				<button data-color="#3498db" class="prime_2 change_prime_color">
+					<i class="icon las la-check"></i>
+				</button>
+				<button data-color="#1abc9c" class="prime_3 change_prime_color">
+					<i class="icon las la-check"></i>
+				</button>
+				<button data-color="#F79F1F" class="prime_4 change_prime_color">
+					<i class="icon las la-check"></i>
+				</button>
+			</div>
+
+			<h5>Secondary Colors</h5>
+			<div class="setting_colors">
+				<button data-color="#18181b" class="second_1 change_sec_color">
+					<i class="icon las la-check"></i>
+				</button>
+				<button data-color="#1e293b" class="second_2 change_sec_color">
+					<i class="icon las la-check"></i>
+				</button>
+				<button data-color="#374151" class="second_3 change_sec_color">
+					<i class="icon las la-check"></i>
+				</button>
+				<button data-color="#44403c" class="second_4 change_sec_color">
+					<i class="icon las la-check"></i>
+				</button>
+			</div>
+            <h5>System shortcut</h5>
+			<div class="mt-2">                 
+				<button type="button" id="pembahruandata" class="default_btn_filter">
+					 Reload
+				</button>
+			</div>
+			<h5>Filter Data</h5>
+			<div class="mt-2">
+				<button class="default_btn_filter">Week</button>
+				<button class="default_btn_filter">Month</button>
+				<button class="default_btn_filter">Year</button> 
+			</div>
+		</div>
+
+		<!-- top header -->
+		<header class="home-3">
+			<div class="container">
+				<div class="d-flex align-items-center justify-content-sm-between">
+					<div class="logo">
+					</div>
+					<div class="search_wrap d-none d-lg-block">
+					</div>
+					<div class="header_icon d-flex align-items-center ms-auto ms-sm-0">
+						<div class="shopcart">
+						</div>
+						<div class="position-relative myacwrap home-1">
+							<a href="javascript:void(0)" class="icon_wrp text-center myacc">
+								<span class="icon">
+									<i class="icon-user-line"></i>
+								</span>
+								<span class="icon_text">Account</span>
+							</a>
+							<div class="myacc_cont">
+								<div class="ac_links">
+									<a href="account.html" class="myac">
+										<i class="lar la-id-card"></i>
+										My Account
+									</a>
+									<a href="account-order-history.html">
+										<i class="las la-robot"></i>
+										Setting
+									</a>
+									<a href="javascript:void(0)" id="LogOutSistem">
+										<i class="las la-power-off"></i>
+										Log out
+									</a>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</header>
+
+		<!-- mobile bottom bar -->
+		<div class="mobile_bottombar d-block d-lg-none">
+			<div class="header_icon">
+				<a href="index.html" class="icon_wrp text-center">
+					<span class="icon">
+						<i class="las la-chart-bar"></i>
+					</span>
+					<span class="icon_text">Dashboard</span>
+				</a>
+				<a href="javascript:void(0)" class="icon_wrp text-center open_menu">
+					<span class="icon">
+						<i class="las la-bars"></i>
+					</span>
+					<span class="icon_text">Menu</span>
+				</a>
+				<a href="Transaksi-save.html" class="icon_wrp text-center">
+					<span class="icon">
+						<i class="las la-edit"></i>
+					</span>
+					<span class="icon_text">Simpan Transaksi</span>
+				</a>
+			</div>
+		</div>
+
+		<!-- mobile menu -->
+		<div class="mobile_menwrap d-lg-none" id="mobile_menwrap">
+			<div class="mobile_menu_2">
+				<h5 class="mobile_title">
+					Menu
+					<span class="sidebarclose" id="menuclose">
+						<i class="las la-times"></i>
+					</span>
+				</h5>
+				<ul>
+					<li class="">
+						<a href="index.html">Dashboard</a>
+					</li>
+					<li class="">
+						<a href="plan-saveing.html">Saveing-Plan</a>
+					</li>
+					<li class=""> 
+						<a href="budgeting-view.html">Budgeting</a>
+					</li>
+					<li class="">
+						<a href="budgeting-view.html">Riyawat Transaksi</a>
+					</li>
+				</ul>
+			</div>
+		</div>
+		<div class="container">
+			<div class="breadcrumbs">
+				<a href="index.html"><i class="las la-home"></i></a>
+				<a href="#" class="active">Budgeting</a>
+			</div>
+		</div>
+
+		
+		<!-- Budgeting Content -->
+		<div class="container-lg home_2_hero_wrp home-3 mb-3">
+			<div class="row">
+				<div class="col-12">
+					<div class="account_sidebar">
+						<div class="account_profile position-relative shadow_sm">
+							<div class="acprof_img">
+								<a href="account.html">
+									<img loading="lazy" src="assets/images/avatar-2.png" alt="user" />
+								</a>
+							</div>
+							<div class="acprof_cont">
+								<p>Hello,</p>
+								<h3 class="output"></h3>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+
+			<!-- Tab Navigation -->
+			<div class="row mb-4">
+				<div class="col-12">
+					<ul class="nav nav-tabs" id="budgetTabs" role="tablist">
+						<li class="nav-item" role="presentation">
+							<button class="nav-link active" id="resume-tab" data-bs-toggle="tab" data-bs-target="#resume" type="button" role="tab">
+								<i class="las la-chart-pie"></i> Resume
+							</button>
+						</li>
+						<li class="nav-item" role="presentation">
+							<button class="nav-link" id="category-tab" data-bs-toggle="tab" data-bs-target="#category" type="button" role="tab">
+								<i class="las la-list"></i> Kategori
+							</button>
+						</li>
+						<li class="nav-item" role="presentation">
+							<button class="nav-link" id="history-tab" data-bs-toggle="tab" data-bs-target="#history" type="button" role="tab">
+								<i class="las la-history"></i> Riwayat
+							</button>
+						</li>
+					</ul>
+				</div>
+			</div>
+
+			<!-- Tab Content -->
+			<div class="tab-content" id="budgetTabsContent">
+				<!-- Resume Tab -->
+				<div class="tab-pane fade show active" id="resume" role="tabpanel">
+					<!-- Quick Add Category Button -->
+					<div class="row mb-4">
+						<div class="col-12">
+							<div class="d-flex justify-content-end">
+								<button class="default_btn btn-sm" id="addCategoryBtnResume">
+									<i class="las la-plus"></i> Tambah Anggaran
+								</button>
+							</div>
+						</div>
+					</div>
+
+					<!-- Budget Summary Cards -->
+					<div class="row mb-4">
+						<div class="col-md-4">
+							<div class="budget_card">
+								<div class="budget_card_header">
+									<h4>Total Anggaran</h4>
+									<i class="las la-wallet"></i>
+								</div>
+								<div class="budget_card_body">
+									<h3 id="totalBudget">Rp 0</h3>
+									<p>Bulan Ini</p>
+								</div>
+							</div>
+						</div>
+						<div class="col-md-4">
+							<div class="budget_card">
+								<div class="budget_card_header">
+									<h4>Pengeluaran</h4>
+									<i class="las la-money-bill-wave"></i>
+								</div>
+								<div class="budget_card_body">
+									<h3 id="totalSpent">Rp 0</h3>
+									<p>Bulan Ini</p>
+								</div>
+							</div>
+						</div>
+						<div class="col-md-4">
+							<div class="budget_card">
+								<div class="budget_card_header">
+									<h4>Sisa Anggaran</h4>
+									<i class="las la-piggy-bank"></i>
+								</div>
+								<div class="budget_card_body">
+									<h3 id="remainingBudget">Rp 0</h3>
+									<p>Bulan Ini</p>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+
+				<!-- Category Tab -->
+				<div class="tab-pane fade" id="category" role="tabpanel">
+					<!-- Quick Add Category Button -->
+					<div class="row mb-4">
+						<div class="col-12">
+							<div class="d-flex justify-content-end">
+								<button class="default_btn btn-sm" id="addCategoryBtn">
+									<i class="las la-plus"></i> Tambah Kategori
+								</button>
+							</div>
+						</div>
+					</div>
+
+					<!-- Budget Categories Table -->
+					<div class="row">
+						<div class="col-12">
+							<div class="budget_categories">
+								<div class="d-flex justify-content-between align-items-center mb-3">
+									<h4>Kategori Anggaran</h4>
+								</div>
+								<div class="table-responsive">
+									<table class="table">
+										<thead>
+											<tr>
+												<th>Kategori</th>
+												<th>Anggaran</th>
+												<th>Terpakai</th>
+												<th>Sisa</th>
+												<th>Progress</th>
+												<th>Aksi</th>
+											</tr>
+										</thead>
+										<tbody id="budgetCategories">
+											<!-- Data akan diisi melalui JavaScript -->
+										</tbody>
+									</table>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+
+				<!-- History Tab -->
+				<div class="tab-pane fade" id="history" role="tabpanel">
+					<div class="row">
+						<div class="col-12">
+							<div class="budget_categories">
+								<div class="d-flex justify-content-between align-items-center mb-3">
+									<h4>Riwayat Anggaran</h4>
+									<div class="btn-group">
+										<button class="default_btn btn-sm active" data-period="week">Minggu Ini</button>
+										<button class="default_btn btn-sm" data-period="month">Bulan Ini</button>
+										<button class="default_btn btn-sm" data-period="year">Tahun Ini</button>
+									</div>
+								</div>
+								<div class="table-responsive">
+									<table class="table">
+										<thead>
+											<tr>
+												<th>Tanggal</th>
+												<th>Kategori</th>
+												<th>Jenis</th>
+												<th>Jumlah</th>
+												<th>Keterangan</th>
+											</tr>
+										</thead>
+										<tbody id="budgetHistory">
+											<!-- Data akan diisi melalui JavaScript -->
+										</tbody>
+									</table>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+
+		<!-- Add Category Modal -->
+		<div class="modal fade" id="addCategoryModal" tabindex="-1">
+			<div class="modal-dialog">
+				<div class="modal-content">
+					<div class="modal-header">
+						<h5 class="modal-title">Tambah Kategori Anggaran</h5>
+						<button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+					</div>
+					<div class="modal-body">
+						<form id="addCategoryForm">
+							<div class="mb-3">
+								<label class="form-label">Nama Kategori</label>
+								<input type="text" class="form-control" id="categoryName" required>
+							</div>
+							<div class="mb-3">
+								<label class="form-label">Anggaran (Rp)</label>
+								<input type="number" class="form-control" id="categoryBudget" required>
+							</div>
+						</form>
+					</div>
+					<div class="modal-footer">
+						<button type="button" class="default_btn" data-bs-dismiss="modal">Batal</button>
+						<button type="button" class="default_btn" id="saveCategoryBtn">Simpan</button>
+					</div>
+				</div>
+			</div>
+		</div>
+
+		<!-- copyright -->
+		<div class="copyright_wrap">
+			<div class="container">
+				<div class="row align-items-center">
+					<div class="col-md-6">
+						<p class="copyright_text">2025 | Finance Management</p>
+					</div>
+				</div>
+			</div>
+		</div>
+
+		<!-- back to top -->
+		<button id="back-to-top" class="back-to-top-hide">
+			<i class="las la-arrow-up"></i>
+		</button>
+
+		<!-- all js -->
+		<script src="assets/js/bootstrap.bundle.min.js"></script>
+		<script src="assets/js/jquery-3.5.1.min.js"></script>
+		<script src="assets/js/jquery-ui.min.js"></script>
+		<script src="assets/js/slick.min.js"></script>
+		<script src="assets/js/jquery.nice-select.min.js"></script>
+		<script src="assets/js/app.js"></script>
+		<script src="assets/js/theme-manager.js"></script>
+		<script>
+			// Cek login
+			const savedUser = localStorage.getItem('user');
+			const outputElements = document.querySelectorAll('.output');
+			if (savedUser) {
+				outputElements.forEach(el => el.textContent = savedUser);
+			} else {
+				window.location.href = "login.html";
+			}
+
+			// Format currency
+			function formatRupiah(number) {
+				return new Intl.NumberFormat('id-ID', {
+					style: 'currency',
+					currency: 'IDR'
+				}).format(number);
+			}
+
+			// Load budget data
+			function loadBudgetData() {
+				const budgetData = JSON.parse(localStorage.getItem('budgetData')) || [];
+				const tbody = document.getElementById('budgetCategories');
+				tbody.innerHTML = '';
+
+				let totalBudget = 0;
+				let totalSpent = 0;
+
+				budgetData.forEach((category, index) => {
+					const remaining = category.budget - category.spent;
+					const progress = (category.spent / category.budget) * 100;
+					
+					totalBudget += category.budget;
+					totalSpent += category.spent;
+
+					tbody.innerHTML += `
+						<tr>
+							<td>${category.name}</td>
+							<td>${formatRupiah(category.budget)}</td>
+							<td>${formatRupiah(category.spent)}</td>
+							<td>${formatRupiah(remaining)}</td>
+							<td>
+								<div class="progress">
+									<div class="progress-bar" role="progressbar" style="width: ${progress}%">
+										${progress.toFixed(1)}%
+									</div>
+								</div>
+							</td>
+							<td>
+								<button class="btn btn-sm btn-primary edit-category" data-index="${index}">
+									<i class="las la-edit"></i>
+								</button>
+								<button class="btn btn-sm btn-danger delete-category" data-index="${index}">
+									<i class="las la-trash"></i>
+								</button>
+							</td>
+						</tr>
+					`;
+				});
+
+				// Update summary cards
+				document.getElementById('totalBudget').textContent = formatRupiah(totalBudget);
+				document.getElementById('totalSpent').textContent = formatRupiah(totalSpent);
+				document.getElementById('remainingBudget').textContent = formatRupiah(totalBudget - totalSpent);
+			}
+
+			// Load budget history
+			function loadBudgetHistory(period = 'week') {
+				const historyData = JSON.parse(localStorage.getItem('budgetHistory')) || [];
+				const tbody = document.getElementById('budgetHistory');
+				tbody.innerHTML = '';
+
+				// Filter data based on period
+				const now = new Date();
+				const filteredData = historyData.filter(item => {
+					const itemDate = new Date(item.date);
+					const diffTime = Math.abs(now - itemDate);
+					const diffDays = Math.ceil(diffTime / (1000 * 60 * 60 * 24));
+					
+					switch(period) {
+						case 'week':
+							return diffDays <= 7;
+						case 'month':
+							return diffDays <= 30;
+						case 'year':
+							return diffDays <= 365;
+						default:
+							return true;
+					}
+				});
+
+				filteredData.forEach(item => {
+					tbody.innerHTML += `
+						<tr>
+							<td>${new Date(item.date).toLocaleDateString('id-ID')}</td>
+							<td>${item.category}</td>
+							<td>${item.type}</td>
+							<td>${formatRupiah(item.amount)}</td>
+							<td>${item.note || '-'}</td>
+						</tr>
+					`;
+				});
+			}
+
+			// Add category from resume tab
+			document.getElementById('addCategoryBtnResume').addEventListener('click', () => {
+				const modal = new bootstrap.Modal(document.getElementById('addCategoryModal'));
+				modal.show();
+			});
+
+			// Add category from category tab
+			document.getElementById('addCategoryBtn').addEventListener('click', () => {
+				const modal = new bootstrap.Modal(document.getElementById('addCategoryModal'));
+				modal.show();
+			});
+
+			document.getElementById('saveCategoryBtn').addEventListener('click', () => {
+				const name = document.getElementById('categoryName').value;
+				const budget = parseFloat(document.getElementById('categoryBudget').value);
+
+				if (name && budget) {
+					const budgetData = JSON.parse(localStorage.getItem('budgetData')) || [];
+					budgetData.push({
+						name,
+						budget,
+						spent: 0
+					});
+
+					localStorage.setItem('budgetData', JSON.stringify(budgetData));
+					loadBudgetData();
+
+					const modal = bootstrap.Modal.getInstance(document.getElementById('addCategoryModal'));
+					modal.hide();
+
+					document.getElementById('addCategoryForm').reset();
+				}
+			});
+
+			// Delete category
+			document.addEventListener('click', (e) => {
+				if (e.target.closest('.delete-category')) {
+					const index = e.target.closest('.delete-category').dataset.index;
+					const budgetData = JSON.parse(localStorage.getItem('budgetData')) || [];
+					budgetData.splice(index, 1);
+					localStorage.setItem('budgetData', JSON.stringify(budgetData));
+					loadBudgetData();
+				}
+			});
+
+			// Period filter buttons
+			document.querySelectorAll('[data-period]').forEach(button => {
+				button.addEventListener('click', (e) => {
+					// Remove active class from all buttons
+					document.querySelectorAll('[data-period]').forEach(btn => {
+						btn.classList.remove('active');
+					});
+					// Add active class to clicked button
+					e.target.classList.add('active');
+					// Load history for selected period
+					loadBudgetHistory(e.target.dataset.period);
+				});
+			});
+
+			// Load initial data
+			document.addEventListener('DOMContentLoaded', () => {
+				loadBudgetData();
+				loadBudgetHistory();
+			});
+
+			// Logout handler
+			document.getElementById("LogOutSistem").addEventListener("click", function (e) {
+				e.preventDefault();
+				localStorage.clear();
+				window.location.href = "login.html";
+			});
+		</script>
+	</body>
+</html> 

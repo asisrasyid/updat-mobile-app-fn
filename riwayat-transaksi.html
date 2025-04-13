@@ -1,0 +1,824 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="UTF-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+		<title>Riwayat Transaksi - Finance Management</title>
+		<link rel="manifest" href="/manifest.json" />
+  		<meta name="theme-color" content="#18181b"/>
+  		<link rel="icon" href="https://cdn-icons-png.flaticon.com/512/906/906334.png" />
+
+		<!-- all css -->
+		<link rel="stylesheet" href="assets/css/bootstrap.min.css" />
+		<link rel="stylesheet" href="assets/css/jquery-ui.css" />
+		<link rel="stylesheet" href="assets/css/slick.css" />
+		<link rel="stylesheet" href="assets/css/line-awesome.css" />
+		<link rel="stylesheet" href="assets/css/nice-select.css" />
+		<link rel="stylesheet" href="assets/css/style.css" />
+		<link rel="stylesheet" href="assets/css/responsive.css" />
+		<style>
+			/* Transaction List Styling */
+			.transaction-list {
+				max-height: 600px;
+				overflow-y: auto;
+			}
+
+			.transaction-item {
+				padding: 12px 15px;
+				border-bottom: 1px solid #e3e6f0;
+				transition: all 0.2s ease;
+				display: flex;
+				justify-content: space-between;
+				align-items: center;
+			}
+
+			.transaction-item:last-child {
+				border-bottom: none;
+			}
+
+			.transaction-item:hover {
+				background-color: #f8f9fc;
+			}
+
+			.transaction-info {
+				display: flex;
+				align-items: center;
+			}
+
+			.transaction-icon {
+				width: 40px;
+				height: 40px;
+				border-radius: 50%;
+				display: flex;
+				align-items: center;
+				justify-content: center;
+				margin-right: 12px;
+			}
+
+			.transaction-icon.income {
+				background-color: rgba(28, 200, 138, 0.1);
+				color: #1cc88a;
+			}
+
+			.transaction-icon.expense {
+				background-color: rgba(231, 74, 59, 0.1);
+				color: #e74a3b;
+			}
+
+			.transaction-icon.saving {
+				background-color: rgba(54, 185, 204, 0.1);
+				color: #36b9cc;
+			}
+
+			.transaction-details h6 {
+				margin-bottom: 2px;
+				font-weight: 600;
+			}
+
+			.transaction-category {
+				font-size: 0.75rem;
+				color: #858796;
+			}
+
+			.transaction-amount {
+				font-weight: 600;
+			}
+
+			.transaction-amount.income {
+				color: #1cc88a;
+			}
+
+			.transaction-amount.expense {
+				color: #e74a3b;
+			}
+
+			.transaction-amount.saving {
+				color: #36b9cc;
+			}
+
+			.transaction-date {
+				font-size: 0.75rem;
+				color: #858796;
+				margin-top: 4px;
+			}
+
+			/* Filter Styling */
+			.filter-section {
+				background-color: #f8f9fc;
+				padding: 15px;
+				border-radius: 8px;
+				margin-bottom: 20px;
+			}
+
+			.filter-group {
+				display: flex;
+				flex-wrap: wrap;
+				gap: 10px;
+				margin-bottom: 10px;
+			}
+
+			.filter-btn {
+				padding: 6px 12px;
+				border-radius: 20px;
+				font-size: 0.85rem;
+				background-color: #fff;
+				border: 1px solid #e3e6f0;
+				color: #858796;
+				cursor: pointer;
+				transition: all 0.2s ease;
+			}
+
+			.filter-btn:hover, .filter-btn.active {
+				background-color: #4e73df;
+				color: #fff;
+				border-color: #4e73df;
+			}
+
+			.date-filter {
+				display: flex;
+				gap: 10px;
+				margin-top: 10px;
+			}
+
+			.date-filter select {
+				flex: 1;
+				padding: 6px 12px;
+				border-radius: 4px;
+				border: 1px solid #e3e6f0;
+				background-color: #fff;
+				font-size: 0.85rem;
+			}
+
+			/* Empty State */
+			.empty-state {
+				text-align: center;
+				padding: 40px 20px;
+				color: #858796;
+			}
+
+			.empty-state i {
+				font-size: 3rem;
+				margin-bottom: 15px;
+				color: #e3e6f0;
+			}
+
+			.empty-state h5 {
+				margin-bottom: 10px;
+				font-weight: 600;
+			}
+
+			.empty-state p {
+				font-size: 0.9rem;
+				max-width: 400px;
+				margin: 0 auto;
+			}
+
+			/* Responsive */
+			@media (max-width: 768px) {
+				.transaction-item {
+					flex-direction: column;
+					align-items: flex-start;
+				}
+
+				.transaction-amount {
+					margin-top: 10px;
+				}
+
+				.date-filter {
+					flex-direction: column;
+				}
+			}
+		</style>
+	</head>
+
+	<body>
+		<!-- Preloader -->
+		<!-- <div class="preloader">
+			<img src="assets/images/preloader.gif" alt="preloader" />
+		</div> -->
+
+		<!-- top header -->
+		<header class="home-3">
+			<div class="container">
+				<div class="d-flex align-items-center justify-content-sm-between">
+					<div class="logo">
+					</div>
+					<div class="search_wrap d-none d-lg-block">
+					</div>
+					<div class="header_icon d-flex align-items-center ms-auto ms-sm-0">
+						<div class="shopcart">
+						</div>
+						<div class="position-relative myacwrap home-1">
+							<a href="javascript:void(0)" class="icon_wrp text-center myacc">
+								<span class="icon">
+									<i class="icon-user-line"></i>
+								</span>
+								<span class="icon_text">Account</span>
+							</a>
+							<div class="myacc_cont">
+								<div class="ac_links">
+									<a href="account.html" class="myac">
+										<i class="lar la-id-card"></i>
+										My Account
+									</a>
+									<a href="account-order-history.html">
+										<i class="las la-robot"></i>
+										Setting
+									</a>
+									<a href="javascript:void(0)" id="LogOutSistem">
+										<i class="las la-power-off"></i>
+										Log out
+									</a>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</header>
+		<!-- mobile bottom bar -->
+		<div class="mobile_bottombar d-block d-lg-none">
+			<div class="header_icon">
+				<a href="index.html" class="icon_wrp text-center">
+					<span class="icon">
+						<i class="las la-chart-bar"></i>
+					</span>
+					<span class="icon_text">Dashboard</span>
+				</a>
+				<a href="javascript:void(0)" class="icon_wrp text-center open_menu">
+					<span class="icon">
+						<i class="las la-bars"></i>
+					</span>
+					<span class="icon_text">Menu</span>
+				</a>
+				<a href="Transaksi-save.html" class="icon_wrp text-center">
+					<span class="icon">
+						<i class="las la-edit"></i>
+					</span>
+					<span class="icon_text">Simpan Transaksi</span>
+				</a>
+			</div>
+		</div>
+
+		<!-- mobile menu -->
+		<div class="mobile_menwrap d-lg-none" id="mobile_menwrap">
+			<div class="mobile_menu_2">
+				<h5 class="mobile_title">
+					Menu
+					<span class="sidebarclose" id="menuclose">
+						<i class="las la-times"></i>
+					</span>
+				</h5>
+				<ul>
+					<li class="">
+						<a href="index.html">Dashboard</a>
+					</li>
+
+					<li class="">
+						<a href="plan-saveing.html">Saveing-Plan</a>
+					</li>
+					<li class=""> 
+						<a href="budgeting-view.html">Budgeting</a>
+					</li>
+					<li class="">
+						<a href="riwayat-transaksi.html">Riwayat Transaksi</a>
+					</li>
+				</ul>
+			</div>
+		</div>
+		<div class="container">
+			<div class="breadcrumbs">
+				<a href="index.html"><i class="las la-home"></i></a>
+				<a href="#" class="active">Riwayat Transaksi</a>
+			</div>
+		</div>
+		
+		<!-- Transaction History Section -->
+		<section class="">
+			<div class="container">
+				<div class="row">
+					<div class="col-12">
+						<div class="card mb-4">
+							<div class="card-header  bg-white py-3 d-flex justify-content-between align-items-center">
+								<h4 class="m-0 font-weight-bold text-primary">Semua Transaksi</h6>
+									<div class="d-flex align-items-center">
+										<button class="btn btn-primary small rounded me-2" id="refreshData">
+											<i class="las la-sync-alt"></i>
+										</button>
+										<a class="btn btn-primary small rounded" href="Transaksi-save.html">
+											<i class="las la-plus"></i>
+										</a>
+									</div>
+							</div>
+							<div class="card-body">
+								<!-- Filter Section -->
+								<div class="filter-section">
+									<div class="filter-group">
+										<button class="filter-btn active" data-type="all">All</button>
+										<button class="filter-btn" data-type="income">Income</button>
+										<button class="filter-btn" data-type="expense">Expense</button>
+										<button class="filter-btn" data-type="saving">save</button>
+									</div>
+									<div class="date-filter">
+										<select id="periodFilter">
+											<option value="all">Semua Waktu</option>
+											<option value="today">Hari Ini</option>
+											<option value="week">Minggu Ini</option>
+											<option value="month">Bulan Ini</option>
+											<option value="year">Tahun Ini</option>
+										</select>
+										<select id="monthFilter" style="display: none;">
+											<option value="1">Januari</option>
+											<option value="2">Februari</option>
+											<option value="3">Maret</option>
+											<option value="4">April</option>
+											<option value="5">Mei</option>
+											<option value="6">Juni</option>
+											<option value="7">Juli</option>
+											<option value="8">Agustus</option>
+											<option value="9">September</option>
+											<option value="10">Oktober</option>
+											<option value="11">November</option>
+											<option value="12">Desember</option>
+										</select>
+										<select id="yearFilter" style="display: none;">
+											<option value="2024">2024</option>
+											<option value="2023">2023</option>
+											<option value="2022">2022</option>
+											<option value="2021">2021</option>
+											<option value="2020">2020</option>
+										</select>
+									</div>
+								</div>
+
+								<!-- Transaction List -->
+								<div class="transaction-list" id="transactionList">
+									<!-- Transactions will be populated by JavaScript -->
+								</div>
+
+								<!-- Empty State (will be shown when no transactions) -->
+								<div class="empty-state" id="emptyState" style="display: none;">
+									<i class="las la-receipt"></i>
+									<h5>Tidak ada transaksi</h5>
+									<p>Belum ada transaksi yang tercatat. Tambahkan transaksi baru untuk melihat riwayat di sini.</p>
+									<a class="default_btn small rounded mt-3" href="Transaksi-save.html">
+										<i class="las la-plus"></i> Tambah Transaksi
+									</a>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</section>
+
+		<!-- copyright -->
+		<div class="copyright_wrap">
+			<div class="container">
+				<div class="row align-items-center">
+					<div class="col-md-6">
+						<p class="copyright_text">2025 | Finance Management</p>
+					</div>
+				</div>
+			</div>
+		</div>
+
+		<!-- back to top -->
+		<button id="back-to-top" class="back-to-top-hide">
+			<i class="las la-arrow-up"></i>
+		</button>
+
+		<!-- all js -->
+		<script src="assets/js/bootstrap.bundle.min.js"></script>
+		<script src="assets/js/jquery-3.5.1.min.js"></script>
+		<script src="assets/js/jquery-ui.min.js"></script>
+		<script src="assets/js/slick.min.js"></script>
+		<script src="assets/js/jquery.nice-select.min.js"></script>
+		<script src="assets/js/app.js"></script>
+		<script src="assets/js/theme-manager.js"></script>
+		<script>
+			// Cek apakah aplikasi berjalan dari server web
+			if (window.location.protocol === 'http:' || window.location.protocol === 'https:') {
+				if ('serviceWorker' in navigator) {
+					window.addEventListener('load', function() {
+						navigator.serviceWorker.register('/service-worker.js')
+							.then(function(registration) {
+								console.log('ServiceWorker registration successful');
+							})
+							.catch(function(err) {
+								console.log('ServiceWorker registration failed: ', err);
+							});
+					});
+				}
+			}
+
+			// Cek login
+			const savedUser = localStorage.getItem('user');
+			if (!savedUser) {
+				window.location.href = "login.html";
+			}
+
+			// Fungsi untuk memformat rupiah
+			function formatRupiah(angka) {
+				// Pastikan angka adalah number
+				angka = Number(angka);
+				
+				// Jika angka adalah 0 atau tidak valid
+				if (isNaN(angka) || angka === 0) {
+					return 'Rp 0';
+				}
+				
+				// Format untuk angka besar (miliar)
+				if (angka >= 1000000000) {
+					return 'Rp ' + (angka / 1000000000).toFixed(1) + 'B';
+				}
+				
+				// Format untuk angka menengah (juta)
+				if (angka >= 1000000) {
+					return 'Rp ' + (angka / 1000000).toFixed(1) + 'M';
+				}
+				
+				// Format untuk angka kecil (ribu)
+				if (angka >= 1000) {
+					return 'Rp ' + (angka / 1000).toFixed(1) + 'K';
+				}
+				
+				// Format untuk angka di bawah 1000
+				return 'Rp ' + angka.toString();
+			}
+
+			// Fungsi untuk memformat tanggal
+			function formatDate(dateStr) {
+				const date = new Date(dateStr);
+				const options = { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' };
+				return date.toLocaleDateString('id-ID', options);
+			}
+
+			// Fungsi untuk memformat waktu
+			function formatTime(dateStr) {
+				const date = new Date(dateStr);
+				return date.toLocaleTimeString('id-ID', { hour: '2-digit', minute: '2-digit' });
+			}
+
+			// Fungsi untuk mendapatkan ikon berdasarkan kategori
+			function getCategoryIcon(category) {
+				const categoryMap = {
+					'makanan': 'las la-utensils',
+					'transportasi': 'las la-car',
+					'hiburan': 'las la-film',
+					'belanja': 'las la-shopping-bag',
+					'utilitas': 'las la-lightbulb',
+					'gaji': 'las la-money-bill',
+					'freelance': 'las la-laptop',
+					'investasi': 'las la-chart-line',
+					'tabungan': 'las la-piggy-bank',
+					'lainnya': 'las la-ellipsis-h'
+				};
+
+				// Cari kategori yang cocok (case insensitive)
+				for (const [key, icon] of Object.entries(categoryMap)) {
+					if (category.toLowerCase().includes(key)) {
+						return icon;
+					}
+				}
+
+				// Default icon
+				return 'las la-ellipsis-h';
+			}
+
+			// Fungsi untuk memuat data transaksi
+			function loadTransactions() {
+				const transactionList = document.getElementById('transactionList');
+				const emptyState = document.getElementById('emptyState');
+				
+				// Tampilkan loading
+				transactionList.innerHTML = '<div class="text-center py-4"><i class="las la-spinner fa-spin fa-2x"></i></div>';
+				
+				// Ambil data dari localStorage atau API
+				const savedData = localStorage.getItem('transaction_data');
+				
+				if (savedData) {
+					try {
+						const transactions = JSON.parse(savedData);
+						if (Array.isArray(transactions) && transactions.length > 0) {
+							// Urutkan transaksi dari yang terbaru
+							transactions.sort((a, b) => new Date(b.tanggal) - new Date(a.tanggal));
+							
+							// Tampilkan transaksi
+							displayTransactions(transactions);
+						} else {
+							showEmptyState();
+						}
+					} catch (e) {
+						console.error('Gagal memparse data transaksi:', e);
+						showEmptyState();
+					}
+				} else {
+					// Jika tidak ada data di localStorage, ambil dari API
+					const dashboardData = {
+				summary: {
+					totalPemasukan: 15000000,
+					totalPengeluaran: 8500000,
+					totalTabungan: 3000000,
+					sisaBudget: 3500000
+				},
+				chartData: {
+					// Data untuk Distribusi Pengeluaran
+					categories: ['Makanan', 'Transportasi', 'Hiburan', 'Belanja', 'Utilitas', 'Lainnya'],
+					amounts: [2500000, 1500000, 1000000, 2000000, 1000000, 500000],
+					
+					// Data untuk Tren Keuangan
+					months: ['2024-01', '2024-02', '2024-03', '2024-04', '2024-05', '2024-06'],
+					income: [12000000, 13500000, 12800000, 14200000, 15000000, 15000000],
+					expense: [7500000, 8200000, 7800000, 8900000, 8200000, 8500000]
+				},
+				recentTransactions: [
+					{
+						id: 1,
+						tanggal: '2024-03-15',
+						jenis: 'expense',
+						kategori: 'Makanan',
+						jumlah: 150000,
+						keterangan: 'Makan siang dengan tim'
+					},
+					{
+						id: 2,
+						tanggal: '2024-03-15',
+						jenis: 'income',
+						kategori: 'Gaji',
+						jumlah: 15000000,
+						keterangan: 'Gaji bulan Maret'
+					},
+					{
+						id: 3,
+						tanggal: '2024-03-14',
+						jenis: 'expense',
+						kategori: 'Transportasi',
+						jumlah: 500000,
+						keterangan: 'Bensin dan parkir'
+					},
+					{
+						id: 4,
+						tanggal: '2024-03-14',
+						jenis: 'expense',
+						kategori: 'Hiburan',
+						jumlah: 300000,
+						keterangan: 'Nonton bioskop'
+					},
+					{
+						id: 5,
+						tanggal: '2024-03-13',
+						jenis: 'income',
+						kategori: 'Freelance',
+						jumlah: 2500000,
+						keterangan: 'Proyek website'
+					}
+				]
+			}
+			console.log(dashboardData.recentTransactions)
+			displayTransactions(dashboardData.recentTransactions);
+				}
+			}
+
+			// Fungsi untuk mengambil data transaksi dari API
+			function fetchTransactions() {
+				const spreadsheetUrl = "https://script.google.com/macros/s/AKfycbyBfKNeW5yhAyL8BdaJo6AhkbVfEPeorcqOMjPElrCCZJU9sQpCKpWwGAAqSYqKSqFw2g/exec?dataset=accdta";
+				
+				fetch(spreadsheetUrl)
+					.then(res => res.json())
+					.then(res => {
+						if (res && res.value && Array.isArray(res.value)) {
+							// Simpan ke localStorage
+							localStorage.setItem('transaction_data', JSON.stringify(res.value));
+							
+							// Urutkan transaksi dari yang terbaru
+							res.value.sort((a, b) => new Date(b.tanggal) - new Date(a.tanggal));
+							
+							// Tampilkan transaksi
+							displayTransactions(res.value);
+						} else {
+							console.error('Format data transaksi tidak valid:', res);
+							showEmptyState();
+						}
+					})
+					.catch(err => {
+						console.error('Gagal mengambil data transaksi:', err);
+						showEmptyState();
+					});
+			}
+
+			// Fungsi untuk menampilkan transaksi
+			function displayTransactions(transactions) {
+				const transactionList = document.getElementById('transactionList');
+				const emptyState = document.getElementById('emptyState');
+				
+				// Filter transaksi berdasarkan jenis dan periode
+				const filteredTransactions = filterTransactions(transactions);
+				
+				if (filteredTransactions.length > 0) {
+					// Sembunyikan empty state
+					emptyState.style.display = 'none';
+					
+					// Tampilkan transaksi
+					transactionList.innerHTML = '';
+					
+					// Kelompokkan transaksi berdasarkan tanggal
+					const groupedTransactions = groupTransactionsByDate(filteredTransactions);
+					
+					// Tampilkan transaksi yang dikelompokkan
+					for (const [date, items] of Object.entries(groupedTransactions)) {
+						// Tambahkan header tanggal
+						const dateHeader = document.createElement('div');
+						dateHeader.className = 'transaction-date-header py-2 px-3 bg-light';
+						dateHeader.innerHTML = `<strong>${date}</strong>`;
+						transactionList.appendChild(dateHeader);
+						
+						// Tambahkan transaksi untuk tanggal tersebut
+						items.forEach(item => {
+							const transactionItem = document.createElement('div');
+							transactionItem.className = 'transaction-item';
+							
+							// Tentukan ikon berdasarkan kategori
+							const iconClass = getCategoryIcon(item.kategori);
+							
+							transactionItem.innerHTML = `
+								<div class="transaction-info">
+									<div class="transaction-icon ${item.jenis}">
+										<i class="${iconClass}"></i>
+									</div>
+									<div class="transaction-details">
+										<h6>${item.keterangan}</h6>
+										<div class="transaction-category">${item.kategori}</div>
+									</div>
+								</div>
+								<div class="transaction-amount-container">
+									<div class="transaction-amount ${item.jenis}">
+										${item.jenis === 'income' ? '+' : '-'} ${formatRupiah(item.jumlah)}
+									</div>
+								</div>
+							`;
+							
+							transactionList.appendChild(transactionItem);
+						});
+					}
+				} else {
+					showEmptyState();
+				}
+			}
+
+			// Fungsi untuk mengelompokkan transaksi berdasarkan tanggal
+			function groupTransactionsByDate(transactions) {
+				const grouped = {};
+				
+				transactions.forEach(transaction => {
+					const date = new Date(transaction.tanggal);
+					const dateStr = formatDate(transaction.tanggal);
+					
+					if (!grouped[dateStr]) {
+						grouped[dateStr] = [];
+					}
+					
+					grouped[dateStr].push(transaction);
+				});
+				
+				return grouped;
+			}
+
+			// Fungsi untuk menampilkan empty state
+			function showEmptyState() {
+				const transactionList = document.getElementById('transactionList');
+				const emptyState = document.getElementById('emptyState');
+				
+				transactionList.innerHTML = '';
+				emptyState.style.display = 'block';
+			}
+
+			// Fungsi untuk memfilter transaksi berdasarkan jenis dan periode
+			function filterTransactions(transactions) {
+				// Filter berdasarkan jenis
+				const typeFilter = document.querySelector('.filter-btn.active').dataset.type;
+				let filtered = transactions;
+				
+				if (typeFilter !== 'all') {
+					filtered = transactions.filter(item => item.jenis === typeFilter);
+				}
+				
+				// Filter berdasarkan periode
+				const periodFilter = document.getElementById('periodFilter').value;
+				const today = new Date();
+				today.setHours(0, 0, 0, 0);
+				
+				switch (periodFilter) {
+					case 'today':
+						filtered = filtered.filter(item => {
+							const itemDate = new Date(item.tanggal);
+							itemDate.setHours(0, 0, 0, 0);
+							return itemDate.getTime() === today.getTime();
+						});
+						break;
+					case 'week':
+						const weekAgo = new Date(today);
+						weekAgo.setDate(today.getDate() - 7);
+						filtered = filtered.filter(item => {
+							const itemDate = new Date(item.tanggal);
+							return itemDate >= weekAgo && itemDate <= today;
+						});
+						break;
+					case 'month':
+						const monthFilter = document.getElementById('monthFilter');
+						const yearFilter = document.getElementById('yearFilter');
+						
+						if (monthFilter.style.display !== 'none') {
+							const selectedMonth = parseInt(monthFilter.value) - 1; // 0-based month
+							const selectedYear = parseInt(yearFilter.value);
+							
+							filtered = filtered.filter(item => {
+								const itemDate = new Date(item.tanggal);
+								return itemDate.getMonth() === selectedMonth && itemDate.getFullYear() === selectedYear;
+							});
+						} else {
+							// Bulan saat ini
+							const firstDayOfMonth = new Date(today.getFullYear(), today.getMonth(), 1);
+							const lastDayOfMonth = new Date(today.getFullYear(), today.getMonth() + 1, 0);
+							
+							filtered = filtered.filter(item => {
+								const itemDate = new Date(item.tanggal);
+								return itemDate >= firstDayOfMonth && itemDate <= lastDayOfMonth;
+							});
+						}
+						break;
+					case 'year':
+						const selectedYear = parseInt(document.getElementById('yearFilter').value);
+						
+						filtered = filtered.filter(item => {
+							const itemDate = new Date(item.tanggal);
+							return itemDate.getFullYear() === selectedYear;
+						});
+						break;
+				}
+				
+				return filtered;
+			}
+
+			// Event listener untuk filter jenis
+			document.querySelectorAll('.filter-btn').forEach(btn => {
+				btn.addEventListener('click', function() {
+					// Hapus kelas active dari semua tombol
+					document.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
+					
+					// Tambah kelas active ke tombol yang diklik
+					this.classList.add('active');
+					
+					// Muat ulang transaksi
+					loadTransactions();
+				});
+			});
+
+			// Event listener untuk filter periode
+			document.getElementById('periodFilter').addEventListener('change', function() {
+				const monthFilter = document.getElementById('monthFilter');
+				const yearFilter = document.getElementById('yearFilter');
+				
+				// Sembunyikan filter bulan dan tahun secara default
+				monthFilter.style.display = 'none';
+				yearFilter.style.display = 'none';
+				
+				// Tampilkan filter yang sesuai
+				if (this.value === 'month') {
+					monthFilter.style.display = 'block';
+					yearFilter.style.display = 'block';
+				} else if (this.value === 'year') {
+					yearFilter.style.display = 'block';
+				}
+				
+				// Muat ulang transaksi
+				loadTransactions();
+			});
+
+			// Event listener untuk filter bulan
+			document.getElementById('monthFilter').addEventListener('change', function() {
+				loadTransactions();
+			});
+
+			// Event listener untuk filter tahun
+			document.getElementById('yearFilter').addEventListener('change', function() {
+				loadTransactions();
+			});
+
+			// Event listener untuk tombol refresh
+			document.getElementById('refreshData').addEventListener('click', function() {
+				fetchTransactions();
+			});
+
+			// Event listener untuk logout
+			document.getElementById("LogOutSistem").addEventListener("click", function (e) {
+				e.preventDefault(); 
+				localStorage.clear(); 
+				window.location.href = "login.html"; 
+			});
+
+			// Muat transaksi saat halaman dimuat
+			document.addEventListener('DOMContentLoaded', loadTransactions);
+		</script>
+	</body>
+</html> 

@@ -27,3 +27,42 @@ self.addEventListener('install', function(e) {
 self.addEventListener('fetch', function(event) {
   // Bisa disesuaikan jika ingin offline support
 });
+
+// Menambahkan handler untuk manifest.json
+self.addEventListener('fetch', event => {
+    if (event.request.url.endsWith('manifest.json')) {
+        event.respondWith(
+            caches.match(event.request).then(response => {
+                // Cek apakah ada cache manifest yang diperbarui
+                return fetch(event.request).then(networkResponse => {
+                    // Simpan response network ke cache
+                    const responseToCache = networkResponse.clone();
+                    caches.open('manifest-cache').then(cache => {
+                        cache.put(event.request, responseToCache);
+                    });
+                    return networkResponse;
+                }).catch(() => {
+                    // Jika offline atau file://, gunakan cache
+                    return response || new Response(JSON.stringify({
+                        name: "Finance Management",
+                        short_name: "E-FinMen",
+                        start_url: "/",
+                        display: "standalone",
+                        background_color: "#ffffff",
+                        theme_color: localStorage.getItem('theme_secondary_color') || "#18181b",
+                        orientation: "portrait",
+                        icons: [
+                            {
+                                src: "https://cdn-icons-png.flaticon.com/512/906/906334.png",
+                                sizes: "192x192",
+                                type: "image/png"
+                            }
+                        ]
+                    }), {
+                        headers: { 'Content-Type': 'application/json' }
+                    });
+                });
+            })
+        );
+    }
+});

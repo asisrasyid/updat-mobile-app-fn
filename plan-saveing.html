@@ -216,47 +216,18 @@
 					</span>
 				</h5>
 				<ul>
-					<li class="withsub">
-						<a href="javascript:void(0)"> Management </a>
-						<div class="submn">
-							<a href="index.html">Dashboard</a>
-							<a href="plan-saveing.html">Saveing-Plan</a>
-							<a href="budgeting-view.html">Budgeting</a>
-						</div>
+					<li class="">
+						<a href="index.html">Dashboard</a>
 					</li>
 
-					<li class="withsub">
-						<a href="javascript:void(0)"> Shop </a>
-						<div class="submn">
-							<a href="shop-list.html">List View</a>
-							<a href="shop-grid.html">Grid View</a>
-							<a href="shop-grid-2.html">Grid View 2</a>
-							<a href="wish-list.html">Wishlist</a>
-							<a href="shopping-cart.html">Shopping cart</a>
-							<a href="product-view.html">Product view</a>
-						</div>
+					<li class="">
+						<a href="plan-saveing.html">Saveing-Plan</a>
 					</li>
-					<li class="withsub">
-						<a href="javascript:void(0)"> My Account </a>
-						<div class="submn">
-							<a href="account.html">My account</a>
-							<a href="login.html">Login</a>
-							<a href="register.html">Register</a>
-							<a href="forgot-password.html">Forgot password</a>
-						</div>
+					<li class=""> 
+						<a href="budgeting-view.html">Budgeting</a>
 					</li>
-					<li class="withsub">
-						<a href="javascript:void(0)"> Other pages </a>
-						<div class="submn">
-							<a href="about-us.html">about us</a>
-							<a href="contact-us.html">Contact us</a>
-							<a href="track-order.html">Track order</a>
-							<a href="faq.html">FAQ</a>
-							<a href="404.html">404</a>
-							<a href="checkout.html">Checkout</a>
-							<a href="payment.html">Payment</a>
-							<a href="order-completed.html">Order complete</a>
-						</div>
+					<li class="">
+						<a href="budgeting-view.html">Riyawat Transaksi</a>
 					</li>
 				</ul>
 			</div>
@@ -264,7 +235,7 @@
         <!-- breadcrumbs -->
 		<div class="container">
 			<div class="breadcrumbs">
-				<a href="index-1.html"><i class="las la-home"></i></a>
+				<a href="index.html"><i class="las la-home"></i></a>
 				<a href="#" class="active">Saveing-Plan</a>
 			</div>
 		</div>
@@ -289,37 +260,143 @@
 								<div class="profile_hambarg d-lg-none d-block">
 									<i class="las la-bars"></i>
 								</div>
-                                
-							</div>
-							<div class="acprof_wrap shadow_sm">
-								<div class="acprof_links">
-									<a href="account.html">
-										<h4 class="acprof_link_title">
-											<i class="lar la-edit"></i>
-											Manage Saveing Plan
-										</h4>
-									</a>
-									<a href="account-profile-info.html">Add Plan</a>
-									<a href="account-manage-address.html">Edit Plan</a>
-									<a href="account-change-password.html">Delete Plan</a>
-								</div>
-								<div class="acprof_links">
-									<a href="account-order-history.html">
-										<h4 class="acprof_link_title">
-											<i class="las la-star-of-life"></i>
-											Transaksi
-										</h4>
-									</a>
-									<a href="account-return-order.html">Simpan Transaksi</a>
-									<a href="account-order-cancel.html">Edit Transkasi</a>
-									<a href="account-my-reviews.html">Riwayat Transaksi</a>
-								</div>
 							</div>
 						</div>
 					</div>
 					<!-- account content -->
 					<div class="col-lg-9">
-						<div id="data-container" class="shop_cart_wrap wishlist">
+						<!-- Tab Navigation -->
+						<ul class="nav nav-tabs mb-4" id="savingTabs" role="tablist">
+							<li class="nav-item" role="presentation">
+								<button class="nav-link active" id="resume-tab" data-bs-toggle="tab" data-bs-target="#resume" type="button" role="tab">
+									<i class="las la-chart-pie"></i> Resume
+								</button>
+							</li>
+							<li class="nav-item" role="presentation">
+								<button class="nav-link" id="progress-tab" data-bs-toggle="tab" data-bs-target="#progress" type="button" role="tab">
+									<i class="las la-chart-line"></i> Progress
+								</button>
+							</li>
+							<li class="nav-item" role="presentation">
+								<button class="nav-link" id="new-plan-tab" data-bs-toggle="tab" data-bs-target="#new-plan" type="button" role="tab">
+									<i class="las la-plus-circle"></i> Buat Plan
+								</button>
+							</li>
+							<li class="nav-item" role="presentation">
+								<button class="nav-link" id="history-tab" data-bs-toggle="tab" data-bs-target="#history" type="button" role="tab">
+									<i class="las la-history"></i> Riwayat
+								</button>
+							</li>
+						</ul>
+
+						<!-- Tab Content -->
+						<div class="tab-content" id="savingTabsContent">
+							<!-- Resume Tab -->
+							<div class="tab-pane fade show active" id="resume" role="tabpanel">
+								<div class="row mb-4">
+									<div class="col-md-4">
+										<div class="budget_card">
+											<div class="budget_card_header">
+												<h4>Total Target</h4>
+												<i class="las la-bullseye"></i>
+											</div>
+											<div class="budget_card_body">
+												<h3 id="totalTargetResume">Rp 0</h3>
+												<p>Semua Plan</p>
+											</div>
+										</div>
+									</div>
+									<div class="col-md-4">
+										<div class="budget_card">
+											<div class="budget_card_header">
+												<h4>Total Terkumpul</h4>
+												<i class="las la-piggy-bank"></i>
+											</div>
+											<div class="budget_card_body">
+												<h3 id="totalCollectedResume">Rp 0</h3>
+												<p>Semua Plan</p>
+											</div>
+										</div>
+									</div>
+									<div class="col-md-4">
+										<div class="budget_card">
+											<div class="budget_card_header">
+												<h4>Sisa Target</h4>
+												<i class="las la-coins"></i>
+											</div>
+											<div class="budget_card_body">
+												<h3 id="remainingTargetResume">Rp 0</h3>
+												<p>Semua Plan</p>
+											</div>
+										</div>
+									</div>
+								</div>
+							</div>
+
+							<!-- Progress Tab (Existing View) -->
+							<div class="tab-pane fade" id="progress" role="tabpanel">
+								<div id="data-container" class="shop_cart_wrap wishlist">
+									<!-- Progress bar content will be loaded here by existing JavaScript -->
+								</div>
+							</div>
+
+							<!-- New Plan Tab -->
+							<div class="tab-pane fade" id="new-plan" role="tabpanel">
+								<div class="card">
+									<div class="card-body">
+										<h4 class="mb-4">Buat Saving Plan Baru</h4>
+										<form id="newPlanForm">
+											<div class="mb-3">
+												<label class="form-label">Judul Plan</label>
+												<input type="text" class="form-control" id="planTitle" required>
+											</div>
+											<div class="mb-3">
+												<label class="form-label">Target Nominal (Rp)</label>
+												<input type="number" class="form-control" id="planTarget" required>
+											</div>
+											<div class="mb-3">
+												<label class="form-label">Target Tanggal</label>
+												<input type="date" class="form-control" id="planDeadline" required>
+											</div>
+											<div class="mb-3">
+												<label class="form-label">Catatan (opsional)</label>
+												<textarea class="form-control" id="planNotes" rows="3"></textarea>
+											</div>
+											<button type="submit" class="default_btn">Buat Plan</button>
+										</form>
+									</div>
+								</div>
+							</div>
+
+							<!-- History Tab -->
+							<div class="tab-pane fade" id="history" role="tabpanel">
+								<div class="budget_categories">
+									<div class="d-flex justify-content-between align-items-center mb-3">
+										<h4>Riwayat Saving Plan</h4>
+										<div class="btn-group">
+											<button class="default_btn btn-sm active" data-period="week">Minggu Ini</button>
+											<button class="default_btn btn-sm" data-period="month">Bulan Ini</button>
+											<button class="default_btn btn-sm" data-period="year">Tahun Ini</button>
+										</div>
+									</div>
+									<div class="table-responsive">
+										<table class="table">
+											<thead>
+												<tr>
+													<th>Tanggal</th>
+													<th>Judul Plan</th>
+													<th>Nominal</th>
+													<th>Status</th>
+													<th>Keterangan</th>
+												</tr>
+											</thead>
+											<tbody id="savingHistory">
+												<!-- Data akan diisi melalui JavaScript -->
+											</tbody>
+										</table>
+									</div>
+								</div>
+							</div>
 						</div>
 					</div>
 				</div>
@@ -594,5 +671,86 @@
                 .catch(err => {console.error('Gagal ambil data:', err); document.getElementById("loadingOverlay").style.display = "none";});
         });
         </script>
+		<script>
+			// Update summary in Resume tab
+			function updateResumeSummary(data) {
+				let totalTarget = 0;
+				let totalCollected = 0;
+
+				data.forEach(item => {
+					totalTarget += parseFloat(item.target_nominal);
+					totalCollected += parseFloat(item.nominal_dikumpulkan);
+				});
+
+				document.getElementById('totalTargetResume').textContent = formatRupiah(totalTarget);
+				document.getElementById('totalCollectedResume').textContent = formatRupiah(totalCollected);
+				document.getElementById('remainingTargetResume').textContent = formatRupiah(totalTarget - totalCollected);
+			}
+
+			// Modify existing ambilData function
+			function ambilData() {
+				const dataLocal = localStorage.getItem('saving_plan');
+				const spreadsheetUrlSvdt = "https://script.google.com/macros/s/AKfycbyBfKNeW5yhAyL8BdaJo6AhkbVfEPeorcqOMjPElrCCZJU9sQpCKpWwGAAqSYqKSqFw2g/exec?dataset=trgSave"; 
+
+				if (dataLocal) {
+					const parsedData = JSON.parse(dataLocal);
+					tampilkanDataKeUI(parsedData);
+					updateResumeSummary(parsedData);
+				} else {
+					fetch(spreadsheetUrlSvdt) 
+						.then(res => res.json())
+						.then(res => {
+							localStorage.setItem('saving_plan', JSON.stringify(res.value));
+							tampilkanDataKeUI(res.value);
+							updateResumeSummary(res.value);
+						})
+						.catch(err => console.error('Gagal ambil data:', err));
+				}
+			}
+
+			// Add new plan handler
+			document.getElementById('newPlanForm').addEventListener('submit', function(e) {
+				e.preventDefault();
+				// Add your logic here to save new plan
+				// This is just a placeholder - implement according to your needs
+				alert('Fitur ini akan segera tersedia!');
+			});
+
+			// Load saving history
+			function loadSavingHistory(period = 'week') {
+				const history = JSON.parse(localStorage.getItem('saving_history')) || [];
+				const tbody = document.getElementById('savingHistory');
+				tbody.innerHTML = '';
+
+				// Filter logic here
+				history.forEach(item => {
+					tbody.innerHTML += `
+						<tr>
+							<td>${new Date(item.date).toLocaleDateString('id-ID')}</td>
+							<td>${item.title}</td>
+							<td>${formatRupiah(item.amount)}</td>
+							<td><span class="badge bg-success">${item.status}</span></td>
+							<td>${item.notes || '-'}</td>
+						</tr>
+					`;
+				});
+			}
+
+			// Period filter buttons
+			document.querySelectorAll('[data-period]').forEach(button => {
+				button.addEventListener('click', (e) => {
+					document.querySelectorAll('[data-period]').forEach(btn => {
+						btn.classList.remove('active');
+					});
+					e.target.classList.add('active');
+					loadSavingHistory(e.target.dataset.period);
+				});
+			});
+
+			// Initialize history on load
+			document.addEventListener('DOMContentLoaded', () => {
+				loadSavingHistory();
+			});
+		</script>
 	</body>
 </html>

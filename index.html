@@ -4,8 +4,8 @@
 		<meta charset="UTF-8" />
 		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
 		<title>Managament Finance</title>
-		<link rel="manifest" href="/updat-mobile-app-fn/manifest.json" />
-  		<meta name="theme-color" content="#4CAF50"/>
+		<link rel="manifest" href="/manifest.json" />
+  		<meta name="theme-color" content="#18181b"/>
   		<link rel="icon" href="https://cdn-icons-png.flaticon.com/512/906/906334.png" />
 
 		<!-- all css -->
@@ -16,6 +16,356 @@
 		<link rel="stylesheet" href="assets/css/nice-select.css" />
 		<link rel="stylesheet" href="assets/css/style.css" />
 		<link rel="stylesheet" href="assets/css/responsive.css" />
+		<style>
+			/* Dashboard Cards */
+			.card {
+				position: relative;
+				display: flex;
+				flex-direction: column;
+				min-width: 0;
+				word-wrap: break-word;
+				background-color: #fff;
+				background-clip: border-box;
+				border: 1px solid #e3e6f0;
+				border-radius: 0.35rem;
+			}
+
+			.border-left-primary {
+				border-left: 0.25rem solid #4e73df !important;
+			}
+
+			.border-left-success {
+				border-left: 0.25rem solid #1cc88a !important;
+			}
+
+			.border-left-info {
+				border-left: 0.25rem solid #36b9cc !important;
+			}
+
+			.border-left-warning {
+				border-left: 0.25rem solid #f6c23e !important;
+			}
+
+			.text-xs {
+				font-size: .7rem;
+			}
+
+			.text-primary {
+				color: #4e73df !important;
+			}
+
+			.text-success {
+				color: #1cc88a !important;
+			}
+
+			.text-info {
+				color: #36b9cc !important;
+			}
+
+			.text-warning {
+				color: #f6c23e !important;
+			}
+
+			.font-weight-bold {
+				font-weight: 700 !important;
+			}
+
+			/* Charts */
+			.chart-area {
+				position: relative;
+				height: 20rem;
+				width: 100%;
+			}
+
+			.chart-pie {
+				position: relative;
+				height: 15rem;
+				width: 100%;
+			}
+
+			/* Table Styling */
+			.table-responsive {
+				display: block;
+				width: 100%;
+				overflow-x: auto;
+				-webkit-overflow-scrolling: touch;
+			}
+
+			.table {
+				width: 100%;
+				margin-bottom: 1rem;
+				color: #858796;
+			}
+
+			.table th,
+			.table td {
+				padding: 0.75rem;
+				vertical-align: top;
+				border-top: 1px solid #e3e6f0;
+			}
+
+			.table thead th {
+				vertical-align: bottom;
+				border-bottom: 2px solid #e3e6f0;
+				background-color: #f8f9fc;
+			}
+
+			.table tbody + tbody {
+				border-top: 2px solid #e3e6f0;
+			}
+
+			/* Card Header */
+			.card-header {
+				padding: 0.75rem 1.25rem;
+				margin-bottom: 0;
+				background-color: #f8f9fc;
+				border-bottom: 1px solid #e3e6f0;
+			}
+
+			/* Shadow */
+			.shadow {
+				box-shadow: 0 0.15rem 1.75rem 0 rgba(58, 59, 69, 0.15) !important;
+			}
+
+			/* Icons */
+			.fa-2x {
+				font-size: 2em;
+			}
+
+			.text-gray-300 {
+				color: #dddfeb !important;
+			}
+
+			/* Responsive Fixes */
+			@media (max-width: 768px) {
+				.chart-area {
+					height: 15rem;
+				}
+				
+				.chart-pie {
+					height: 12rem;
+				}
+			}
+
+			/* Transaction Cards */
+			.transaction-list {
+				max-height: 500px;
+				overflow-y: auto;
+			}
+
+			.transaction-card {
+				border-left: 4px solid;
+				margin-bottom: 1rem;
+				padding: 1rem;
+				border-radius: 0.5rem;
+				background: #fff;
+				box-shadow: 0 2px 4px rgba(0,0,0,0.05);
+				transition: transform 0.2s;
+			}
+
+			.transaction-card:hover {
+				transform: translateX(5px);
+			}
+
+			.transaction-card.income {
+				border-left-color: #1cc88a;
+			}
+
+			.transaction-card.expense {
+				border-left-color: #e74a3b;
+			}
+
+			.transaction-amount {
+				font-size: 1.1rem;
+				font-weight: bold;
+			}
+
+			.transaction-amount.income {
+				color: #1cc88a;
+			}
+
+			.transaction-amount.expense {
+				color: #e74a3b;
+			}
+
+			.transaction-date {
+				color: #858796;
+				font-size: 0.8rem;
+			}
+
+			.transaction-category {
+				display: inline-block;
+				padding: 0.25rem 0.5rem;
+				border-radius: 0.25rem;
+				font-size: 0.8rem;
+				background: #f8f9fc;
+				color: #4e73df;
+			}
+
+			/* Expense Distribution Styling */
+			.expense-distribution {
+				padding: 0.5rem;
+			}
+
+			.expense-item {
+				padding: 0.75rem;
+				border-radius: 8px;
+				transition: all 0.3s ease;
+				background: #fff;
+			}
+
+			.expense-item:hover {
+				background: #f8f9fc;
+				transform: translateX(5px);
+			}
+
+			.expense-item .progress {
+				border-radius: 10px;
+				background-color: #eaecf4;
+			}
+
+			.expense-item .progress-bar {
+				border-radius: 10px;
+				transition: width 0.6s ease;
+			}
+
+			.expense-item i {
+				width: 24px;
+				height: 24px;
+				display: flex;
+				align-items: center;
+				justify-content: center;
+				border-radius: 6px;
+			}
+
+			.badge.bg-primary {
+				background-color: #4e73df !important;
+				color: white;
+				padding: 0.5em 0.75em;
+				font-weight: 500;
+				font-size: 0.75rem;
+			}
+
+			.text-muted {
+				color: #858796 !important;
+				font-size: 0.75rem;
+			}
+
+			.fw-bold {
+				font-weight: 600 !important;
+			}
+
+			/* Tambahkan style untuk tren keuangan */
+			.trend-list {
+				max-height: 400px;
+				overflow-y: auto;
+			}
+
+			.trend-item {
+				padding: 1rem;
+				border-bottom: 1px solid #e3e6f0;
+				transition: all 0.3s ease;
+			}
+
+			.trend-item:last-child {
+				border-bottom: none;
+			}
+
+			.trend-item:hover {
+				background-color: #f8f9fc;
+			}
+
+			.trend-header {
+				display: flex;
+				justify-content: space-between;
+				align-items: center;
+				margin-bottom: 0.5rem;
+			}
+
+			.trend-date {
+				font-size: 0.9rem;
+				color: #858796;
+			}
+
+			.trend-amount {
+				font-weight: 600;
+			}
+
+			.trend-amount.income {
+				color: #1cc88a;
+			}
+
+			.trend-amount.expense {
+				color: #e74a3b;
+			}
+
+			.trend-details {
+				display: flex;
+				justify-content: space-between;
+				align-items: center;
+				font-size: 0.85rem;
+			}
+
+			.trend-category {
+				padding: 0.25rem 0.5rem;
+				border-radius: 0.25rem;
+				background: #f8f9fc;
+				color: #4e73df;
+			}
+
+			.trend-description {
+				color: #858796;
+				font-style: italic;
+			}
+
+			/* Tambahkan style untuk tab */
+			.nav-tabs {
+				border-bottom: 1px solid #e3e6f0;
+			}
+
+			.nav-tabs .nav-link {
+				margin-bottom: -1px;
+				border: 1px solid transparent;
+				border-top-left-radius: 0.35rem;
+				border-top-right-radius: 0.35rem;
+				color: #858796;
+				font-weight: 500;
+				padding: 0.75rem 1rem;
+			}
+
+			.nav-tabs .nav-link:hover {
+				border-color: #e3e6f0 #e3e6f0 #e3e6f0;
+				color: #4e73df;
+			}
+
+			.nav-tabs .nav-link.active {
+				color: #4e73df;
+				background-color: #fff;
+				border-color: #e3e6f0 #e3e6f0 #fff;
+			}
+
+			.tab-content {
+				background-color: #fff;
+				border: 1px solid #e3e6f0;
+				border-top: none;
+				border-bottom-left-radius: 0.35rem;
+				border-bottom-right-radius: 0.35rem;
+			}
+
+			.tab-pane {
+				padding: 5px;
+			}
+
+			/* Penyesuaian untuk konten tab */
+			#data-container, #budget-container {
+				max-height: 300px;
+				overflow-y: auto;
+			}
+
+			.meter {
+				margin-bottom: 1rem;
+			}
+		</style>
 	</head>
 
 	<body>
@@ -67,9 +417,16 @@
 			</div>
             <h5>System shortcut</h5>
 			<div class="mt-2">                 
-				<button type="button" id="pembahruandata" class="btn btn-outline-primary">
+				<button type="button" id="pembahruandata" class="default_btn_filter">
 					 Reload
 				</button>
+			</div>
+			<h5>Filter Data</h5>
+			<div class="mt-2">
+				<button class="default_btn_filter">Week</button>
+				<button class="default_btn_filter">Month</button>
+				<button class="default_btn_filter">Year</button> 
+				</div>
 			</div>
 		</div>
 		<!-- top header -->
@@ -111,76 +468,6 @@
 				</div>
 			</div>
 		</header>
-
-		<nav class="d-none d-lg-block home-3">
-			<div class="container">
-				<div class="d-flex">
-					<ul class="nav_bar flex-grow-1">
-						<li class="withsubs">
-							<a href="index-1.html"
-								>Management <span><i class="las la-angle-down"></i></span
-							></a>
-							<ul class="subnav">
-								<li><a href="index.html">Dashboard</a></li>
-								<li><a href="plan-saveing.html">Saveing-Plan</a></li>
-								<li><a href="budgeting-view.html">Budgeting</a></li>
-							</ul>
-						</li>
-						<li class="withsubs">
-							<a href="shop-list.html"
-								>Shop <span><i class="las la-angle-down"></i></span
-							></a>
-							<ul class="subnav">
-								<li><a href="shop-list.html">List view </a></li>
-								<li><a href="shop-grid.html">Grid view</a></li>
-								<li><a href="shop-grid-2.html">Grid view 2</a></li>
-
-								<li><a href="shopping-cart.html">Shopping cart</a></li>
-								<li><a href="product-view.html">Product view</a></li>
-							</ul>
-						</li>
-						<li class="withsubs">
-							<a href="shop-list.html"
-								>Pages <span><i class="las la-angle-down"></i></span
-							></a>
-							<div class="subnav py-3 px-2 d-flex gx-4">
-								<div class="single_subnav">
-									<h5 class="text_lg ps-3 mb-2">Others pages</h5>
-									<ul>
-										<li><a href="about-us.html">About us</a></li>
-										<li><a href="contact-us.html">Contact us</a></li>
-
-										<li><a href="track-order.html">Track order</a></li>
-										<li><a href="faq.html">FAQ</a></li>
-										<li><a href="404.html">404</a></li>
-									</ul>
-								</div>
-								<div class="single_subnav">
-									<h5 class="text_lg ps-3 mb-2">Account pages</h5>
-									<ul>
-										<li><a href="account.html">My Account</a></li>
-										<li><a href="login.html">Login</a></li>
-										<li><a href="register.html">Register</a></li>
-										<li><a href="shop-grid.html">Forgot password</a></li>
-									</ul>
-								</div>
-								<div class="single_subnav">
-									<h5 class="text_lg ps-3 mb-2">Checkout page</h5>
-									<ul>
-										<li><a href="shop-list.html">Checkout</a></li>
-										<li><a href="shop-list.html">Payment</a></li>
-										<li><a href="shop-list.html">Payment success</a></li>
-									</ul>
-								</div>
-							</div>
-						</li>
-						<li><a href="contact-us.html">contact</a></li>
-						
-					</ul>
-				</div>
-			</div>
-		</nav>
-
 		<!-- mobile bottom bar -->
 		<div class="mobile_bottombar d-block d-lg-none">
 			<div class="header_icon">
@@ -215,36 +502,40 @@
 					</span>
 				</h5>
 				<ul>
-					<li class="withsub">
-						<a href="javascript:void(0)"> Management </a>
-						<div class="submn">
-							<a href="index.html">Dashboard</a>
-							<a href="plan-saveing.html">Saveing-Plan</a>
-							<a href="budgeting-view.html">Budgeting</a>
-						</div>
+					<li class="">
+						<a href="index.html">Dashboard</a>
 					</li>
 
-					<li class="withsub">
-						<a href="javascript:void(0)"> Shop </a>
-						<div class="submn">
+					<li class="">
+						<a href="plan-saveing.html">Saveing-Plan</a>
+						<!-- <div class="submn">
 							<a href="shop-list.html">List View</a>
 							<a href="shop-grid.html">Grid View</a>
 							<a href="shop-grid-2.html">Grid View 2</a>
 							<a href="wish-list.html">Wishlist</a>
 							<a href="shopping-cart.html">Shopping cart</a>
 							<a href="product-view.html">Product view</a>
-						</div>
+						</div> -->
 					</li>
-					<li class="withsub">
-						<a href="javascript:void(0)"> My Account </a>
-						<div class="submn">
+					<li class=""> 
+						<a href="budgeting-view.html">Budgeting</a>
+						<!-- <div class="submn">
 							<a href="account.html">My account</a>
 							<a href="login.html">Login</a>
 							<a href="register.html">Register</a>
 							<a href="forgot-password.html">Forgot password</a>
-						</div>
+						</div> -->
 					</li>
-					<li class="withsub">
+					<li class="">
+						<a href="budgeting-view.html">Riyawat Transaksi</a>
+						<!-- <div class="submn">
+							<a href="account.html">My account</a>
+							<a href="login.html">Login</a>
+							<a href="register.html">Register</a>
+							<a href="forgot-password.html">Forgot password</a>
+						</div> -->
+					</li>
+					<!-- <li class="withsub">
 						<a href="javascript:void(0)"> Other pages </a>
 						<div class="submn">
 							<a href="about-us.html">about us</a>
@@ -256,77 +547,48 @@
 							<a href="payment.html">Payment</a>
 							<a href="order-completed.html">Order complete</a>
 						</div>
-					</li>
+					</li> -->
 				</ul>
 			</div>
 		</div>
 
-		<!-- hero area -->
-		<div class="container-lg home_2_hero_wrp home-3">
+		<!-- hero area -->		
+		<div class="container-lg home_2_hero_wrp home-3 mt-4">
 			<div class="row">
 				<div class="col-xl-9">
 					<div class="home_2_hero">
 						<div class="container">
 							<div class="hero_slider_active">
-								<div class="single_hero_slider bg-3">
+								<div class="single_hero_slider">
+									<div class="hero_content m-4">
+										<p>Jangan Lupa isi Catatan Keuangannya</p>
+										<h1>
+											Hallo! <strong class="output"></strong><br class="d-block d-sm-none" />
+											Semangat yaa!
+										</h1>
+										<div class="hero_btn">
+											<a class="default_btn small rounded" href="Transaksi-save.html">Catat Transaksi</a>
+										</div>
+									</div>
+								</div>
+								<div class="single_hero_slider">
 									<div class="container">
-										<div class="row align-items-center">
-											<div class="col-lg-6 col-sm-7">
-												<div class="hero_content text-center text-sm-start ps-4">
-													<p>Jangan Lupa isi Catatan Keuangannya</p>
-													<h1>
-														Hallo! <strong class="output"></strong><br class="d-block d-sm-none" />
-														Semangat yaa!
-													</h1>
-													<div class="hero_btn">
-														<a class="default_btn small rounded" href="shop-grid.html">Catat Transaksi</a>
-													</div>
-												</div>
-											</div>
-											<div class="col-lg-6 col-sm-5 d-none d-sm-block">
-												<div class="hero_img">
-													<img loading="lazy" src="assets/images/men-1.png" alt="shirt" />
-												</div>
+										<div class="hero_content">
+											<p><strong class="output"></strong> dicatat ya Pengeluarannya</p>
+											<h1>Punya rencana Menabung? yuk buat!</h1>
+											<div class="hero_btn">
+												<a class="default_btn small rounded" href="plan-saveing.html">Rencanan Tabungan</a>
 											</div>
 										</div>
 									</div>
 								</div>
-								<div class="single_hero_slider bg-2">
+								<div class="single_hero_slider">
 									<div class="container">
-										<div class="row align-items-center">
-											<div class="col-sm-6">
-												<div class="hero_content text-center text-sm-start ps-4">
-													<p><strong class="output"></strong> dicatat ya Pengeluarannya</p>
-													<h1>Punya rencana Menabung? yuk buat!</h1>
-													<div class="hero_btn">
-														<a class="default_btn small rounded" href="plan-saveing.html">Rencanan Tabungan</a>
-													</div>
-												</div>
-											</div>
-											<div class="col-sm-6 d-none d-sm-block">
-												<div class="hero_img">
-													<img loading="lazy" src="assets/images/men-1.png" alt="shirt" />
-												</div>
-											</div>
-										</div>
-									</div>
-								</div>
-								<div class="single_hero_slider bg-1">
-									<div class="container">
-										<div class="row align-items-center">
-											<div class="col-sm-6">
-												<div class="hero_content text-center text-sm-start ps-4">
-													<p>coba cek deh <strong class="output"></strong></p>
-													<h1>Pengeluarannya sudah sesuai rencana ?</h1>
-													<div class="hero_btn">
-														<a class="default_btn small rounded" href="shop-grid.html">Data Transaksi</a>
-													</div>
-												</div>
-											</div>
-											<div class="col-sm-6 d-none d-sm-block">
-												<div class="hero_img">
-													<img loading="lazy" src="assets/images/men-1.png" alt="shirt" />
-												</div>
+										<div class="hero_content">
+											<p>coba cek deh <strong class="output"></strong></p>
+											<h1>Pengeluarannya sudah sesuai rencana ?</h1>
+											<div class="hero_btn">
+												<a class="default_btn small rounded" href="budgeting-view.html">Data Transaksi</a>
 											</div>
 										</div>
 									</div>
@@ -336,56 +598,128 @@
 					</div>
 				</div>
 				<div class="col-xl-3">
-					<h2 class="section_title_2 mb-0">Saveing Plan</h2>
-					<div id="data-container" class="shop_cart_wrap wishlist single_shop_cart_index">
+					<!-- Summary Cards -->
+					<div class="card mt-2">
+						<div class="card-body p-2">
+							<div class="row g-2">
+								<div class="col-6">
+									<div class="d-flex align-items-center p-2 rounded" style="background: rgba(78, 115, 223, 0.1);">
+										<div class="flex-shrink-0">
+											<i class="las la-money-bill fa-lg text-primary"></i>
+										</div>
+										<div class="flex-grow-1 ms-2">
+											<div class="small text-muted">Pemasukan</div>
+											<div class="fw-bold text-primary" id="totalPemasukan">Rp 0</div>
+										</div>
+									</div>
+								</div>
+								<div class="col-6">
+									<div class="d-flex align-items-center p-2 rounded" style="background: rgba(28, 200, 138, 0.1);">
+										<div class="flex-shrink-0">
+											<i class="las la-shopping-cart fa-lg text-success"></i>
+										</div>
+										<div class="flex-grow-1 ms-2">
+											<div class="small text-muted">Pengeluaran</div>
+											<div class="fw-bold text-success" id="totalPengeluaran">Rp 0</div>
+										</div>
+									</div>
+								</div>
+								<div class="col-6">
+									<div class="d-flex align-items-center p-2 rounded" style="background: rgba(54, 185, 204, 0.1);">
+										<div class="flex-shrink-0">
+											<i class="las la-piggy-bank fa-lg text-info"></i>
+										</div>
+										<div class="flex-grow-1 ms-2">
+											<div class="small text-muted">Tabungan</div>
+											<div class="fw-bold text-info" id="totalTabungan">Rp 0</div>
+										</div>
+									</div>
+								</div>
+								<div class="col-6">
+									<div class="d-flex align-items-center p-2 rounded" style="background: rgba(246, 194, 62, 0.1);">
+										<div class="flex-shrink-0">
+											<i class="las la-wallet fa-lg text-warning"></i>
+										</div>
+										<div class="flex-grow-1 ms-2">
+											<div class="small text-muted">Sisa Budget</div>
+											<div class="fw-bold text-warning" id="sisaBudget">Rp 0</div>
+										</div>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+
+					<div class="card mt-2">
+						<h4 class="text-dark card-header bg-white">Saldo Terkini</h4>
+						<div class="card-body p-2">
+							<div class="row g-2">
+								<div class="col-12">
+									<div class="d-flex align-items-center p-2 rounded" style="background: rgba(78, 115, 223, 0.1);">
+										<div class="flex-grow-1 ms-2">
+											<div class="small text-muted">BANK BNI Widya</div>
+											<div class="fw-bold text-primary" >Rp 0</div>
+										</div>
+									</div>
+								</div>
+								<div class="col-12">
+									<div class="d-flex align-items-center p-2 rounded" style="background: rgba(54, 185, 204, 0.1);">
+										<div class="flex-grow-1 ms-2">
+											<div class="small text-muted">BANK BNI Azis</div>
+											<div class="fw-bold text-info">Rp 0</div>
+										</div>
+									</div>
+								</div>
+								<div class="col-12">
+									<div class="d-flex align-items-center p-2 rounded" style="background: rgba(246, 194, 62, 0.1);">
+										<div class="flex-grow-1 ms-2">
+											<div class="small text-muted">Tunai</div>
+											<div class="fw-bold text-warning">Rp 0</div>
+										</div>
+									</div>
+								</div>
+								<div class="col-12">
+									<div class="d-flex align-items-center p-2 rounded" style="background:rgba(54, 185, 204, 0.1);">
+										<div class="flex-grow-1 ms-2">
+											<div class="small text-muted">Rekening Tabungan</div>
+											<div class="fw-bold text-success">Rp 0</div>
+										</div>
+									</div>
+								</div>
+							</div>
+						</div>
 					</div>
 					<div class="shop_cart_wrap wishlist single_shop_cart_index">
-						<div>
-							<div class="row justify-content-center">
-								<a class="default_btn small rounded" href="plan-saveing.html">Lihat Rencanan Tabungan</a>
-							</div>
-						</div> 
-					</div>
-				</div>
-			</div>
-		</div>
-
-		<!-- features area -->
-		<section class="features_area section_padding">
-			<div class="container">
-				<div class="row justify-content-center">
-					<div class="col-xl-10">
-						<div class="row justify-content-center gx-2 gx-md-4">
-							<div class="col-sm-4 mb-3 mb-sm-0">
-								<div class="single_feature d-flex flex-column flex-sm-row align-items-center justify-content-center">
-									<div class="feature_icon">
-										<img loading="lazy" src="assets/images/svg/delivery-van.svg" alt="icon" />
-									</div>
-									<div class="feature_content">
-										<h4>Free shipping</h4>
-										<p>Orders over $200</p>
+						<ul class="nav nav-tabs" id="financeTab" role="tablist">
+							<li class="nav-item" role="presentation">
+								<button class="nav-link active" id="savings-tab" data-bs-toggle="tab" data-bs-target="#savings" type="button" role="tab">
+									Rencana Tabungan
+								</button>
+							</li>
+							<li class="nav-item" role="presentation">
+								<button class="nav-link" id="budget-tab" data-bs-toggle="tab" data-bs-target="#budget" type="button" role="tab">
+									Budgeting
+								</button>
+							</li>
+						</ul>
+						<div class="tab-content p-3" id="financeTabContent">
+							<div class="tab-pane fade show active" id="savings" role="tabpanel">
+								<div id="data-container">
+									<!-- Rencana tabungan akan ditampilkan di sini -->
+								</div>
+								<div class="shop_cart_wrap wishlist single_shop_cart_index">
+									<div class="row justify-content-center">
+										<a class="default_btn small rounded" href="plan-saveing.html">Lihat Rencanan Tabungan</a>
 									</div>
 								</div>
 							</div>
-							<div class="col-sm-4 mb-3 mb-sm-0">
-								<div class="single_feature d-flex flex-column flex-sm-row align-items-center justify-content-center">
-									<div class="feature_icon">
-										<img loading="lazy" src="assets/images/svg/money-back.svg" alt="icon" />
-									</div>
-									<div class="feature_content">
-										<h4>Money Returns</h4>
-										<p>30 Days money return</p>
-									</div>
+							<div class="tab-pane fade" id="budget" role="tabpanel">
+								<div id="budget-container">
+									<!-- Progress budget akan ditampilkan di sini -->
 								</div>
-							</div>
-							<div class="col-sm-4">
-								<div class="single_feature d-flex flex-column flex-sm-row align-items-center justify-content-center">
-									<div class="feature_icon">
-										<img loading="lazy" src="assets/images/svg/service-hours.svg" alt="icon" />
-									</div>
-									<div class="feature_content">
-										<h4>24/7 Support</h4>
-										<p>Customer support</p>
+								<div class="shop_cart_wrap wishlist single_shop_cart_index">
+									<div class="row justify-content-center">
+										<a class="default_btn small rounded" href="plan-saveing.html">Lihat Budgeting</a>
 									</div>
 								</div>
 							</div>
@@ -393,7 +727,81 @@
 					</div>
 				</div>
 			</div>
+		</div>
+
+		<!-- Dashboard Summary -->
+		<section class="features_area  m-0 mt-1">
+			<div class="container">
+				<!-- Charts Row -->
+				<div class="row">
+					<!-- Distribusi Pengeluaran -->
+					<div class="col-xl-4 col-lg-5">
+						<div class="card m-0 mb-4">
+							<div class="card-header bg-white py-3 d-flex justify-content-between align-items-center">
+								<h4 class="m-0 text-danger">Distribusi Pengeluaran</h6>
+								<span class="badge bg-primary">Bulan Ini</span>
+							</div>
+							<div class="card-body">
+								<div class="expense-distribution">
+									<!-- Items will be populated by JavaScript -->
+								</div>
+							</div>
+						</div>
+					</div>
+
+					<!-- Tren Keuangan -->
+					<div class="col-xl-8 col-lg-7">
+						<div class="card mb-4">
+							<div class="card-header  bg-white py-3 d-flex justify-content-between align-items-center">
+								<h4 class="m-0 text-dark">Tren Keuangan</h6>
+								<div class="dropdown">
+									<button class="btn btn-link dropdown-toggle" type="button" id="trendFilterButton" data-bs-toggle="dropdown">
+										<i class="las la-filter"></i> Filter
+									</button>
+									<ul class="dropdown-menu">
+										<li><a class="dropdown-item" href="#" data-period="week">Minggu Ini</a></li>
+										<li><a class="dropdown-item" href="#" data-period="month">Bulan Ini</a></li>
+										<li><a class="dropdown-item" href="#" data-period="year">Tahun Ini</a></li>
+									</ul>
+								</div>
+							</div>
+							<div class="card-body">
+								<div class="trend-list">
+									<!-- Items will be populated by JavaScript -->
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+
+				<!-- Recent Transactions -->
+				<div class="row">
+					<div class="col-12">
+						<div class="card  mb-4">
+							<div class="card-header  bg-white py-3 d-flex justify-content-between align-items-center">
+								<h4 class="m-0 text-dark">Transaksi Terakhir</h6>
+								<div class="dropdown">
+									<button class="btn btn-link dropdown-toggle" type="button" id="dropdownMenuButton" data-bs-toggle="dropdown">
+										<i class="las la-filter"></i> Filter
+									</button>
+									<ul class="dropdown-menu">
+										<li><a class="dropdown-item" href="#">Semua</a></li>
+										<li><a class="dropdown-item" href="#">Pemasukan</a></li>
+										<li><a class="dropdown-item" href="#">Pengeluaran</a></li>
+									</ul>
+								</div>
+							</div>
+							<div class="card-body">
+								<div id="recentTransactions" class="transaction-list">
+									<!-- Transactions will be populated by JavaScript -->
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
 		</section>
+
 		<!-- copyright -->
 		<div class="copyright_wrap">
 			<div class="container">
@@ -405,166 +813,24 @@
 			</div>
 		</div>
 
-		<!-- product quick view -->
-		<div class="product_quickview">
-			<div class="prodquick_wrap position-relative">
-				<div class="close_quickview">
-					<i class="las la-times"></i>
-				</div>
-				<div class="row">
-					<div class="col-lg-6">
-						<div class="product_view_slider">
-							<div class="single_viewslider">
-								<img loading="lazy" src="assets/images/slider-1.png" alt="product" />
-							</div>
-							<div class="single_viewslider">
-								<img loading="lazy" src="assets/images/slider-2.png" alt="product" />
-							</div>
-							<div class="single_viewslider">
-								<img loading="lazy" src="assets/images/slider-3.png" alt="product" />
-							</div>
-							<div class="single_viewslider">
-								<img loading="lazy" src="assets/images/slider-4.png" alt="product" />
-							</div>
-							<div class="single_viewslider">
-								<img loading="lazy" src="assets/images/slider-5.png" alt="product" />
-							</div>
-							<div class="single_viewslider">
-								<img loading="lazy" src="assets/images/slider-1.png" alt="product" />
-							</div>
-						</div>
-						<div class="product_viewslid_nav">
-							<div class="single_viewslid_nav">
-								<img loading="lazy" src="assets/images/slider-1.png" alt="product" />
-							</div>
-							<div class="single_viewslid_nav">
-								<img loading="lazy" src="assets/images/slider-2.png" alt="product" />
-							</div>
-							<div class="single_viewslid_nav">
-								<img loading="lazy" src="assets/images/slider-3.png" alt="product" />
-							</div>
-							<div class="single_viewslid_nav">
-								<img loading="lazy" src="assets/images/slider-4.png" alt="product" />
-							</div>
-							<div class="single_viewslid_nav">
-								<img loading="lazy" src="assets/images/slider-5.png" alt="product" />
-							</div>
-							<div class="single_viewslid_nav">
-								<img loading="lazy" src="assets/images/slider-1.png" alt="product" />
-							</div>
-						</div>
-					</div>
-					<div class="col-lg-6">
-						<div class="product_info_wrapper">
-							<div class="product_base_info">
-								<h1>MEN'S ADIDAS COURTSMASH</h1>
-								<div class="rating">
-									<div class="d-flex align-items-center">
-										<div class="rating_star">
-											<span><i class="las la-star"></i></span>
-											<span><i class="las la-star"></i></span>
-											<span><i class="las la-star"></i></span>
-											<span><i class="las la-star"></i></span>
-											<span><i class="las la-star"></i></span>
-										</div>
-										<p class="rating_count">50 Reviews</p>
-									</div>
-								</div>
-								<div class="product_other_info">
-									<p><span class="text-semibold">Availability:</span><span class="text-green">In Stock</span></p>
-									<p><span class="text-semibold">Brand:</span>Bata</p>
-									<p><span class="text-semibold">Category:</span>Clothing</p>
-									<p><span class="text-semibold">SKU:</span>BE45VGRT</p>
-								</div>
-								<div class="price mt-3 mb-3 d-flex align-items-center">
-									<span class="prev_price ms-0">$5000.00</span>
-									<span class="org_price ms-2">$4500.00</span>
-									<div class="disc_tag ms-3">-30%</div>
-								</div>
-								<div class="pd_dtails">
-									<p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Enim exercitationem quaerat....</p>
-								</div>
-								<div class="shop_filter border-bottom-0 pb-0">
-									<div class="size_selector mb-3">
-										<h5>Size</h5>
-										<div class="d-flex align-items-center">
-											<div class="single_size_opt">
-												<input type="radio" hidden name="size" class="size_inp" id="size-xs" />
-												<label for="size-xs">XS</label>
-											</div>
-											<div class="single_size_opt ms-2">
-												<input type="radio" hidden name="size" class="size_inp" id="size-s" />
-												<label for="size-s">S</label>
-											</div>
-											<div class="single_size_opt ms-2">
-												<input type="radio" hidden name="size" class="size_inp" id="size-m" checked />
-												<label for="size-m">M</label>
-											</div>
-											<div class="single_size_opt ms-2">
-												<input type="radio" hidden name="size" class="size_inp" id="size-l" />
-												<label for="size-l">L</label>
-											</div>
-											<div class="single_size_opt ms-2">
-												<input type="radio" hidden name="size" class="size_inp" id="size-xl" />
-												<label for="size-xl">XL</label>
-											</div>
-										</div>
-									</div>
-									<div class="size_selector color_selector">
-										<h5>Color:</h5>
-										<div class="d-flex align-items-center">
-											<div class="single_size_opt">
-												<input type="radio" hidden name="color" class="size_inp" id="color-purple" />
-												<label for="color-purple" class="bg-color" data-bs-toggle="tooltip" title="Rose Red"></label>
-											</div>
-											<div class="single_size_opt ms-2">
-												<input type="radio" hidden name="color" class="size_inp" id="color-red" />
-												<label for="color-red" class="bg-white" data-bs-toggle="tooltip" title="White"></label>
-											</div>
-											<div class="single_size_opt ms-2">
-												<input type="radio" hidden name="color" class="size_inp" id="color-green" checked />
-												<label for="color-green" class="bg-dark" data-bs-toggle="tooltip" title="Black"></label>
-											</div>
-										</div>
-									</div>
-								</div>
-								<div class="cart_qnty ms-md-auto">
-									<p>Quantity</p>
-									<div class="d-flex align-items-center">
-										<div class="cart_qnty_btn">
-											<i class="las la-minus"></i>
-										</div>
-										<div class="cart_count">4</div>
-										<div class="cart_qnty_btn">
-											<i class="las la-plus"></i>
-										</div>
-									</div>
-								</div>
-							</div>
-							<div class="product_buttons">
-								<a href="#" class="default_btn me-sm-3 me-2 px-2 px-lg-4"><i class="icon-cart me-2"></i> Add to Cart</a>
-								<a href="#" class="default_btn second px-3 px-ms-4"><i class="icon-heart me-2"></i> Wishlist</a>
-							</div>
-							<div class="share_icons footer_icon d-flex">
-								<a href="#"><i class="lab la-facebook-f"></i></a>
-								<a href="#"><i class="lab la-twitter"></i></a>
-								<a href="#"><i class="lab la-instagram"></i></a>
-							</div>
-						</div>
-					</div>
-				</div>
-			</div>
-		</div>
-
 		<!-- back to top -->
 		<button id="back-to-top" class="back-to-top-hide">
 			<i class="las la-arrow-up"></i>
 		</button>
 		<script>
+			// Cek apakah aplikasi berjalan dari server web
+			if (window.location.protocol === 'http:' || window.location.protocol === 'https:') {
 			if ('serviceWorker' in navigator) {
-				navigator.serviceWorker.register('service-worker.js')
-					.then(() => console.log("✅ Service Worker registered"))
-					.catch(err => console.log("❌ SW error", err));
+					window.addEventListener('load', function() {
+						navigator.serviceWorker.register('/service-worker.js')
+							.then(function(registration) {
+								console.log('ServiceWorker registration successful');
+							})
+							.catch(function(err) {
+								console.log('ServiceWorker registration failed: ', err);
+							});
+					});
+				}
 			}
 		</script> 
 		<!-- all js -->
@@ -574,30 +840,379 @@
 		<script src="assets/js/slick.min.js"></script>
 		<script src="assets/js/jquery.nice-select.min.js"></script>
 		<script src="assets/js/app.js"></script>
+		<script src="assets/js/theme-manager.js"></script>
+		<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 		<script>
 		const spreadsheetUrl = "https://script.google.com/macros/s/AKfycbyBfKNeW5yhAyL8BdaJo6AhkbVfEPeorcqOMjPElrCCZJU9sQpCKpWwGAAqSYqKSqFw2g/exec?dataset=accdta"; 
 		const savedUser = localStorage.getItem('user');
     	const outputElements = document.querySelectorAll('.output');
 		if (savedUser) {
 			outputElements.forEach(el => el.textContent = savedUser);
-			//$('.preloader').fadeOut(500, function(){ $('.preloader').remove(); } );
+			loadDashboardData();
+			loadBudgetProgress();
 		 }
 		 else {
 			window.location.href = "login.html"; 	
 		 }
 		
-		</script>
-		<script>
+		// Fungsi untuk memuat dan menampilkan progress budget
+		function loadBudgetProgress() {
+			// Data dummy untuk contoh
+			const budgetData = [
+				{
+					kategori: "MAKANAN & MINUMAN",
+					target: 2000000,
+					terpakai: 1500000,
+					persen_tercapai: 75
+				},
+				{
+					kategori: "TRANSPORTASI",
+					target: 1000000,
+					terpakai: 400000,
+					persen_tercapai: 40
+				},
+				{
+					kategori: "HIBURAN DAN JALAN-JALAN",
+					target: 500000,
+					terpakai: 600000,
+					persen_tercapai: 120
+				}
+			];
+
+			const container = document.getElementById('budget-container');
+			container.innerHTML = ''; // Reset container
+			budgetData.forEach(item => {
+				const el = document.createElement('div');
+				el.className = 'd-flex align-items-center flex-wrap';
+				
+				// Tentukan apakah melebihi target
+				const melebihiTarget = item.terpakai > item.target;
+				const persentaseKelebihan = melebihiTarget ? ((item.terpakai / item.target) * 100 - 100).toFixed(1) : 0;
+				
+				// Tentukan warna progress bar
+				const progressBarClass = melebihiTarget ? 'bg-danger' : '';
+				
+				// Tentukan lebar progress bar
+				const progressWidth = melebihiTarget ? 100 : item.persen_tercapai;
+				
+				el.innerHTML = `
+					<div class="cart_cont w-100">
+						<div class="d-flex justify-content-between align-items-center mb-2">
+							<h6 class="mb-0">${item.kategori}</h6>
+							${melebihiTarget ? 
+								`<span class="badge bg-danger">
+									<i class="las la-exclamation-triangle"></i> 
+									Melampaui  ${persentaseKelebihan}%
+								</span>` : 
+								''}
+						</div>
+						<div class="page-wrap">
+							<div class="meter">
+								<span class="progress ${progressBarClass}" style="width: ${progressWidth}%"></span>
+								<div class="label">${formatRupiah(item.terpakai)} dari ${formatRupiah(item.target)}</div>
+							</div>
+						</div>
+					</div>
+				`;
+				container.appendChild(el);
+			});
+		}
+
+		function formatRupiah(angka) {
+			// Pastikan angka adalah number
+			angka = Number(angka);
+			
+			// Jika angka adalah 0 atau tidak valid
+			if (isNaN(angka) || angka === 0) {
+				return 'Rp 0';
+			}
+			
+			// Format untuk angka besar (miliar)
+			if (angka >= 1000000000) {
+				return 'Rp ' + (angka / 1000000000).toFixed(1) + 'B';
+			}
+			
+			// Format untuk angka menengah (juta)
+			if (angka >= 1000000) {
+				return 'Rp ' + (angka / 1000000).toFixed(1) + 'M';
+			}
+			
+			// Format untuk angka kecil (ribu)
+			if (angka >= 1000) {
+				return 'Rp ' + (angka / 1000).toFixed(1) + 'K';
+			}
+			
+			// Format untuk angka di bawah 1000
+			return 'Rp ' + angka.toString();
+		}
+
+		function loadDashboardData() {
+			// Data dummy untuk dashboard
+			const dashboardData = {
+				summary: {
+					totalPemasukan: 15000000,
+					totalPengeluaran: 8500000,
+					totalTabungan: 3000000,
+					sisaBudget: 3500000
+				},
+				chartData: {
+					// Data untuk Distribusi Pengeluaran
+					categories: ['Makanan', 'Transportasi', 'Hiburan', 'Belanja', 'Utilitas', 'Lainnya'],
+					amounts: [2500000, 1500000, 1000000, 2000000, 1000000, 500000],
+					
+					// Data untuk Tren Keuangan
+					months: ['2024-01', '2024-02', '2024-03', '2024-04', '2024-05', '2024-06'],
+					income: [12000000, 13500000, 12800000, 14200000, 15000000, 15000000],
+					expense: [7500000, 8200000, 7800000, 8900000, 8200000, 8500000]
+				},
+				recentTransactions: [
+					{
+						id: 1,
+						tanggal: '2024-03-15',
+						jenis: 'expense',
+						kategori: 'Makanan',
+						jumlah: 150000,
+						keterangan: 'Makan siang dengan tim'
+					},
+					{
+						id: 2,
+						tanggal: '2024-03-15',
+						jenis: 'income',
+						kategori: 'Gaji',
+						jumlah: 15000000,
+						keterangan: 'Gaji bulan Maret'
+					},
+					{
+						id: 3,
+						tanggal: '2024-03-14',
+						jenis: 'expense',
+						kategori: 'Transportasi',
+						jumlah: 500000,
+						keterangan: 'Bensin dan parkir'
+					},
+					{
+						id: 4,
+						tanggal: '2024-03-14',
+						jenis: 'expense',
+						kategori: 'Hiburan',
+						jumlah: 300000,
+						keterangan: 'Nonton bioskop'
+					},
+					{
+						id: 5,
+						tanggal: '2024-03-13',
+						jenis: 'income',
+						kategori: 'Freelance',
+						jumlah: 2500000,
+						keterangan: 'Proyek website'
+					}
+				]
+			};
+
+			updateSummaryCards(dashboardData.summary);
+			updateCharts(dashboardData.chartData);
+			updateRecentTransactions(dashboardData.recentTransactions);
+		}
+
+		function updateSummaryCards(summary) {
+			document.getElementById('totalPemasukan').textContent = formatRupiah(summary.totalPemasukan);
+			document.getElementById('totalPengeluaran').textContent = formatRupiah(summary.totalPengeluaran);
+			document.getElementById('totalTabungan').textContent = formatRupiah(summary.totalTabungan);
+			document.getElementById('sisaBudget').textContent = formatRupiah(summary.sisaBudget);
+		}
+
+		function updateCharts(chartData) {
+			// Update distribusi pengeluaran
+			const expenseDistribution = document.querySelector('.expense-distribution');
+			if (expenseDistribution) {
+				expenseDistribution.innerHTML = '';
+				
+				// Hitung total pengeluaran
+				const totalExpense = chartData.amounts.reduce((sum, amount) => sum + amount, 0);
+				
+				// Buat item untuk setiap kategori
+				chartData.categories.forEach((category, index) => {
+					const amount = chartData.amounts[index];
+					const percentage = ((amount / totalExpense) * 100).toFixed(1);
+					
+					const expenseItem = document.createElement('div');
+					expenseItem.className = 'expense-item mb-3';
+					
+					// Tentukan ikon berdasarkan kategori
+					let icon = 'las la-ellipsis-h';
+					let iconColor = 'text-secondary';
+					
+					switch(category.toLowerCase()) {
+						case 'makanan':
+							icon = 'las la-utensils';
+							iconColor = 'text-primary';
+							break;
+						case 'transportasi':
+							icon = 'las la-car';
+							iconColor = 'text-success';
+							break;
+						case 'hiburan':
+							icon = 'las la-film';
+							iconColor = 'text-info';
+							break;
+						case 'belanja':
+							icon = 'las la-shopping-bag';
+							iconColor = 'text-warning';
+							break;
+						case 'utilitas':
+							icon = 'las la-lightbulb';
+							iconColor = 'text-danger';
+							break;
+						case 'lainnya':
+							icon = 'las la-ellipsis-h';
+							iconColor = 'text-secondary';
+							break;
+					}
+					
+					expenseItem.innerHTML = `
+						<div class="d-flex justify-content-between align-items-center mb-1">
+							<div class="d-flex align-items-center">
+								<i class="${icon} fa-lg me-2 ${iconColor}"></i>
+								<span class="fw-bold">${category}</span>
+							</div>
+							<span class="text-dark">${formatRupiah(amount)}</span>
+						</div>
+						<div class="progress" style="height: 8px;">
+							<div class="progress-bar ${iconColor.replace('text-', 'bg-')}" 
+								 role="progressbar" 
+								 style="width: ${percentage}%" 
+								 aria-valuenow="${percentage}" 
+								 aria-valuemin="0" 
+								 aria-valuemax="100">
+							</div>
+						</div>
+						<div class="d-flex justify-content-between mt-1">
+							<small class="text-muted">${percentage}% dari total</small>
+							<small class="text-muted">Target: ${formatRupiah(amount * 1.2)}</small>
+						</div>
+					`;
+					
+					expenseDistribution.appendChild(expenseItem);
+				});
+			}
+
+			// Update tren keuangan
+			const trendList = document.querySelector('.trend-list');
+			if (trendList) {
+				trendList.innerHTML = '';
+				
+				// Gabungkan data pemasukan dan pengeluaran
+				const trendData = chartData.months.map((month, index) => ({
+					month: month,
+					income: chartData.income[index],
+					expense: chartData.expense[index],
+					balance: chartData.income[index] - chartData.expense[index]
+				}));
+
+				// Tampilkan data tren
+				trendData.forEach(item => {
+					const trendItem = document.createElement('div');
+					trendItem.className = 'trend-item';
+					
+					const monthName = formatMonthName(item.month);
+					const balanceClass = item.balance >= 0 ? 'income' : 'expense';
+					
+					trendItem.innerHTML = `
+						<div class="trend-header">
+							<span class="trend-date">${monthName}</span>
+							<span class="trend-amount ${balanceClass}">
+								${formatRupiah(Math.abs(item.balance))}
+								${item.balance >= 0 ? '(Surplus)' : '(Defisit)'}
+							</span>
+						</div>
+						<div class="trend-details">
+							<div>
+								<span class="trend-category">Pemasukan: ${formatRupiah(item.income)}</span>
+								<span class="trend-category ms-2">Pengeluaran: ${formatRupiah(item.expense)}</span>
+							</div>
+						</div>
+					`;
+					
+					trendList.appendChild(trendItem);
+				});
+			}
+		}
+
+		function formatMonthName(monthKey) {
+			const [year, month] = monthKey.split('-');
+			const date = new Date(year, month - 1);
+			return date.toLocaleDateString('id-ID', { month: 'long', year: 'numeric' });
+		}
+
+		function updateRecentTransactions(transactions) {
+			const container = document.getElementById('recentTransactions');
+			container.innerHTML = '';
+
+			// Mengelompokkan transaksi berdasarkan tanggal
+			const groupedTransactions = transactions.reduce((groups, transaction) => {
+				const date = transaction.tanggal;
+				if (!groups[date]) {
+					groups[date] = [];
+				}
+				groups[date].push(transaction);
+				return groups;
+			}, {});
+
+			// Mengurutkan tanggal dari yang terbaru
+			Object.keys(groupedTransactions)
+				.sort((a, b) => new Date(b) - new Date(a))
+				.forEach(date => {
+					const dateGroup = document.createElement('div');
+					dateGroup.className = 'mb-3';
+					
+					// Menambahkan header tanggal
+					const dateHeader = document.createElement('div');
+					dateHeader.className = 'transaction-date mb-2';
+					dateHeader.textContent = formatDate(date);
+					dateGroup.appendChild(dateHeader);
+
+					// Menambahkan transaksi untuk tanggal tersebut
+					groupedTransactions[date].forEach(transaction => {
+						const card = document.createElement('div');
+						card.className = `transaction-card ${transaction.jenis}`;
+						card.innerHTML = `
+							<div class="d-flex justify-content-between align-items-center">
+								<div>
+									<h6 class="mb-1">${transaction.keterangan}</h6>
+									<span class="transaction-category">${transaction.kategori}</span>
+								</div>
+								<div class="text-end">
+									<div class="transaction-amount ${transaction.jenis}">
+										${transaction.jenis === 'income' ? '+' : '-'} ${formatRupiah(transaction.jumlah)}
+									</div>
+									<div class="transaction-date">${formatTime(transaction.tanggal)}</div>
+								</div>
+							</div>
+						`;
+						dateGroup.appendChild(card);
+					});
+
+					container.appendChild(dateGroup);
+				});
+		}
+
+		function formatDate(dateStr) {
+			const date = new Date(dateStr);
+			const options = { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' };
+			return date.toLocaleDateString('id-ID', options);
+		}
+
+		function formatTime(dateStr) {
+			const date = new Date(dateStr);
+			return date.toLocaleTimeString('id-ID', { hour: '2-digit', minute: '2-digit' });
+		}
+
 			document.getElementById("LogOutSistem").addEventListener("click", function (e) {
 			  e.preventDefault(); 
 			  localStorage.clear(); 
 			  window.location.href = "index.html"; 
 			});
-		</script>	
-		  <script> 
-			function formatRupiah(number) {
-				return Number(number).toLocaleString('id-ID');
-			}
+
 			function formatBulanTahun(dateStr) {
 				const bulan = [
 					'Januari', 'Februari', 'Maret', 'April', 'Mei', 'Juni',
@@ -610,8 +1225,8 @@
 			}
 				
 			function tampilkanDataKeUI(data) {
-			  const container = document.getElementById('data-container'); // pastikan kamu punya <div id="data-container"></div> di HTML-mu
-			  container.innerHTML = ''; // Kosongkan dulu
+			const container = document.getElementById('data-container');
+			container.innerHTML = '<h5 class="mb-3">Rencana Tabungan</h5>';
 			  const top3 = data.slice(0, 3);
 
 			  top3.forEach(item => {
@@ -632,6 +1247,7 @@
 			  });
 			  $('.preloader').fadeOut(500, function(){ $('.preloader').remove(); } );
 			}
+
 			function ambilData() {
 				const dataLocal = localStorage.getItem('saving_plan_Index');
 				const spreadsheetUrlSvdt = "https://script.google.com/macros/s/AKfycbyBfKNeW5yhAyL8BdaJo6AhkbVfEPeorcqOMjPElrCCZJU9sQpCKpWwGAAqSYqKSqFw2g/exec?dataset=trgSave"; 
@@ -649,7 +1265,9 @@
 					.catch(err => console.error('Gagal ambil data:', err));
 				}
 			}
+
 			document.addEventListener('DOMContentLoaded', ambilData);
+		
 			const submitButton = document.getElementById("pembahruandata");   
 			document.getElementById("pembahruandata").addEventListener("click", function(event) {
 				event.preventDefault();
@@ -660,10 +1278,209 @@
 					.then(res => {
 					  localStorage.setItem('saving_plan_Index', JSON.stringify(res.value));
 					  window.location.reload();
-					  //tampilkanDataKeUI(res.value);
 					})
-					.catch(err => {console.error('Gagal ambil data:', err); document.getElementById("loadingOverlay").style.display = "none";});
+				.catch(err => {
+					console.error('Gagal ambil data:', err); 
+					document.getElementById("loadingOverlay").style.display = "none";
+				});
 			});
-			</script>
+
+		// Fungsi untuk sinkronisasi data real-time
+		function syncData() {
+			const spreadsheetUrl = "https://script.google.com/macros/s/AKfycbyBfKNeW5yhAyL8BdaJo6AhkbVfEPeorcqOMjPElrCCZJU9sQpCKpWwGAAqSYqKSqFw2g/exec?dataset=accdta";
+			const spreadsheetUrlSvdt = "https://script.google.com/macros/s/AKfycbyBfKNeW5yhAyL8BdaJo6AhkbVfEPeorcqOMjPElrCCZJU9sQpCKpWwGAAqSYqKSqFw2g/exec?dataset=trgSave";
+			
+			// Sinkronisasi data transaksi
+			fetch(spreadsheetUrl)
+				.then(res => res.json())
+				.then(res => {
+					if (res && res.value && Array.isArray(res.value)) {
+						localStorage.setItem('transaction_data', JSON.stringify(res.value));
+						updateDashboardData(res.value);
+					} else {
+						console.error('Format data transaksi tidak valid:', res);
+						// Gunakan data dummy jika format tidak valid
+						const dummyData = [
+							{
+								tanggal: new Date().toISOString().split('T')[0],
+								jenis: 'income',
+								kategori: 'Gaji',
+								jumlah: 15000000,
+								keterangan: 'Gaji bulan ini'
+							},
+							{
+								tanggal: new Date().toISOString().split('T')[0],
+								jenis: 'expense',
+								kategori: 'Makanan',
+								jumlah: 500000,
+								keterangan: 'Makan siang'
+							},
+							{
+								tanggal: new Date().toISOString().split('T')[0],
+								jenis: 'expense',
+								kategori: 'hiburan',
+								jumlah: 500000,
+								keterangan: 'Jalan-jalan'
+							}
+						];
+						updateDashboardData(dummyData);
+					}
+				})
+				.catch(err => {
+					console.error('Gagal sinkronisasi data transaksi:', err);
+					// Gunakan data dari localStorage jika ada
+					const savedData = localStorage.getItem('transaction_data');
+					if (savedData) {
+						try {
+							const parsedData = JSON.parse(savedData);
+							if (Array.isArray(parsedData)) {
+								updateDashboardData(parsedData);
+							}
+						} catch (e) {
+							console.error('Gagal memparse data dari localStorage:', e);
+						}
+					}
+				});
+
+			// Sinkronisasi data tabungan
+			fetch(spreadsheetUrlSvdt)
+				.then(res => res.json())
+				.then(res => {
+					if (res && res.value && Array.isArray(res.value)) {
+						localStorage.setItem('saving_plan_Index', JSON.stringify(res.value));
+						tampilkanDataKeUI(res.value);
+					} else {
+						console.error('Format data tabungan tidak valid:', res);
+					}
+				})
+				.catch(err => {
+					console.error('Gagal sinkronisasi data tabungan:', err);
+					// Gunakan data dari localStorage jika ada
+					const savedData = localStorage.getItem('saving_plan_Index');
+					if (savedData) {
+						try {
+							const parsedData = JSON.parse(savedData);
+							if (Array.isArray(parsedData)) {
+								tampilkanDataKeUI(parsedData);
+							}
+						} catch (e) {
+							console.error('Gagal memparse data dari localStorage:', e);
+						}
+					}
+				});
+		}
+
+		// Fungsi untuk memperbarui data dashboard
+		function updateDashboardData(data) {
+			if (!Array.isArray(data)) {
+				console.error('Data harus berupa array:', data);
+				return;
+			}
+
+			const summary = calculateSummary(data);
+			const chartData = processChartData(data);
+			const recentTransactions = getRecentTransactions(data);
+
+			updateSummaryCards(summary);
+			updateCharts(chartData);
+			updateRecentTransactions(recentTransactions);
+		}
+
+		// Fungsi untuk menghitung ringkasan
+		function calculateSummary(data) {
+			if (!Array.isArray(data)) {
+				console.error('Data harus berupa array:', data);
+				return {
+					totalPemasukan: 0,
+					totalPengeluaran: 0,
+					totalTabungan: 0,
+					sisaBudget: 0
+				};
+			}
+
+			return {
+				totalPemasukan: data.reduce((sum, item) => item.jenis === 'income' ? sum + (Number(item.jumlah) || 0) : sum, 0),
+				totalPengeluaran: data.reduce((sum, item) => item.jenis === 'expense' ? sum + (Number(item.jumlah) || 0) : sum, 0),
+				totalTabungan: data.reduce((sum, item) => item.jenis === 'saving' ? sum + (Number(item.jumlah) || 0) : sum, 0),
+				sisaBudget: data.reduce((sum, item) => {
+					if (item.jenis === 'income') return sum + (Number(item.jumlah) || 0);
+					if (item.jenis === 'expense') return sum - (Number(item.jumlah) || 0);
+					return sum;
+				}, 0)
+			};
+		}
+
+		// Fungsi untuk memproses data chart
+		function processChartData(data) {
+			if (!Array.isArray(data)) {
+				console.error('Data harus berupa array:', data);
+				return {
+					categories: [],
+					amounts: [],
+					months: [],
+					income: [],
+					expense: []
+				};
+			}
+
+			const categories = {};
+			const months = {};
+			
+			data.forEach(item => {
+				// Proses data kategori
+				if (item.jenis === 'expense') {
+					if (!categories[item.kategori]) {
+						categories[item.kategori] = 0;
+					}
+					categories[item.kategori] += Number(item.jumlah) || 0;
+				}
+				
+				// Proses data bulanan
+				const date = new Date(item.tanggal);
+				const monthKey = `${date.getFullYear()}-${date.getMonth() + 1}`;
+				if (!months[monthKey]) {
+					months[monthKey] = { income: 0, expense: 0 };
+				}
+				if (item.jenis === 'income') {
+					months[monthKey].income += Number(item.jumlah) || 0;
+				} else if (item.jenis === 'expense') {
+					months[monthKey].expense += Number(item.jumlah) || 0;
+				}
+			});
+
+			// Jika tidak ada data transaksi, gunakan data dummy
+			if (Object.keys(categories).length === 0) {
+				return {
+					categories: ['Makanan', 'Transportasi', 'Hiburan', 'Belanja', 'Utilitas', 'Lainnya'],
+					amounts: [2500000, 1500000, 1000000, 2000000, 1000000, 500000],
+					months: ['2024-01', '2024-02', '2024-03', '2024-04', '2024-05', '2024-06'],
+					income: [12000000, 13500000, 12800000, 14200000, 15000000, 15000000],
+					expense: [7500000, 8200000, 7800000, 8900000, 8200000, 8500000]
+				};
+			}
+
+			return {
+				categories: Object.keys(categories),
+				amounts: Object.values(categories),
+				months: Object.keys(months).sort(),
+				income: Object.values(months).map(m => m.income),
+				expense: Object.values(months).map(m => m.expense)
+			};
+		}
+
+		// Fungsi untuk mendapatkan transaksi terbaru
+		function getRecentTransactions(data) {
+			return data
+				.sort((a, b) => new Date(b.tanggal) - new Date(a.tanggal))
+				.slice(0, 5);
+		}
+
+		// Panggil fungsi sinkronisasi saat halaman dimuat
+		document.addEventListener('DOMContentLoaded', () => {
+			syncData();
+			// Sinkronisasi setiap 5 menit
+			setInterval(syncData, 300000);
+		});
+		</script>
 	</body>
 </html>
