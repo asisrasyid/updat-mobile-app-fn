@@ -17,95 +17,6 @@
 		<link rel="stylesheet" href="assets/css/style.css" />
 		<link rel="stylesheet" href="assets/css/responsive.css" />
 		<link rel="stylesheet" href="assets/sweetalert2/sweetalert2.css">
-		<style>
-			/* Container untuk wrapper jika perlu */
-			.select-wrapper {
-			  position: relative;
-			  display: inline-block;
-			  width: 100%;
-			  max-width: 300px;
-			}
-			
-			/* Gaya dasar untuk select */
-			.select-wrapper select {
-			  appearance: none;
-			  -webkit-appearance: none;
-			  -moz-appearance: none;
-			  width: 100%;
-			  padding: 12px 16px;
-			  border: 2px solid;
-			  border-radius: 10px;
-			  background-color: #f9f9f9;
-			  color: #333;
-			  font-size: 16px;
-			  font-family: 'Segoe UI', sans-serif;
-			  transition: all 0.3s ease;
-			  cursor: pointer;
-			  box-shadow: 0 3px 6px rgba(0, 0, 0, 0.1);
-			}
-			
-			/* Animasi saat hover/focus */
-			.select-wrapper select:hover,
-			.select-wrapper select:focus {
-			  background-color: #fff;
-			  outline: none;
-			  box-shadow: 0 5px 10px rgba(72, 187, 120, 0.3);
-			}
-			
-			/* Panah custom */
-			.select-wrapper::after {
-			  content: '▾';
-			  position: absolute;
-			  right: 16px;
-			  top: 50%;
-			  transform: translateY(-50%);
-			  pointer-events: none;
-			  font-size: 16px;
-			  transition: transform 0.3s ease;
-			}
-			
-			/* Saat aktif */
-			.select-wrapper select:focus + .select-wrapper::after {
-			  transform: translateY(-50%) rotate(180deg);
-			}
-			</style>
-			<style>
-				/* Gaya untuk input (text, number, email, dll) */
-				.input-styled {
-				  width: 100%;
-				  max-width: 300px;
-				  padding: 12px 16px;
-				  border: 2px solid;
-				  border-radius: 10px;
-				  background-color: #f9f9f9;
-				  color: #333;
-				  font-size: 16px;
-				  font-family: 'Segoe UI', sans-serif;
-				  transition: all 0.3s ease;
-				  box-shadow: 0 3px 6px rgba(0, 0, 0, 0.1);
-				}
-				
-				/* Hover & Focus effect */
-				.input-styled:hover,
-				.input-styled:focus {
-				  background-color: #fff;
-				  outline: none;
-				  box-shadow: 0 5px 10px rgba(72, 187, 120, 0.3);
-				}
-				
-				/* Placeholder style */
-				.input-styled::placeholder {
-				  color: #999;
-				  transition: color 0.3s ease;
-				}
-				
-				/* Saat focus, placeholder agak menghilang */
-				.input-styled:focus::placeholder {
-				  color: transparent;
-				}
-				</style>
-				
-			
 	</head>
 
 	<body>
@@ -176,7 +87,7 @@
 						<div class="position-relative myacwrap home-1">
 							<a href="javascript:void(0)" class="icon_wrp text-center myacc">
 								<span class="icon">
-									<i class="icon-user-line"></i>
+									<i class="las la-user-circle" style="font-size: 30px;"></i>
 								</span>
 								<span class="icon_text">Account</span>
 							</a>
@@ -186,7 +97,7 @@
 										<i class="lar la-id-card"></i>
 										My Account
 									</a>
-									<a href="account-order-history.html">
+									<a href="settup-fn.html">
 										<i class="las la-robot"></i>
 										Setting
 									</a>
@@ -498,6 +409,7 @@
 		<script src="assets/sweetalert2/sweetalert2.js"></script>
 		<script src="assets/js/app.js"></script>
 		<script>
+		//	https://script.google.com/macros/s/AKfycbyBfKNeW5yhAyL8BdaJo6AhkbVfEPeorcqOMjPElrCCZJU9sQpCKpWwGAAqSYqKSqFw2g/exec
 			const spreadsheetUrl = "https://script.google.com/macros/s/AKfycbyBfKNeW5yhAyL8BdaJo6AhkbVfEPeorcqOMjPElrCCZJU9sQpCKpWwGAAqSYqKSqFw2g/exec?dataset=accdta"; 
 			const savedUser = localStorage.getItem('user');
 			const outputElements = document.querySelectorAll('.output');
@@ -605,7 +517,8 @@
 					  if (selectedJenis.toLowerCase() === "perpindahan") {
  						   kelompokDropdown.innerHTML = '<option>Pilih Asal</option>';
  						   enumDropdown.innerHTML = '<option>Pilih Tujuan</option>';
- 						 } else {
+ 						 } 
+						 else {
  						   kelompokDropdown.innerHTML = '<option>Pilih Kelompok</option>';
  						   enumDropdown.innerHTML = '<option>Pilih Keterangan</option>';
  						 }
@@ -619,7 +532,14 @@
   						  inputSumberContainer.style.display = "none";
   						  manualSumberInput.required = false;
   						  inputSumber.value = sumberDropdown.value || "";
-  						} else {
+  						} else if (selectedJenis.toLowerCase() === "pemasukan")
+						{
+						  sumberDropdown.style.display = "block";
+  						  dropdownSumberContainer.style.display = "block";
+  						  inputSumberContainer.style.display = "none";
+  						  manualSumberInput.required = false;
+  						  inputSumber.value = sumberDropdown.value || "";
+						}else{
   						  sumberDropdown.style.display = "none";
   						  dropdownSumberContainer.style.display = "none";
   						  inputSumberContainer.style.display = "block";
@@ -627,7 +547,14 @@
   						  inputSumber.value = manualSumberInput.value;
   						}
 					  
-						if (data.byJenis[selectedJenis]) {
+						if (data.byJenis[selectedJenis] && selectedJenis.toLowerCase() ==="perpindahan") {
+							data.bySumber.forEach(kelompok => {
+								const opt = document.createElement("option");
+								opt.value = kelompok;
+								opt.textContent = kelompok;
+								kelompokDropdown.appendChild(opt);
+							});
+						} else if (data.byJenis[selectedJenis]){
 							data.byJenis[selectedJenis].forEach(kelompok => {
 								const opt = document.createElement("option");
 								opt.value = kelompok;
@@ -639,11 +566,30 @@
 					
 					kelompokDropdown.addEventListener("change", function () {
 						const selectedKelompok = this.value;
-						inputKategori.value = selectedKelompok;
+						inputKategori.value = selectedKelompok; 
+						
+						const jeniscek = jenisDropdown.value;
+						console.log(jeniscek); 
 						
 						inputSubkategori.value = '';
-						
-						if (data.byKelompok[selectedKelompok]) {
+						if (jeniscek.toLowerCase() ==="perpindahan") {
+							data.bySumber.forEach(keterangan => {
+								if(keterangan != selectedKelompok) {
+									const opt = document.createElement("option");
+									opt.value = keterangan;
+									opt.textContent = keterangan;
+									enumDropdown.appendChild(opt);
+								}
+							});
+						} else if (selectedKelompok.toLowerCase() === "tabungan") {
+							data.bySave.forEach(keterangan => {
+								const opt = document.createElement("option");
+									opt.value = keterangan;
+									opt.textContent = keterangan;
+									enumDropdown.appendChild(opt);
+							});
+						} 
+						else if (data.byKelompok[selectedKelompok]) {
 							data.byKelompok[selectedKelompok].forEach(keterangan => {
 								const opt = document.createElement("option");
 								opt.value = keterangan;
@@ -656,6 +602,8 @@
 					enumDropdown.addEventListener("change", function () {
 						const selectedSubkategori = this.value;
 						inputSubkategori.value = selectedSubkategori;
+						inputSumber=inputKategori.value;
+						manualSumberInput.value = inputKategori.value;
 					});
 					sumberDropdown.addEventListener("change", function () {
 						inputSumber.value = this.value;

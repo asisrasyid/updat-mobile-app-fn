@@ -17,6 +17,40 @@
 		<link rel="stylesheet" href="assets/css/style.css" />
 		<link rel="stylesheet" href="assets/css/responsive.css" />
 		<style>
+			.card-color-1 {
+				background: rgba(96, 181, 255, 0.1)
+			}
+			.card-color-2 {
+				background: rgba(175, 221, 255, 0.1);
+			}
+			.card-color-3 {
+				background: rgba(93, 90, 255, 0.1);
+			}
+			.card-color-4 {
+				background: rgba(255, 145, 73, 0.1);
+			}
+			.card-color-5 {
+				background: rgba(21, 135, 235, 0.1);
+			}
+			.text-color-1 {
+				color: rgba(96, 181, 255);
+			}
+			.text-color-2 {
+				color: rgb(175, 221, 255);
+			}
+			.text-color-3 {
+				color: rgb(93, 90, 255); 
+				/* 255, 236, 219 */
+			}
+			.text-color-4 {
+				color: rgb(255, 145, 73);
+			}
+			.text-color-5 {
+				color: rgb(21, 135, 235);
+			}
+		</style>
+		
+		<style>
 			/* Dashboard Cards */
 			.card {
 				position: relative;
@@ -167,11 +201,14 @@
 				transform: translateX(5px);
 			}
 
-			.transaction-card.income {
+			.transaction-card.Pemasukan {
 				border-left-color: #1cc88a;
 			}
 
-			.transaction-card.expense {
+			.transaction-card.Perpindahan {
+				border-left-color: #2666db;
+			}
+			.transaction-card.Pengeluaran {
 				border-left-color: #e74a3b;
 			}
 
@@ -180,11 +217,11 @@
 				font-weight: bold;
 			}
 
-			.transaction-amount.income {
+			.transaction-amount.Pemasukan {
 				color: #1cc88a;
 			}
 
-			.transaction-amount.expense {
+			.transaction-amount.Pengeluaran {
 				color: #e74a3b;
 			}
 
@@ -202,34 +239,34 @@
 				color: #4e73df;
 			}
 
-			/* Expense Distribution Styling */
-			.expense-distribution {
+			/* Pengeluaran Distribution Styling */
+			.Pengeluaran-distribution {
 				padding: 0.5rem;
 			}
 
-			.expense-item {
+			.Pengeluaran-item {
 				padding: 0.75rem;
 				border-radius: 8px;
 				transition: all 0.3s ease;
 				background: #fff;
 			}
 
-			.expense-item:hover {
+			.Pengeluaran-item:hover {
 				background: #f8f9fc;
 				transform: translateX(5px);
 			}
 
-			.expense-item .progress {
+			.Pengeluaran-item .progress {
 				border-radius: 10px;
 				background-color: #eaecf4;
 			}
 
-			.expense-item .progress-bar {
+			.Pengeluaran-item .progress-bar {
 				border-radius: 10px;
 				transition: width 0.6s ease;
 			}
 
-			.expense-item i {
+			.Pengeluaran-item i {
 				width: 24px;
 				height: 24px;
 				display: flex;
@@ -291,11 +328,11 @@
 				font-weight: 600;
 			}
 
-			.trend-amount.income {
+			.trend-amount.Pemasukan {
 				color: #1cc88a;
 			}
 
-			.trend-amount.expense {
+			.trend-amount.Pengeluaran {
 				color: #e74a3b;
 			}
 
@@ -373,9 +410,9 @@
             <div class="spinner"></div>
           </div>
 		<!-- Preloader -->
-		<div class="preloader">
+		<!-- <div class="preloader">
 			<img src="assets/images/preloader.gif" alt="preloader" />
-		</div>
+		</div> -->
 
 		<!-- Settings -->
 		<div class="theme_settings">
@@ -443,7 +480,7 @@
 						<div class="position-relative myacwrap home-1">
 							<a href="javascript:void(0)" class="icon_wrp text-center myacc">
 								<span class="icon">
-									<i class="icon-user-line"></i>
+									<i class="las la-user-circle" style="font-size: 30px;"></i>
 								</span>
 								<span class="icon_text">Account</span>
 							</a>
@@ -453,7 +490,7 @@
 										<i class="lar la-id-card"></i>
 										My Account
 									</a>
-									<a href="account-order-history.html">
+									<a href="settup-fn.html">
 										<i class="las la-robot"></i>
 										Setting
 									</a>
@@ -535,8 +572,8 @@
 							<a href="forgot-password.html">Forgot password</a>
 						</div> -->
 					</li>
-					<!-- <li class="withsub">
-						<a href="javascript:void(0)"> Other pages </a>
+					<!-- <li class="">
+						<a href="">Setting </a>
 						<div class="submn">
 							<a href="about-us.html">about us</a>
 							<a href="contact-us.html">Contact us</a>
@@ -653,39 +690,7 @@
 					<div class="card mt-2">
 						<h4 class="text-dark card-header bg-white">Saldo Terkini</h4>
 						<div class="card-body p-2">
-							<div class="row g-2">
-								<div class="col-12">
-									<div class="d-flex align-items-center p-2 rounded" style="background: rgba(78, 115, 223, 0.1);">
-										<div class="flex-grow-1 ms-2">
-											<div class="small text-muted">BANK BNI Widya</div>
-											<div class="fw-bold text-primary" >Rp 0</div>
-										</div>
-									</div>
-								</div>
-								<div class="col-12">
-									<div class="d-flex align-items-center p-2 rounded" style="background: rgba(54, 185, 204, 0.1);">
-										<div class="flex-grow-1 ms-2">
-											<div class="small text-muted">BANK BNI Azis</div>
-											<div class="fw-bold text-info">Rp 0</div>
-										</div>
-									</div>
-								</div>
-								<div class="col-12">
-									<div class="d-flex align-items-center p-2 rounded" style="background: rgba(246, 194, 62, 0.1);">
-										<div class="flex-grow-1 ms-2">
-											<div class="small text-muted">Tunai</div>
-											<div class="fw-bold text-warning">Rp 0</div>
-										</div>
-									</div>
-								</div>
-								<div class="col-12">
-									<div class="d-flex align-items-center p-2 rounded" style="background:rgba(54, 185, 204, 0.1);">
-										<div class="flex-grow-1 ms-2">
-											<div class="small text-muted">Rekening Tabungan</div>
-											<div class="fw-bold text-success">Rp 0</div>
-										</div>
-									</div>
-								</div>
+							<div class="row g-2" id="dataaccount">
 							</div>
 						</div>
 					</div>
@@ -730,19 +735,19 @@
 		</div>
 
 		<!-- Dashboard Summary -->
-		<section class="features_area  m-0 mt-1">
-			<div class="container">
+		<section class="container-lg mt-3 >
+			<div class="">
 				<!-- Charts Row -->
 				<div class="row">
 					<!-- Distribusi Pengeluaran -->
-					<div class="col-xl-4 col-lg-5">
+					<div class="col-12 col-sm-6 h-100">
 						<div class="card m-0 mb-4">
 							<div class="card-header bg-white py-3 d-flex justify-content-between align-items-center">
-								<h4 class="m-0 text-danger">Distribusi Pengeluaran</h6>
+								<h4 class="m-0 text-dark">Distribusi Pengeluaran</h6>
 								<span class="badge bg-primary">Bulan Ini</span>
 							</div>
 							<div class="card-body">
-								<div class="expense-distribution">
+								<div class="Pengeluaran-distribution">
 									<!-- Items will be populated by JavaScript -->
 								</div>
 							</div>
@@ -750,7 +755,7 @@
 					</div>
 
 					<!-- Tren Keuangan -->
-					<div class="col-xl-8 col-lg-7">
+					<div class="col-12 col-sm-6 h-100">
 						<div class="card mb-4">
 							<div class="card-header  bg-white py-3 d-flex justify-content-between align-items-center">
 								<h4 class="m-0 text-dark">Tren Keuangan</h6>
@@ -812,11 +817,6 @@
 				</div>
 			</div>
 		</div>
-
-		<!-- back to top -->
-		<button id="back-to-top" class="back-to-top-hide">
-			<i class="las la-arrow-up"></i>
-		</button>
 		<script>
 			// Cek apakah aplikasi berjalan dari server web
 			if (window.location.protocol === 'http:' || window.location.protocol === 'https:') {
@@ -843,21 +843,80 @@
 		<script src="assets/js/theme-manager.js"></script>
 		<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 		<script>
+		const urlGet = "https://script.google.com/macros/s/AKfycbyBfKNeW5yhAyL8BdaJo6AhkbVfEPeorcqOMjPElrCCZJU9sQpCKpWwGAAqSYqKSqFw2g/exec?dataset="
+
 		const spreadsheetUrl = "https://script.google.com/macros/s/AKfycbyBfKNeW5yhAyL8BdaJo6AhkbVfEPeorcqOMjPElrCCZJU9sQpCKpWwGAAqSYqKSqFw2g/exec?dataset=accdta"; 
 		const savedUser = localStorage.getItem('user');
     	const outputElements = document.querySelectorAll('.output');
 		if (savedUser) {
 			outputElements.forEach(el => el.textContent = savedUser);
-			loadDashboardData();
 			loadBudgetProgress();
 		 }
 		 else {
 			window.location.href = "login.html"; 	
 		 }
 		
+		async function EndPointHit (param) {
+			const GetDatabase = `${urlGet}${param}`;
+			try {
+    			const res = await fetch(GetDatabase);
+    			const json = await res.json();
+    			return json.values;
+  			} catch (err) {
+    			console.error('Gagal ambil data:', err);
+    			return [];
+  			}
+		}
+
+		//DATA TRANSKASI GET
+		async function updateDashboardData() {
+			const data = await EndPointHit("resTrx")
+			if (!Array.isArray(data)) {
+				console.error('Data harus berupa array:', data);
+				return;
+			}
+
+			const summary = calculateSummary(data);
+			const chartData = processChartData(data);
+			const recentTransactions = getRecentTransactions(data);
+			updateSummaryCards(summary);
+			updateCharts(chartData);
+			updateRecentTransactions(recentTransactions);
+		}
+		//LIST SALDO
+		async function tampilDataAccount () {
+			const container = document.getElementById('dataaccount');
+			container.innerHTML = '';
+			
+			const colorClasses = ['card-color-1', 'card-color-2', 'card-color-3', 'card-color-4', 'card-color-5'];
+			const textClass = ['text-color-1', 'text-color-2', 'text-color-3', 'text-color-4', 'text-color-5'];
+			
+			const data = await EndPointHit("DataAccRek")
+			
+			data.forEach((item, index) => {
+				const el = document.createElement('div');
+				el.className = 'col-12';
+				const randomClass = colorClasses[index % colorClasses.length];
+				const rancolo = textClass[index % textClass.length];
+				el.innerHTML = `
+				  <div class="d-flex align-items-center p-2 rounded ${randomClass}" );">
+					<div class="flex-grow-1 ms-2">
+						<div class="small text-muted">${item.Keterangan}</div>
+						<div class="fw-bold ${rancolo}" >${formatRupiah(item.Nilai)}</div>
+						<div class="d-flex gap-3 "> 
+							<div class="small text-success fw-semibold"> +${formatRupiah(item.Pemasukan)}</div>
+							<div class="small text-danger fw-semibold"> -${formatRupiah(item.Pengeluaran)}</div>
+						</div>
+					</div>
+				</div>
+				`;
+				container.appendChild(el);
+			});
+		}
+		tampilDataAccount()	
+		updateDashboardData()
 		// Fungsi untuk memuat dan menampilkan progress budget
 		function loadBudgetProgress() {
-			// Data dummy untuk contoh
 			const budgetData = [
 				{
 					kategori: "MAKANAN & MINUMAN",
@@ -880,19 +939,16 @@
 			];
 
 			const container = document.getElementById('budget-container');
-			container.innerHTML = ''; // Reset container
+			container.innerHTML = '';
 			budgetData.forEach(item => {
 				const el = document.createElement('div');
 				el.className = 'd-flex align-items-center flex-wrap';
 				
-				// Tentukan apakah melebihi target
 				const melebihiTarget = item.terpakai > item.target;
 				const persentaseKelebihan = melebihiTarget ? ((item.terpakai / item.target) * 100 - 100).toFixed(1) : 0;
 				
-				// Tentukan warna progress bar
 				const progressBarClass = melebihiTarget ? 'bg-danger' : '';
 				
-				// Tentukan lebar progress bar
 				const progressWidth = melebihiTarget ? 100 : item.persen_tercapai;
 				
 				el.innerHTML = `
@@ -918,127 +974,28 @@
 			});
 		}
 
-		function formatRupiah(angka) {
-			// Pastikan angka adalah number
-			angka = Number(angka);
-			
-			// Jika angka adalah 0 atau tidak valid
-			if (isNaN(angka) || angka === 0) {
-				return 'Rp 0';
-			}
-			
-			// Format untuk angka besar (miliar)
-			if (angka >= 1000000000) {
-				return 'Rp ' + (angka / 1000000000).toFixed(1) + 'B';
-			}
-			
-			// Format untuk angka menengah (juta)
-			if (angka >= 1000000) {
-				return 'Rp ' + (angka / 1000000).toFixed(1) + 'M';
-			}
-			
-			// Format untuk angka kecil (ribu)
-			if (angka >= 1000) {
-				return 'Rp ' + (angka / 1000).toFixed(1) + 'K';
-			}
-			
-			// Format untuk angka di bawah 1000
-			return 'Rp ' + angka.toString();
-		}
-
-		function loadDashboardData() {
-			// Data dummy untuk dashboard
-			const dashboardData = {
-				summary: {
-					totalPemasukan: 15000000,
-					totalPengeluaran: 8500000,
-					totalTabungan: 3000000,
-					sisaBudget: 3500000
-				},
-				chartData: {
-					// Data untuk Distribusi Pengeluaran
-					categories: ['Makanan', 'Transportasi', 'Hiburan', 'Belanja', 'Utilitas', 'Lainnya'],
-					amounts: [2500000, 1500000, 1000000, 2000000, 1000000, 500000],
-					
-					// Data untuk Tren Keuangan
-					months: ['2024-01', '2024-02', '2024-03', '2024-04', '2024-05', '2024-06'],
-					income: [12000000, 13500000, 12800000, 14200000, 15000000, 15000000],
-					expense: [7500000, 8200000, 7800000, 8900000, 8200000, 8500000]
-				},
-				recentTransactions: [
-					{
-						id: 1,
-						tanggal: '2024-03-15',
-						jenis: 'expense',
-						kategori: 'Makanan',
-						jumlah: 150000,
-						keterangan: 'Makan siang dengan tim'
-					},
-					{
-						id: 2,
-						tanggal: '2024-03-15',
-						jenis: 'income',
-						kategori: 'Gaji',
-						jumlah: 15000000,
-						keterangan: 'Gaji bulan Maret'
-					},
-					{
-						id: 3,
-						tanggal: '2024-03-14',
-						jenis: 'expense',
-						kategori: 'Transportasi',
-						jumlah: 500000,
-						keterangan: 'Bensin dan parkir'
-					},
-					{
-						id: 4,
-						tanggal: '2024-03-14',
-						jenis: 'expense',
-						kategori: 'Hiburan',
-						jumlah: 300000,
-						keterangan: 'Nonton bioskop'
-					},
-					{
-						id: 5,
-						tanggal: '2024-03-13',
-						jenis: 'income',
-						kategori: 'Freelance',
-						jumlah: 2500000,
-						keterangan: 'Proyek website'
-					}
-				]
-			};
-
-			updateSummaryCards(dashboardData.summary);
-			updateCharts(dashboardData.chartData);
-			updateRecentTransactions(dashboardData.recentTransactions);
-		}
-
+		//TAMPIL DATA CARD RESUME
 		function updateSummaryCards(summary) {
 			document.getElementById('totalPemasukan').textContent = formatRupiah(summary.totalPemasukan);
 			document.getElementById('totalPengeluaran').textContent = formatRupiah(summary.totalPengeluaran);
 			document.getElementById('totalTabungan').textContent = formatRupiah(summary.totalTabungan);
 			document.getElementById('sisaBudget').textContent = formatRupiah(summary.sisaBudget);
 		}
-
+		//TAMPIL DATA DISTIRIBUSI PENGELUARAN TREN KEUANGAN DAN TRANSKASI TERAKHIR
 		function updateCharts(chartData) {
-			// Update distribusi pengeluaran
-			const expenseDistribution = document.querySelector('.expense-distribution');
-			if (expenseDistribution) {
-				expenseDistribution.innerHTML = '';
+			const PengeluaranDistribution = document.querySelector('.Pengeluaran-distribution');
+			if (PengeluaranDistribution) {
+				PengeluaranDistribution.innerHTML = '';
 				
-				// Hitung total pengeluaran
-				const totalExpense = chartData.amounts.reduce((sum, amount) => sum + amount, 0);
+				const totalPengeluaran = chartData.amounts.reduce((sum, amount) => sum + amount, 0);
 				
-				// Buat item untuk setiap kategori
 				chartData.categories.forEach((category, index) => {
 					const amount = chartData.amounts[index];
-					const percentage = ((amount / totalExpense) * 100).toFixed(1);
+					const percentage = ((amount / totalPengeluaran) * 100).toFixed(1);
 					
-					const expenseItem = document.createElement('div');
-					expenseItem.className = 'expense-item mb-3';
+					const PengeluaranItem = document.createElement('div');
+					PengeluaranItem.className = 'Pengeluaran-item mb-3';
 					
-					// Tentukan ikon berdasarkan kategori
 					let icon = 'las la-ellipsis-h';
 					let iconColor = 'text-secondary';
 					
@@ -1069,10 +1026,9 @@
 							break;
 					}
 					
-					expenseItem.innerHTML = `
+					PengeluaranItem.innerHTML = `
 						<div class="d-flex justify-content-between align-items-center mb-1">
 							<div class="d-flex align-items-center">
-								<i class="${icon} fa-lg me-2 ${iconColor}"></i>
 								<span class="fw-bold">${category}</span>
 							</div>
 							<span class="text-dark">${formatRupiah(amount)}</span>
@@ -1092,7 +1048,7 @@
 						</div>
 					`;
 					
-					expenseDistribution.appendChild(expenseItem);
+					PengeluaranDistribution.appendChild(PengeluaranItem);
 				});
 			}
 
@@ -1104,9 +1060,9 @@
 				// Gabungkan data pemasukan dan pengeluaran
 				const trendData = chartData.months.map((month, index) => ({
 					month: month,
-					income: chartData.income[index],
-					expense: chartData.expense[index],
-					balance: chartData.income[index] - chartData.expense[index]
+					Pemasukan: chartData.Pemasukan[index],
+					Pengeluaran: chartData.Pengeluaran[index],
+					balance: chartData.Pemasukan[index] - chartData.Pengeluaran[index]
 				}));
 
 				// Tampilkan data tren
@@ -1115,7 +1071,7 @@
 					trendItem.className = 'trend-item';
 					
 					const monthName = formatMonthName(item.month);
-					const balanceClass = item.balance >= 0 ? 'income' : 'expense';
+					const balanceClass = item.balance >= 0 ? 'Pemasukan' : 'Pengeluaran';
 					
 					trendItem.innerHTML = `
 						<div class="trend-header">
@@ -1127,8 +1083,8 @@
 						</div>
 						<div class="trend-details">
 							<div>
-								<span class="trend-category">Pemasukan: ${formatRupiah(item.income)}</span>
-								<span class="trend-category ms-2">Pengeluaran: ${formatRupiah(item.expense)}</span>
+								<span class="trend-category">Pemasukan: ${formatRupiah(item.Pemasukan)}</span>
+								<span class="trend-category ms-2">Pengeluaran: ${formatRupiah(item.Pengeluaran)}</span>
 							</div>
 						</div>
 					`;
@@ -1138,10 +1094,54 @@
 			}
 		}
 
+		function formatRupiah(angka) {
+			angka = Number(angka);
+			
+			if (isNaN(angka) || angka === 0) {
+				return 'Rp 0';
+			}
+			
+			if (angka >= 1000000000) {
+				return 'Rp ' + (angka / 1000000000).toFixed(1) + ' Milyar';
+			}
+			
+			if (angka >= 1000000) {
+				return 'Rp ' + (angka / 1000000).toFixed(1) + ' Juta';
+			}
+			
+			if (angka >= 1000) {
+				return 'Rp ' + (angka / 1000).toFixed(1) + ' Ribu';
+			}
+			
+			return 'Rp ' + angka.toString();
+		}
+
 		function formatMonthName(monthKey) {
 			const [year, month] = monthKey.split('-');
 			const date = new Date(year, month - 1);
 			return date.toLocaleDateString('id-ID', { month: 'long', year: 'numeric' });
+		}
+
+		function formatDate(dateStr) {
+			const date = new Date(dateStr);
+			const options = { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' };
+			return date.toLocaleDateString('id-ID', options);
+		}
+
+		function formatTime(dateStr) {
+			const date = new Date(dateStr);
+			return date.toLocaleTimeString('id-ID', { hour: '2-digit', minute: '2-digit' });
+		}
+
+		function formatBulanTahun(dateStr) {
+				const bulan = [
+					'Januari', 'Februari', 'Maret', 'April', 'Mei', 'Juni',
+					'Juli', 'Agustus', 'September', 'Oktober', 'November', 'Desember'
+				];
+			  const date = new Date(dateStr);
+			  const namaBulan = bulan[date.getMonth()];
+			  const tahun = date.getFullYear();
+			  return `${namaBulan}-${tahun}`;
 		}
 
 		function updateRecentTransactions(transactions) {
@@ -1173,22 +1173,43 @@
 
 					// Menambahkan transaksi untuk tanggal tersebut
 					groupedTransactions[date].forEach(transaction => {
-						const card = document.createElement('div');
+						let card;
+						if(transaction.jenis ==="Perpindahan") {
+						card = document.createElement('div');
 						card.className = `transaction-card ${transaction.jenis}`;
 						card.innerHTML = `
 							<div class="d-flex justify-content-between align-items-center">
 								<div>
-									<h6 class="mb-1">${transaction.keterangan}</h6>
-									<span class="transaction-category">${transaction.kategori}</span>
+									<h6 class="mb-1 text-success fw-semibold"> + ${transaction.subKategori}</h6>
+									<h6 class="mb-1 text-danger fw-semibold"> - ${transaction.kategori}</h6>
+									<span class="transaction-category"> ${transaction.keterangan} </span>
 								</div>
 								<div class="text-end">
-									<div class="transaction-amount ${transaction.jenis}">
-										${transaction.jenis === 'income' ? '+' : '-'} ${formatRupiah(transaction.jumlah)}
+									<div class="transaction-amount text-success">
+										${formatRupiah(transaction.jumlah)}
 									</div>
 									<div class="transaction-date">${formatTime(transaction.tanggal)}</div>
 								</div>
 							</div>
 						`;
+						} else {
+						card = document.createElement('div');
+						card.className = `transaction-card ${transaction.jenis}`;
+						card.innerHTML = `
+							<div class="d-flex justify-content-between align-items-center">
+								<div>
+									<h6 class="mb-1">${transaction.keterangan}</h6>
+									<span class="transaction-category">${transaction.kategori} / ${transaction.subKategori} </span>
+								</div>
+								<div class="text-end">
+									<div class="transaction-amount ${transaction.jenis}">
+										${transaction.jenis === 'Pemasukan' ? '+' : '-'} ${formatRupiah(transaction.jumlah)}
+									</div>
+									<div class="transaction-date">${formatTime(transaction.tanggal)}</div>
+								</div>
+							</div>
+						`;
+						}
 						dateGroup.appendChild(card);
 					});
 
@@ -1196,37 +1217,15 @@
 				});
 		}
 
-		function formatDate(dateStr) {
-			const date = new Date(dateStr);
-			const options = { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' };
-			return date.toLocaleDateString('id-ID', options);
-		}
-
-		function formatTime(dateStr) {
-			const date = new Date(dateStr);
-			return date.toLocaleTimeString('id-ID', { hour: '2-digit', minute: '2-digit' });
-		}
-
-			document.getElementById("LogOutSistem").addEventListener("click", function (e) {
+		document.getElementById("LogOutSistem").addEventListener("click", function (e) {
 			  e.preventDefault(); 
 			  localStorage.clear(); 
 			  window.location.href = "index.html"; 
 			});
-
-			function formatBulanTahun(dateStr) {
-				const bulan = [
-					'Januari', 'Februari', 'Maret', 'April', 'Mei', 'Juni',
-					'Juli', 'Agustus', 'September', 'Oktober', 'November', 'Desember'
-				];
-			  const date = new Date(dateStr);
-			  const namaBulan = bulan[date.getMonth()];
-			  const tahun = date.getFullYear();
-			  return `${namaBulan}-${tahun}`;
-			}
 				
-			function tampilkanDataKeUI(data) {
+		function tampilkanDataKeUI(data) {
 			const container = document.getElementById('data-container');
-			container.innerHTML = '<h5 class="mb-3">Rencana Tabungan</h5>';
+			container.innerHTML = '';
 			  const top3 = data.slice(0, 3);
 
 			  top3.forEach(item => {
@@ -1248,7 +1247,7 @@
 			  $('.preloader').fadeOut(500, function(){ $('.preloader').remove(); } );
 			}
 
-			function ambilData() {
+		function ambilData() {
 				const dataLocal = localStorage.getItem('saving_plan_Index');
 				const spreadsheetUrlSvdt = "https://script.google.com/macros/s/AKfycbyBfKNeW5yhAyL8BdaJo6AhkbVfEPeorcqOMjPElrCCZJU9sQpCKpWwGAAqSYqKSqFw2g/exec?dataset=trgSave"; 
 	
@@ -1266,10 +1265,10 @@
 				}
 			}
 
-			document.addEventListener('DOMContentLoaded', ambilData);
+		document.addEventListener('DOMContentLoaded', ambilData);
 		
-			const submitButton = document.getElementById("pembahruandata");   
-			document.getElementById("pembahruandata").addEventListener("click", function(event) {
+		const submitButton = document.getElementById("pembahruandata");   
+		document.getElementById("pembahruandata").addEventListener("click", function(event) {
 				event.preventDefault();
 				document.getElementById("loadingOverlay").style.display = "flex";
 				const spreadsheetUrlSvdt = "https://script.google.com/macros/s/AKfycbyBfKNeW5yhAyL8BdaJo6AhkbVfEPeorcqOMjPElrCCZJU9sQpCKpWwGAAqSYqKSqFw2g/exec?dataset=trgSave"; 
@@ -1285,109 +1284,136 @@
 				});
 			});
 
-		// Fungsi untuk sinkronisasi data real-time
-		function syncData() {
-			const spreadsheetUrl = "https://script.google.com/macros/s/AKfycbyBfKNeW5yhAyL8BdaJo6AhkbVfEPeorcqOMjPElrCCZJU9sQpCKpWwGAAqSYqKSqFw2g/exec?dataset=accdta";
-			const spreadsheetUrlSvdt = "https://script.google.com/macros/s/AKfycbyBfKNeW5yhAyL8BdaJo6AhkbVfEPeorcqOMjPElrCCZJU9sQpCKpWwGAAqSYqKSqFw2g/exec?dataset=trgSave";
+		// function syncData() {
+		// 	const spreadsheetUrl = "https://script.google.com/macros/s/AKfycbyBfKNeW5yhAyL8BdaJo6AhkbVfEPeorcqOMjPElrCCZJU9sQpCKpWwGAAqSYqKSqFw2g/exec?dataset=resTrx";
+		// 	const spreadsheetUrlSvdt = "https://script.google.com/macros/s/AKfycbyBfKNeW5yhAyL8BdaJo6AhkbVfEPeorcqOMjPElrCCZJU9sQpCKpWwGAAqSYqKSqFw2g/exec?dataset=trgSave";
 			
-			// Sinkronisasi data transaksi
-			fetch(spreadsheetUrl)
-				.then(res => res.json())
-				.then(res => {
-					if (res && res.value && Array.isArray(res.value)) {
-						localStorage.setItem('transaction_data', JSON.stringify(res.value));
-						updateDashboardData(res.value);
-					} else {
-						console.error('Format data transaksi tidak valid:', res);
-						// Gunakan data dummy jika format tidak valid
-						const dummyData = [
-							{
-								tanggal: new Date().toISOString().split('T')[0],
-								jenis: 'income',
-								kategori: 'Gaji',
-								jumlah: 15000000,
-								keterangan: 'Gaji bulan ini'
-							},
-							{
-								tanggal: new Date().toISOString().split('T')[0],
-								jenis: 'expense',
-								kategori: 'Makanan',
-								jumlah: 500000,
-								keterangan: 'Makan siang'
-							},
-							{
-								tanggal: new Date().toISOString().split('T')[0],
-								jenis: 'expense',
-								kategori: 'hiburan',
-								jumlah: 500000,
-								keterangan: 'Jalan-jalan'
-							}
-						];
-						updateDashboardData(dummyData);
-					}
-				})
-				.catch(err => {
-					console.error('Gagal sinkronisasi data transaksi:', err);
-					// Gunakan data dari localStorage jika ada
-					const savedData = localStorage.getItem('transaction_data');
-					if (savedData) {
-						try {
-							const parsedData = JSON.parse(savedData);
-							if (Array.isArray(parsedData)) {
-								updateDashboardData(parsedData);
-							}
-						} catch (e) {
-							console.error('Gagal memparse data dari localStorage:', e);
-						}
-					}
-				});
+		// 	// Sinkronisasi data transaksi
+		// 	fetch(spreadsheetUrl)
+		// 		.then(res => res.json())
+		// 		.then(res => {
+		// 			if (res && res.value && Array.isArray(res.value)) {
+		// 				localStorage.setItem('transaction_data', JSON.stringify(res.value));
+		// 				updateDashboardData(res.value);
+		// 			} else {
+		// 				console.error('Format data transaksi tidak valid:', res);
+		// 				// Gunakan data dummy jika format tidak valid
+		// 				const dummyData = [
+		// 					{
+		// 						tanggal: new Date().toISOString().split('T')[0],
+		// 						jenis: 'Pemasukan',
+		// 						kategori: 'Gaji',
+		// 						jumlah: 15000000,
+		// 						subKategori: "Bolo Bolo",
+		// 						keterangan: 'Gaji bulan ini'
+		// 					},
+		// 					{
+		// 						tanggal: new Date().toISOString().split('T')[0],
+		// 						jenis: 'Pengeluaran',
+		// 						kategori: 'Makanan',
+		// 						jumlah: 500000,
+		// 						subKategori: "Bolo Bolo",
+		// 						keterangan: 'Makan siang'
+		// 					},
+		// 					{
+		// 						tanggal: new Date().toISOString().split('T')[0],
+		// 						jenis: 'Pengeluaran',
+		// 						kategori: 'transportasi',
+		// 						jumlah: 500000,
+		// 						subKategori: "Bolo Bolo",
+		// 						keterangan: 'Jalan-jalan'
+		// 					},
+		// 					{
+		// 						tanggal: new Date().toISOString().split('T')[0],
+		// 						jenis: 'Pengeluaran',
+		// 						kategori: 'hiburan',
+		// 						jumlah: 500000,
+		// 						subKategori: "Bolo Bolo",
+		// 						keterangan: 'Jalan-jalan'
+		// 					},
+		// 					{
+		// 						tanggal: new Date().toISOString().split('T')[0],
+		// 						jenis: 'Pengeluaran',
+		// 						kategori: 'belanja',
+		// 						jumlah: 500000,
+		// 						subKategori: "Bolo Bolo",
+		// 						keterangan: 'Jalan-jalan'
+		// 					},
+		// 					{
+		// 						tanggal: new Date().toISOString().split('T')[0],
+		// 						jenis: 'Pengeluaran',
+		// 						kategori: 'utilitas',
+		// 						jumlah: 500000,
+		// 						subKategori: "Bolo Bolo",
+		// 						keterangan: 'Jalan-jalan'
+		// 					},
+		// 					{
+		// 						tanggal: new Date().toISOString().split('T')[0],
+		// 						jenis: 'Pengeluaran',
+		// 						kategori: 'lainnya',
+		// 						jumlah: 500000,
+		// 						subKategori: "Bolo Bolo",
+		// 						keterangan: 'Jalan-jalan'
+		// 					},
+		// 					{
+		// 						tanggal: new Date("2025-01-01").toISOString().split('T')[0],
+		// 						jenis: 'Pengeluaran',
+		// 						kategori: 'lainnya',
+		// 						jumlah: 500000,
+		// 						subKategori: "Bolo Bolo",
+		// 						keterangan: 'Jalan-jalan'
+		// 					}
 
-			// Sinkronisasi data tabungan
-			fetch(spreadsheetUrlSvdt)
-				.then(res => res.json())
-				.then(res => {
-					if (res && res.value && Array.isArray(res.value)) {
-						localStorage.setItem('saving_plan_Index', JSON.stringify(res.value));
-						tampilkanDataKeUI(res.value);
-					} else {
-						console.error('Format data tabungan tidak valid:', res);
-					}
-				})
-				.catch(err => {
-					console.error('Gagal sinkronisasi data tabungan:', err);
-					// Gunakan data dari localStorage jika ada
-					const savedData = localStorage.getItem('saving_plan_Index');
-					if (savedData) {
-						try {
-							const parsedData = JSON.parse(savedData);
-							if (Array.isArray(parsedData)) {
-								tampilkanDataKeUI(parsedData);
-							}
-						} catch (e) {
-							console.error('Gagal memparse data dari localStorage:', e);
-						}
-					}
-				});
-		}
+		// 				];
+		// 				updateDashboardData(dummyData);
+		// 			}
+		// 		})
+		// 		.catch(err => {
+		// 			console.error('Gagal sinkronisasi data transaksi:', err);
+		// 			// Gunakan data dari localStorage jika ada
+		// 			const savedData = localStorage.getItem('transaction_data');
+		// 			if (savedData) {
+		// 				try {
+		// 					const parsedData = JSON.parse(savedData);
+		// 					if (Array.isArray(parsedData)) {
+		// 						updateDashboardData(parsedData);
+		// 					}
+		// 				} catch (e) {
+		// 					console.error('Gagal memparse data dari localStorage:', e);
+		// 				}
+		// 			}
+		// 		});
 
-		// Fungsi untuk memperbarui data dashboard
-		function updateDashboardData(data) {
-			if (!Array.isArray(data)) {
-				console.error('Data harus berupa array:', data);
-				return;
-			}
+		// 	// Sinkronisasi data tabungan
+		// 	fetch(spreadsheetUrlSvdt)
+		// 		.then(res => res.json())
+		// 		.then(res => {
+		// 			if (res && res.value && Array.isArray(res.value)) {
+		// 				localStorage.setItem('saving_plan_Index', JSON.stringify(res.value));
+		// 				tampilkanDataKeUI(res.value);
+		// 			} else {
+		// 				console.error('Format data tabungan tidak valid:', res);
+		// 			}
+		// 		})
+		// 		.catch(err => {
+		// 			console.error('Gagal sinkronisasi data tabungan:', err);
+		// 			// Gunakan data dari localStorage jika ada
+		// 			const savedData = localStorage.getItem('saving_plan_Index');
+		// 			if (savedData) {
+		// 				try {
+		// 					const parsedData = JSON.parse(savedData);
+		// 					if (Array.isArray(parsedData)) {
+		// 						tampilkanDataKeUI(parsedData);
+		// 					}
+		// 				} catch (e) {
+		// 					console.error('Gagal memparse data dari localStorage:', e);
+		// 				}
+		// 			}
+		// 		});
+		// }
 
-			const summary = calculateSummary(data);
-			const chartData = processChartData(data);
-			const recentTransactions = getRecentTransactions(data);
-
-			updateSummaryCards(summary);
-			updateCharts(chartData);
-			updateRecentTransactions(recentTransactions);
-		}
-
-		// Fungsi untuk menghitung ringkasan
 		function calculateSummary(data) {
+			console.log("data" + data)
 			if (!Array.isArray(data)) {
 				console.error('Data harus berupa array:', data);
 				return {
@@ -1399,18 +1425,17 @@
 			}
 
 			return {
-				totalPemasukan: data.reduce((sum, item) => item.jenis === 'income' ? sum + (Number(item.jumlah) || 0) : sum, 0),
-				totalPengeluaran: data.reduce((sum, item) => item.jenis === 'expense' ? sum + (Number(item.jumlah) || 0) : sum, 0),
-				totalTabungan: data.reduce((sum, item) => item.jenis === 'saving' ? sum + (Number(item.jumlah) || 0) : sum, 0),
+				totalPemasukan: data.reduce((sum, item) => item.jenis === 'Pemasukan' ? sum + (Number(item.jumlah) || 0) : sum, 0),
+				totalPengeluaran: data.reduce((sum, item) => item.jenis === 'Pengeluaran' ? sum + (Number(item.jumlah) || 0) : sum, 0),
+				totalTabungan: data.reduce((sum, item) => item.kategori === 'Tabungan' ? sum + (Number(item.jumlah) || 0) : sum, 0),
 				sisaBudget: data.reduce((sum, item) => {
-					if (item.jenis === 'income') return sum + (Number(item.jumlah) || 0);
-					if (item.jenis === 'expense') return sum - (Number(item.jumlah) || 0);
+					if (item.jenis === 'Pemasukan') return sum + (Number(item.jumlah) || 0);
+					if (item.jenis === 'Pengeluaran') return sum - (Number(item.jumlah) || 0);
 					return sum;
 				}, 0)
 			};
 		}
 
-		// Fungsi untuk memproses data chart
 		function processChartData(data) {
 			if (!Array.isArray(data)) {
 				console.error('Data harus berupa array:', data);
@@ -1418,8 +1443,8 @@
 					categories: [],
 					amounts: [],
 					months: [],
-					income: [],
-					expense: []
+					Pemasukan: [],
+					Pengeluaran: []
 				};
 			}
 
@@ -1428,7 +1453,7 @@
 			
 			data.forEach(item => {
 				// Proses data kategori
-				if (item.jenis === 'expense') {
+				if (item.jenis === 'Pengeluaran') {
 					if (!categories[item.kategori]) {
 						categories[item.kategori] = 0;
 					}
@@ -1439,12 +1464,12 @@
 				const date = new Date(item.tanggal);
 				const monthKey = `${date.getFullYear()}-${date.getMonth() + 1}`;
 				if (!months[monthKey]) {
-					months[monthKey] = { income: 0, expense: 0 };
+					months[monthKey] = { Pemasukan: 0, Pengeluaran: 0 };
 				}
-				if (item.jenis === 'income') {
-					months[monthKey].income += Number(item.jumlah) || 0;
-				} else if (item.jenis === 'expense') {
-					months[monthKey].expense += Number(item.jumlah) || 0;
+				if (item.jenis === 'Pemasukan') {
+					months[monthKey].Pemasukan += Number(item.jumlah) || 0;
+				} else if (item.jenis === 'Pengeluaran') {
+					months[monthKey].Pengeluaran += Number(item.jumlah) || 0;
 				}
 			});
 
@@ -1454,8 +1479,8 @@
 					categories: ['Makanan', 'Transportasi', 'Hiburan', 'Belanja', 'Utilitas', 'Lainnya'],
 					amounts: [2500000, 1500000, 1000000, 2000000, 1000000, 500000],
 					months: ['2024-01', '2024-02', '2024-03', '2024-04', '2024-05', '2024-06'],
-					income: [12000000, 13500000, 12800000, 14200000, 15000000, 15000000],
-					expense: [7500000, 8200000, 7800000, 8900000, 8200000, 8500000]
+					Pemasukan: [12000000, 13500000, 12800000, 14200000, 15000000, 15000000],
+					Pengeluaran: [7500000, 8200000, 7800000, 8900000, 8200000, 8500000]
 				};
 			}
 
@@ -1463,23 +1488,21 @@
 				categories: Object.keys(categories),
 				amounts: Object.values(categories),
 				months: Object.keys(months).sort(),
-				income: Object.values(months).map(m => m.income),
-				expense: Object.values(months).map(m => m.expense)
+				Pemasukan: Object.values(months).map(m => m.Pemasukan),
+				Pengeluaran: Object.values(months).map(m => m.Pengeluaran)
 			};
 		}
 
-		// Fungsi untuk mendapatkan transaksi terbaru
 		function getRecentTransactions(data) {
 			return data
 				.sort((a, b) => new Date(b.tanggal) - new Date(a.tanggal))
-				.slice(0, 5);
+				.slice(0, 10);
 		}
 
-		// Panggil fungsi sinkronisasi saat halaman dimuat
 		document.addEventListener('DOMContentLoaded', () => {
-			syncData();
+			updateDashboardData();
 			// Sinkronisasi setiap 5 menit
-			setInterval(syncData, 300000);
+			setInterval(updateDashboardData, 300000);
 		});
 		</script>
 	</body>
