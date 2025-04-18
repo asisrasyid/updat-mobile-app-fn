@@ -13,6 +13,94 @@
 	--primary-color: #fd3d57;
 	--secondary-color: #18181b;
 }
+
+/*select style*/
+/* Container untuk wrapper jika perlu */
+.select-wrapper {
+	position: relative;
+	display: inline-block;
+	width: 100%;
+	max-width: 300px;
+  }
+  
+  /* Gaya dasar untuk select */
+  .select-wrapper select {
+	appearance: none;
+	-webkit-appearance: none;
+	-moz-appearance: none;
+	width: 100%;
+	padding: 12px 16px;
+	border: 2px solid;
+	border-radius: 10px;
+	background-color: #f9f9f9;
+	color: #333;
+	font-size: 16px;
+	font-family: 'Segoe UI', sans-serif;
+	transition: all 0.3s ease;
+	cursor: pointer;
+	box-shadow: 0 3px 6px rgba(0, 0, 0, 0.1);
+  }
+  
+  /* Animasi saat hover/focus */
+  .select-wrapper select:hover,
+  .select-wrapper select:focus {
+	background-color: #fff;
+	outline: none;
+	box-shadow: 0 5px 10px rgba(72, 187, 120, 0.3);
+  }
+  
+  /* Panah custom */
+  .select-wrapper::after {
+	content: '▾';
+	position: absolute;
+	right: 16px;
+	top: 50%;
+	transform: translateY(-50%);
+	pointer-events: none;
+	font-size: 16px;
+	transition: transform 0.3s ease;
+  }
+  
+  /* Saat aktif */
+  .select-wrapper select:focus + .select-wrapper::after {
+	transform: translateY(-50%) rotate(180deg);
+  }
+
+/*INPUT STYLE*/
+.input-styled {
+		  width: 100%;
+		  max-width: 300px;
+		  padding: 12px 16px;
+		  border: 2px solid;
+		  border-radius: 10px;
+		  background-color: #f9f9f9;
+		  color: #333;
+		  font-size: 16px;
+		  font-family: 'Segoe UI', sans-serif;
+		  transition: all 0.3s ease;
+		  box-shadow: 0 3px 6px rgba(0, 0, 0, 0.1);
+	}
+
+	/* Hover & Focus effect */
+.input-styled:hover,
+.input-styled:focus {
+		  background-color: #fff;
+		  outline: none;
+		  box-shadow: 0 5px 10px var(--primary-color);
+	}
+
+	/* Placeholder style */
+.input-styled::placeholder {
+		  color: #999;
+		  transition: color 0.3s ease;
+	}
+
+	/* Saat focus, placeholder agak menghilang */
+.input-styled:focus::placeholder {
+		  color: transparent;
+	}
+			
+
 /*LOADING*/
 #loadingOverlay {
 	position: fixed;
@@ -5590,7 +5678,7 @@ span.remove_cart:hover {
 }
 
 .tab-content {
-    min-height: calc(100vh - 300px);
+    /* min-height: calc(100vh - 300px); */
 }
 
 .budget_categories .table-responsive {
