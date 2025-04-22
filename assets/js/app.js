@@ -15,11 +15,11 @@
 
         if(lsPrimaryColor) {
             root_theme.style.setProperty('--primary-color', lsPrimaryColor);
-            updateManifestThemeColor(lsPrimaryColor);
+            //updateManifestThemeColor(lsPrimaryColor);
         }
         if(lsSecondaryColor) {
             root_theme.style.setProperty('--secondary-color', lsSecondaryColor);
-            updateManifestThemeColor(lsSecondaryColor);
+            //updateManifestThemeColor(lsSecondaryColor);
         }   
         
         // checked active color
