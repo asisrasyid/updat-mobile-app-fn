@@ -4,9 +4,12 @@
 		<meta charset="UTF-8" />
 		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
 		<title>Managament Finance</title>
-		<link rel="manifest" href="/manifest.json" />
-  		<meta name="theme-color" content="#18181b"/>
-  		<link rel="icon" href="https://cdn-icons-png.flaticon.com/512/906/906334.png" />
+		<link rel="manifest" href="manifest.json" />
+		<meta name="theme-color" content="#4CAF50" />
+  		<meta name="mobile-web-app-capable" content="yes">
+		<meta name="apple-mobile-web-app-capable" content="yes">
+		<meta name="apple-mobile-web-app-status-bar-style" content="default">
+		<link rel="icon" href="https://cdn-icons-png.flaticon.com/512/906/906334.png" />
 
 		<!-- all css -->
 		<link rel="stylesheet" href="assets/css/bootstrap.min.css" />
@@ -16,393 +19,7 @@
 		<link rel="stylesheet" href="assets/css/nice-select.css" />
 		<link rel="stylesheet" href="assets/css/style.css" />
 		<link rel="stylesheet" href="assets/css/responsive.css" />
-		<style>
-			.card-color-1 {
-				background: rgba(96, 181, 255, 0.1)
-			}
-			.card-color-2 {
-				background: rgba(175, 221, 255, 0.1);
-			}
-			.card-color-3 {
-				background: rgba(93, 90, 255, 0.1);
-			}
-			.card-color-4 {
-				background: rgba(255, 145, 73, 0.1);
-			}
-			.card-color-5 {
-				background: rgba(21, 135, 235, 0.1);
-			}
-			.text-color-1 {
-				color: rgba(96, 181, 255);
-			}
-			.text-color-2 {
-				color: rgb(175, 221, 255);
-			}
-			.text-color-3 {
-				color: rgb(93, 90, 255); 
-				/* 255, 236, 219 */
-			}
-			.text-color-4 {
-				color: rgb(255, 145, 73);
-			}
-			.text-color-5 {
-				color: rgb(21, 135, 235);
-			}
-		</style>
-		
-		<style>
-			/* Dashboard Cards */
-			.card {
-				position: relative;
-				display: flex;
-				flex-direction: column;
-				min-width: 0;
-				word-wrap: break-word;
-				background-color: #fff;
-				background-clip: border-box;
-				border: 1px solid #e3e6f0;
-				border-radius: 0.35rem;
-			}
-
-			.border-left-primary {
-				border-left: 0.25rem solid #4e73df !important;
-			}
-
-			.border-left-success {
-				border-left: 0.25rem solid #1cc88a !important;
-			}
-
-			.border-left-info {
-				border-left: 0.25rem solid #36b9cc !important;
-			}
-
-			.border-left-warning {
-				border-left: 0.25rem solid #f6c23e !important;
-			}
-
-			.text-xs {
-				font-size: .7rem;
-			}
-
-			.text-primary {
-				color: #4e73df !important;
-			}
-
-			.text-success {
-				color: #1cc88a !important;
-			}
-
-			.text-info {
-				color: #36b9cc !important;
-			}
-
-			.text-warning {
-				color: #f6c23e !important;
-			}
-
-			.font-weight-bold {
-				font-weight: 700 !important;
-			}
-
-			/* Charts */
-			.chart-area {
-				position: relative;
-				height: 20rem;
-				width: 100%;
-			}
-
-			.chart-pie {
-				position: relative;
-				height: 15rem;
-				width: 100%;
-			}
-
-			/* Table Styling */
-			.table-responsive {
-				display: block;
-				width: 100%;
-				overflow-x: auto;
-				-webkit-overflow-scrolling: touch;
-			}
-
-			.table {
-				width: 100%;
-				margin-bottom: 1rem;
-				color: #858796;
-			}
-
-			.table th,
-			.table td {
-				padding: 0.75rem;
-				vertical-align: top;
-				border-top: 1px solid #e3e6f0;
-			}
-
-			.table thead th {
-				vertical-align: bottom;
-				border-bottom: 2px solid #e3e6f0;
-				background-color: #f8f9fc;
-			}
-
-			.table tbody + tbody {
-				border-top: 2px solid #e3e6f0;
-			}
-
-			/* Card Header */
-			.card-header {
-				padding: 0.75rem 1.25rem;
-				margin-bottom: 0;
-				background-color: #f8f9fc;
-				border-bottom: 1px solid #e3e6f0;
-			}
-
-			/* Shadow */
-			.shadow {
-				box-shadow: 0 0.15rem 1.75rem 0 rgba(58, 59, 69, 0.15) !important;
-			}
-
-			/* Icons */
-			.fa-2x {
-				font-size: 2em;
-			}
-
-			.text-gray-300 {
-				color: #dddfeb !important;
-			}
-
-			/* Responsive Fixes */
-			@media (max-width: 768px) {
-				.chart-area {
-					height: 15rem;
-				}
-				
-				.chart-pie {
-					height: 12rem;
-				}
-			}
-
-			/* Transaction Cards */
-			.transaction-list {
-				max-height: 500px;
-				overflow-y: auto;
-			}
-
-			.transaction-card {
-				border-left: 4px solid;
-				margin-bottom: 1rem;
-				padding: 1rem;
-				border-radius: 0.5rem;
-				background: #fff;
-				box-shadow: 0 2px 4px rgba(0,0,0,0.05);
-				transition: transform 0.2s;
-			}
-
-			.transaction-card:hover {
-				transform: translateX(5px);
-			}
-
-			.transaction-card.Pemasukan {
-				border-left-color: #1cc88a;
-			}
-
-			.transaction-card.Perpindahan {
-				border-left-color: #2666db;
-			}
-			.transaction-card.Pengeluaran {
-				border-left-color: #e74a3b;
-			}
-
-			.transaction-amount {
-				font-size: 1.1rem;
-				font-weight: bold;
-			}
-
-			.transaction-amount.Pemasukan {
-				color: #1cc88a;
-			}
-
-			.transaction-amount.Pengeluaran {
-				color: #e74a3b;
-			}
-
-			.transaction-date {
-				color: #858796;
-				font-size: 0.8rem;
-			}
-
-			.transaction-category {
-				display: inline-block;
-				padding: 0.25rem 0.5rem;
-				border-radius: 0.25rem;
-				font-size: 0.8rem;
-				background: #f8f9fc;
-				color: #4e73df;
-			}
-
-			/* Pengeluaran Distribution Styling */
-			.Pengeluaran-distribution {
-				padding: 0.5rem;
-			}
-
-			.Pengeluaran-item {
-				padding: 0.75rem;
-				border-radius: 8px;
-				transition: all 0.3s ease;
-				background: #fff;
-			}
-
-			.Pengeluaran-item:hover {
-				background: #f8f9fc;
-				transform: translateX(5px);
-			}
-
-			.Pengeluaran-item .progress {
-				border-radius: 10px;
-				background-color: #eaecf4;
-			}
-
-			.Pengeluaran-item .progress-bar {
-				border-radius: 10px;
-				transition: width 0.6s ease;
-			}
-
-			.Pengeluaran-item i {
-				width: 24px;
-				height: 24px;
-				display: flex;
-				align-items: center;
-				justify-content: center;
-				border-radius: 6px;
-			}
-
-			.badge.bg-primary {
-				background-color: #4e73df !important;
-				color: white;
-				padding: 0.5em 0.75em;
-				font-weight: 500;
-				font-size: 0.75rem;
-			}
-
-			.text-muted {
-				color: #858796 !important;
-				font-size: 0.75rem;
-			}
-
-			.fw-bold {
-				font-weight: 600 !important;
-			}
-
-			/* Tambahkan style untuk tren keuangan */
-			.trend-list {
-				max-height: 400px;
-				overflow-y: auto;
-			}
-
-			.trend-item {
-				padding: 1rem;
-				border-bottom: 1px solid #e3e6f0;
-				transition: all 0.3s ease;
-			}
-
-			.trend-item:last-child {
-				border-bottom: none;
-			}
-
-			.trend-item:hover {
-				background-color: #f8f9fc;
-			}
-
-			.trend-header {
-				display: flex;
-				justify-content: space-between;
-				align-items: center;
-				margin-bottom: 0.5rem;
-			}
-
-			.trend-date {
-				font-size: 0.9rem;
-				color: #858796;
-			}
-
-			.trend-amount {
-				font-weight: 600;
-			}
-
-			.trend-amount.Pemasukan {
-				color: #1cc88a;
-			}
-
-			.trend-amount.Pengeluaran {
-				color: #e74a3b;
-			}
-
-			.trend-details {
-				display: flex;
-				justify-content: space-between;
-				align-items: center;
-				font-size: 0.85rem;
-			}
-
-			.trend-category {
-				padding: 0.25rem 0.5rem;
-				border-radius: 0.25rem;
-				background: #f8f9fc;
-				color: #4e73df;
-			}
-
-			.trend-description {
-				color: #858796;
-				font-style: italic;
-			}
-
-			/* Tambahkan style untuk tab */
-			.nav-tabs {
-				border-bottom: 1px solid #e3e6f0;
-			}
-
-			.nav-tabs .nav-link {
-				margin-bottom: -1px;
-				border: 1px solid transparent;
-				border-top-left-radius: 0.35rem;
-				border-top-right-radius: 0.35rem;
-				color: #858796;
-				font-weight: 500;
-				padding: 0.75rem 1rem;
-			}
-
-			.nav-tabs .nav-link:hover {
-				border-color: #e3e6f0 #e3e6f0 #e3e6f0;
-				color: #4e73df;
-			}
-
-			.nav-tabs .nav-link.active {
-				color: #4e73df;
-				background-color: #fff;
-				border-color: #e3e6f0 #e3e6f0 #fff;
-			}
-
-			.tab-content {
-				background-color: #fff;
-				border: 1px solid #e3e6f0;
-				border-top: none;
-				border-bottom-left-radius: 0.35rem;
-				border-bottom-right-radius: 0.35rem;
-			}
-
-			.tab-pane {
-				padding: 5px;
-			}
-
-			/* Penyesuaian untuk konten tab */
-			#data-container, #budget-container {
-				max-height: 300px;
-				overflow-y: auto;
-			}
-
-			.meter {
-				margin-bottom: 1rem;
-			}
-		</style>
+		<link rel="stylesheet" href="style2.css"/>
 	</head>
 
 	<body>
@@ -694,6 +311,13 @@
 							</div>
 						</div>
 					</div>
+					<div class="card mt-2">
+						<h4 class="text-dark card-header bg-white">List Hutang</h4>
+						<div class="card-body p-2">
+							<div class="row g-2" id="DataHutang">
+							</div>
+						</div>
+					</div>
 					<div class="shop_cart_wrap wishlist single_shop_cart_index">
 						<ul class="nav nav-tabs" id="financeTab" role="tablist">
 							<li class="nav-item" role="presentation">
@@ -736,8 +360,7 @@
 
 		<!-- Dashboard Summary -->
 		<section class="container-lg mt-3 >
-			<div class="">
-				<!-- Charts Row -->
+			<!-- Charts Row -->
 				<div class="row">
 					<!-- Distribusi Pengeluaran -->
 					<div class="col-12 col-sm-6 h-100">
@@ -786,7 +409,7 @@
 							<div class="card-header  bg-white py-3 d-flex justify-content-between align-items-center">
 								<h4 class="m-0 text-dark">Transaksi Terakhir</h6>
 								<div class="dropdown">
-									<button class="btn btn-link dropdown-toggle" type="button" id="dropdownMenuButton" data-bs-toggle="dropdown">
+									<button class="btn btn-link dropdown-toggle" id="dropdownMenuButton" data-bs-toggle="dropdown">
 										<i class="las la-filter"></i> Filter
 									</button>
 									<ul class="dropdown-menu">
@@ -804,7 +427,6 @@
 						</div>
 					</div>
 				</div>
-			</div>
 		</section>
 
 		<!-- copyright -->
@@ -818,20 +440,19 @@
 			</div>
 		</div>
 		<script>
-			// Cek apakah aplikasi berjalan dari server web
-			if (window.location.protocol === 'http:' || window.location.protocol === 'https:') {
-			if ('serviceWorker' in navigator) {
-					window.addEventListener('load', function() {
-						navigator.serviceWorker.register('/service-worker.js')
-							.then(function(registration) {
-								console.log('ServiceWorker registration successful');
-							})
-							.catch(function(err) {
-								console.log('ServiceWorker registration failed: ', err);
-							});
-					});
-				}
+			if ("serviceWorker" in navigator) {
+ 				 window.addEventListener("load", function () {
+    			navigator.serviceWorker.register("/service-worker.js").then(
+      			function (registration) {
+        		console.log("ServiceWorker berhasil:", registration.scope);
+      		},
+      		function (err) {
+        		console.log("ServiceWorker gagal:", err);
+      			}
+    			);
+  			});
 			}
+
 		</script> 
 		<!-- all js -->
 		<script src="assets/js/bootstrap.bundle.min.js"></script>
@@ -840,7 +461,7 @@
 		<script src="assets/js/slick.min.js"></script>
 		<script src="assets/js/jquery.nice-select.min.js"></script>
 		<script src="assets/js/app.js"></script>
-		<script src="assets/js/theme-manager.js"></script>
+		<script src="assets/js/theme-manager.js"></script>n
 		<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 		<script>
 		const urlGet = "https://script.google.com/macros/s/AKfycbyBfKNeW5yhAyL8BdaJo6AhkbVfEPeorcqOMjPElrCCZJU9sQpCKpWwGAAqSYqKSqFw2g/exec?dataset="
@@ -861,7 +482,14 @@
 			try {
     			const res = await fetch(GetDatabase);
     			const json = await res.json();
-    			return json.values;
+
+				if(json && json.values){
+					return json.values;
+				} else if (json && json.value) {
+					return json.value;
+				} else {
+					return json;
+				}
   			} catch (err) {
     			console.error('Gagal ambil data:', err);
     			return [];
@@ -875,7 +503,6 @@
 				console.error('Data harus berupa array:', data);
 				return;
 			}
-
 			const summary = calculateSummary(data);
 			const chartData = processChartData(data);
 			const recentTransactions = getRecentTransactions(data);
@@ -883,6 +510,46 @@
 			updateCharts(chartData);
 			updateRecentTransactions(recentTransactions);
 		}
+		async function GetDataLoanList() {
+			const data = await EndPointHit("bckdata")
+			const loanData = data.byLoan
+			LoanAccount(loanData)
+
+		}
+		async function LoanAccount(data) {
+			const container = document.getElementById('DataHutang');
+			container.innerHTML = '';
+			
+			const colorClasses = ['card-color-1', 'card-color-2', 'card-color-3', 'card-color-4', 'card-color-5'];
+			const textClass = ['text-color-1', 'text-color-2', 'text-color-3', 'text-color-4', 'text-color-5'];
+			
+			//const data = await EndPointHit("DataAccRek")
+			console.log(data)
+			data.forEach((item, index) => {
+				if(item.status.toLowerCase() === "belum lunas") {
+					let el = document.createElement('div');
+				el.className = 'col-12';
+				const randomClass = colorClasses[index % colorClasses.length];
+				const rancolo = textClass[index % textClass.length];
+				el.innerHTML = `
+				  <div class="d-flex align-items-center p-2 rounded ${randomClass}" );">
+					<div class="flex-grow-1 ms-2">
+						<div class="small text-muted">${item.KeteranganLoan}</div>
+						<div class="fw-bold ${rancolo}" >${formatRupiah(item.nilaiHutang)}</div>
+						<div class="d-flex gap-3 "> 
+							<div class="small text-success fw-semibold"> 
+								 ${item.jatuhTempo ? formatDate(item.jatuhTempo) : "Tanggal Kosong"}
+							</div>
+							<div class="small text-danger fw-semibold">${item.status}</div>
+						</div>
+					</div>
+				</section>
+				`;
+				container.appendChild(el);
+				}
+			});
+		}
+		GetDataLoanList()
 		//LIST SALDO
 		async function tampilDataAccount () {
 			const container = document.getElementById('dataaccount');
@@ -908,7 +575,7 @@
 							<div class="small text-danger fw-semibold"> -${formatRupiah(item.Pengeluaran)}</div>
 						</div>
 					</div>
-				</div>
+				</section>
 				`;
 				container.appendChild(el);
 			});
@@ -983,6 +650,7 @@
 		}
 		//TAMPIL DATA DISTIRIBUSI PENGELUARAN TREN KEUANGAN DAN TRANSKASI TERAKHIR
 		function updateCharts(chartData) {
+			console.log(chartData)
 			const PengeluaranDistribution = document.querySelector('.Pengeluaran-distribution');
 			if (PengeluaranDistribution) {
 				PengeluaranDistribution.innerHTML = '';
@@ -1081,12 +749,13 @@
 								${item.balance >= 0 ? '(Surplus)' : '(Defisit)'}
 							</span>
 						</div>
-						<div class="trend-details">
-							<div>
+						<div class="trend-details mb-2">
 								<span class="trend-category">Pemasukan: ${formatRupiah(item.Pemasukan)}</span>
-								<span class="trend-category ms-2">Pengeluaran: ${formatRupiah(item.Pengeluaran)}</span>
-							</div>
 						</div>
+						<div class="trend-details">
+								<span class="trend-category text-danger">Pengeluaran: ${formatRupiah(item.Pengeluaran)}</span>
+						</div>
+
 					`;
 					
 					trendList.appendChild(trendItem);

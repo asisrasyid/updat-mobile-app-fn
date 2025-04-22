@@ -16,6 +16,8 @@
 		<link rel="stylesheet" href="assets/css/nice-select.css" />
 		<link rel="stylesheet" href="assets/css/style.css" />
 		<link rel="stylesheet" href="assets/css/responsive.css" />
+		<link rel="stylesheet" href="style2.css" />
+		<link rel="stylesheet" href="assets/sweetalert2/sweetalert2.css"/>
 	</head>
 
 	<body>
@@ -277,40 +279,23 @@
 
 				<!-- Category Tab -->
 				<div class="tab-pane fade" id="category" role="tabpanel">
-					<!-- Quick Add Category Button -->
-					<div class="row mb-4">
-						<div class="col-12">
-							<div class="d-flex justify-content-end">
-								<button class="default_btn btn-sm" id="addCategoryBtn">
-									<i class="las la-plus"></i> Tambah Kategori
-								</button>
-							</div>
-						</div>
-					</div>
-
 					<!-- Budget Categories Table -->
 					<div class="row">
 						<div class="col-12">
-							<div class="budget_categories">
-								<div class="d-flex justify-content-between align-items-center mb-3">
-									<h4>Kategori Anggaran</h4>
+							<div class="card">
+								<div class="card-header m-0 bg-white"> 
+									<div class="d-flex justify-content-between align-items-center">
+										<h4 class="fw-semibold">Kategori Anggaran</h4>
+										<div class="text-end"> 
+											<button class="default_btn btn-sm" id="addCategoryBtn">
+												<i class="las la-plus"></i>
+											</button>
+										</div>
+									</div>
 								</div>
-								<div class="table-responsive">
-									<table class="table">
-										<thead>
-											<tr>
-												<th>Kategori</th>
-												<th>Anggaran</th>
-												<th>Terpakai</th>
-												<th>Sisa</th>
-												<th>Progress</th>
-												<th>Aksi</th>
-											</tr>
-										</thead>
-										<tbody id="budgetCategories">
-											<!-- Data akan diisi melalui JavaScript -->
-										</tbody>
-									</table>
+								<div class=" card-body"> 
+									<div id="budgetCategories" class="transaction-list"> 
+									</div>
 								</div>
 							</div>
 						</div>
@@ -363,13 +348,14 @@
 					</div>
 					<div class="modal-body">
 						<form id="addCategoryForm">
+							<input type="text" name="paramcek" value="simpanBudget" hidden>
 							<div class="mb-3">
 								<label class="form-label">Nama Kategori</label>
-								<input type="text" class="form-control" id="categoryName" required>
+								<input type="text"  name="namaBuget" class="form-control" id="categoryName" required>
 							</div>
 							<div class="mb-3">
 								<label class="form-label">Anggaran (Rp)</label>
-								<input type="number" class="form-control" id="categoryBudget" required>
+								<input type="number" name="nilaibudget" class="form-control" id="categoryBudget" required>
 							</div>
 						</form>
 					</div>
@@ -404,9 +390,11 @@
 		<script src="assets/js/slick.min.js"></script>
 		<script src="assets/js/jquery.nice-select.min.js"></script>
 		<script src="assets/js/app.js"></script>
+		<script src="assets/sweetalert2/sweetalert2.js"></script>
 		<script src="assets/js/theme-manager.js"></script>
 		<script>
 			// Cek login
+			const SPREADSHEET_URL = "https://script.google.com/macros/s/AKfycbyBfKNeW5yhAyL8BdaJo6AhkbVfEPeorcqOMjPElrCCZJU9sQpCKpWwGAAqSYqKSqFw2g/exec";
 			const savedUser = localStorage.getItem('user');
 			const outputElements = document.querySelectorAll('.output');
 			if (savedUser) {
@@ -415,19 +403,57 @@
 				window.location.href = "login.html";
 			}
 
-			// Format currency
-			function formatRupiah(number) {
-				return new Intl.NumberFormat('id-ID', {
-					style: 'currency',
-					currency: 'IDR'
-				}).format(number);
+			function fetchDropdownData() {
+  				fetch(`${SPREADSHEET_URL}?dataset=data-budget`)
+    			.then(res => res.json())
+    			.then(data => {
+					localStorage.setItem('budgetData', JSON.stringify(data.values));
+
+					// const budgetData = JSON.parse(localStorage.getItem('budgetData')) || [];
+					// data.values.forEach ( item => {
+					// 	if(item.status === "Aktif"){
+					// 		budgetData.push({
+					// 			name: item.name,
+					// 			budget: item.budget,
+					// 			spent: item.spent
+					// 		});
+					// 	}
+					// })
+					// localStorage.setItem('budgetData', JSON.stringify(budgetData));
+				})
+				.catch(err => console.error('Failed to fetch data:', err));
 			}
+			fetchDropdownData()
+
+			// Format currency
+			function formatRupiah(angka) {
+			angka = Number(angka);
+			
+			if (isNaN(angka) || angka === 0 || angka < 0) {
+				return 'Rp 0';
+			}
+			
+			if (angka >= 1000000000) {
+				return 'Rp ' + (angka / 1000000000).toFixed(1) + ' Milyar';
+			}
+			
+			if (angka >= 1000000) {
+				return 'Rp ' + (angka / 1000000).toFixed(1) + ' Juta';
+			}
+			
+			if (angka >= 1000) {
+				return 'Rp ' + (angka / 1000).toFixed(1) + ' Ribu';
+			}
+			
+			return 'Rp ' + angka.toString();
+		}
+
 
 			// Load budget data
 			function loadBudgetData() {
 				const budgetData = JSON.parse(localStorage.getItem('budgetData')) || [];
-				const tbody = document.getElementById('budgetCategories');
-				tbody.innerHTML = '';
+				const innerBudget = document.getElementById('budgetCategories');
+				innerBudget.innerHTML = '';
 
 				let totalBudget = 0;
 				let totalSpent = 0;
@@ -439,29 +465,28 @@
 					totalBudget += category.budget;
 					totalSpent += category.spent;
 
-					tbody.innerHTML += `
-						<tr>
-							<td>${category.name}</td>
-							<td>${formatRupiah(category.budget)}</td>
-							<td>${formatRupiah(category.spent)}</td>
-							<td>${formatRupiah(remaining)}</td>
-							<td>
-								<div class="progress">
-									<div class="progress-bar" role="progressbar" style="width: ${progress}%">
-										${progress.toFixed(1)}%
+					innerBudget.innerHTML += `
+						<div class="transaction-card Pengeluaran"> 
+									<div class="d-flex justify-content-between align-items-center"> 
+										<div> 
+											<span class="transaction-category">${category.name}</span>
+											<h6 class="mb-1 fw-semibold"> Total Anggran : ${formatRupiah(category.budget)} </h6>
+										</div>
+										<div class="text-end"> 
+											<div class="transaction-amount text-success">
+												<button class="btn btn-sm btn-primary edit-category" data-index="${index}">
+													<i class="las la-edit"></i>
+												</button>
+											</div>
+										</div>
 									</div>
+									<div class="d-flex gap-3 align-items-center"> 
+										<h6 class="mb-1 text-danger fw-semibold"> - ${formatRupiah(category.spent)}</h6>
+										<h6 class="mb-1 text-success fw-semibold">Sisa : ${formatRupiah(remaining)}</h6>
 								</div>
-							</td>
-							<td>
-								<button class="btn btn-sm btn-primary edit-category" data-index="${index}">
-									<i class="las la-edit"></i>
-								</button>
-								<button class="btn btn-sm btn-danger delete-category" data-index="${index}">
-									<i class="las la-trash"></i>
-								</button>
-							</td>
-						</tr>
+						</div>
 					`;
+					
 				});
 
 				// Update summary cards
@@ -520,27 +545,113 @@
 				modal.show();
 			});
 
+
+
+			function submitButtonExc () {
+				const formsimpan = document.getElementById('addCategoryForm')
+				const sumbitecx = document.getElementById('saveCategoryBtn')
+				alert('test')
+				if (!formsimpan) return ;
+				
+				formsimpan.addEventListener('submit', function(e) {
+					e.preventDefault();
+
+					sumbitecx.disabled = true;
+					sumbitecx.textContent = "Menyimpan Data."
+
+					const formData = new FormData(formsimpan);
+					fetch(SPREADSHEET_URL, {
+						method: "POST",
+						body: formData,
+						redirect: 'follow'
+					})
+					.then(res => res.json())
+					.then(response => {
+						if (!response.success) {
+							showAlert('Ups!', response.message, 'warning');
+						} else {
+							showAlert('Berhasil Simpan!', response.message, 'success');
+        					form.reset();
+							location.reload()
+						}
+						sumbitecx.disabled = false;
+						sumbitecx.textContent = "Simpan";
+					})
+					.catch(err => {
+						showAlert('Ups!', err, 'warning');
+						sumbitecx.disabled = false;
+						sumbitecx.textContent = "Simpan";
+      					console.log(err);
+					})
+				})
+			}
+			//submitButtonExc();
+
 			document.getElementById('saveCategoryBtn').addEventListener('click', () => {
-				const name = document.getElementById('categoryName').value;
-				const budget = parseFloat(document.getElementById('categoryBudget').value);
+				const form = document.getElementById('addCategoryForm');
+				const sumbitecx = document.getElementById('saveCategoryBtn');
 
-				if (name && budget) {
-					const budgetData = JSON.parse(localStorage.getItem('budgetData')) || [];
-					budgetData.push({
-						name,
-						budget,
-						spent: 0
-					});
+				if (!form) return;
 
-					localStorage.setItem('budgetData', JSON.stringify(budgetData));
-					loadBudgetData();
+				sumbitecx.disabled = true;
+				sumbitecx.textContent = "Menyimpan Data.";
 
-					const modal = bootstrap.Modal.getInstance(document.getElementById('addCategoryModal'));
-					modal.hide();
-
-					document.getElementById('addCategoryForm').reset();
-				}
+				const formData = new FormData(form);
+	
+				fetch(SPREADSHEET_URL, {
+					method: "POST",
+					body: formData,
+					redirect: 'follow'
+				})
+				.then(res => res.json())
+				.then(response => {
+					console.log(response)
+					if (!response.success) {
+						const modal = bootstrap.Modal.getInstance(document.getElementById('addCategoryModal'));
+						modal.hide();
+						showAlert('Ups!', response.message, 'warning');
+					} else {
+						showAlert('Berhasil Simpan!', response.message, 'success');
+						form.reset();
+						location.reload();
+					}
+					sumbitecx.disabled = false;
+					sumbitecx.textContent = "Simpan";
+				})
+				.catch(err => {
+					showAlert('Ups!', err, 'warning');
+					sumbitecx.disabled = false;
+					sumbitecx.textContent = "Simpan";
+					console.log(err);
+				});
 			});
+
+
+			//document.getElementById('saveCategoryBtn22').addEventListener('click', () => {
+				//submitButtonExc();
+				// const name = document.getElementById('categoryName').value;
+				// const formsimpan = document.getElementById('addCategoryForm').reset();
+				
+				// const budget = parseFloat(document.getElementById('categoryBudget').value);
+
+				// if (name && budget) {
+				// 	const budgetData = JSON.parse(localStorage.getItem('budgetData')) || [];
+				// 	budgetData.push({
+				// 		name,
+				// 		budget,
+				// 		spent: 0,
+				// 		sedntoDb:0
+				// 	});
+
+				// 	localStorage.setItem('budgetData', JSON.stringify(budgetData));
+				// 	loadBudgetData();
+
+				// 	const modal = bootstrap.Modal.getInstance(document.getElementById('addCategoryModal'));
+				// 	modal.hide();
+
+				// 	document.getElementById('addCategoryForm').reset();
+				// }
+			//});
 
 			// Delete category
 			document.addEventListener('click', (e) => {
@@ -552,6 +663,14 @@
 					loadBudgetData();
 				}
 			});
+			function showAlert(title, text, icon) {
+  				Swal.fire({
+    			title: title,
+    			text: text,
+   	 			icon: icon,
+    		confirmButtonText: icon === 'success' ? 'Sip!' : 'Sorry!'
+  			});
+			}
 
 			// Period filter buttons
 			document.querySelectorAll('[data-period]').forEach(button => {

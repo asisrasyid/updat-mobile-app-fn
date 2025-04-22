@@ -24,9 +24,9 @@
             <div class="spinner"></div>
           </div>
 		<!-- Preloader -->
-		<div class="preloader">
+		<!-- <div class="preloader">
 			<img src="assets/images/preloader.gif" alt="preloader" />
-		</div>
+		</div> -->
 
 		<!-- Settings -->
 		<div class="theme_settings">
@@ -288,90 +288,109 @@
 				<div class="col-xl-12">
 					<div class="home_2_hero">
 						<div class="container">
-							<div class="">
-								<div class="my_account_wrap section_padding_b">
-									<div class="container">
-										<div class="row">
-											<div class="col-xl-12 col-lg-12 col-sm-12">
-												<div class="col-lg-12" style="margin-top: 10px ;">
-													<div class="account_sidebar">
-														<div class="account_profile position-relative shadow_sm">
-															<div class="acprof_img">
-																<a href="account.html">
-																	<img loading="lazy" src="assets/images/avatar-2.png" alt="user" />
-																</a>
-															</div>
-															<div class="acprof_cont">
-																<p>Hello,</p>
-																<h4 class="output"></h4>
-															</div>
+							<div class="my_account_wrap section_padding_b">
+								<div class="container">
+									<div class="row">
+										<div class="col-xl-12 col-lg-12 col-sm-12">
+											<div class="col-lg-12" style="margin-top: 10px ;">
+												<div class="account_sidebar">
+													<div class="account_profile position-relative shadow_sm">
+														<div class="acprof_img">
+															<a href="account.html">
+																<img loading="lazy" src="assets/images/avatar-2.png" alt="user" />
+															</a>
+														</div>
+														<div class="acprof_cont">
+															<p>Hello,</p>
+															<h4 class="output"></h4>
 														</div>
 													</div>
 												</div>
-												<div class="acprof_info_wrap shadow_sm">
-													<h4 class="text_xl mb-3">Catat Transaksi</h4>
-													<form id="dataForm">
-														<div class="row">
-															<div class="col-md-6">
-																<div class="single_billing_inp select-wrapper">
-																	<select class="" id="JenisTransaksi">
-																		<option>Pilih Jenis</option>
-																	</select>
-																</div>
-															</div>
-															<div class="col-md-6">
-																<div class="single_billing_inp select-wrapper">
-																	<select class="" id="keteranganDropdown">
-																		<option>Pilih Keterangan</option>
-																	</select>
-																</div>
-															</div>
-															<div class="col-md-6">
-																<div class="single_billing_inp select-wrapper">
-																	<select class="" id="enumDropdown">
-																		<option>Pilih Subkategori</option>
-																	</select>
-																</div>
-															</div>
-															<input type="text" name="Jenis" id="inputJenis" hidden>
-															<input type="text" name="Kategori" id="inputKategori" hidden>
-															<input type="text" name="Subkategori" id="inputSubkategori" hidden>
-															<div class="col-md-6">
-																<div class="single_billing_inp">
-																	<input type="text" class="input-styled" name="Keterangan" placeholder="Keterangan" required />
-																</div>
-															</div>
-															<div class="col-md-6">
-																<div class="single_billing_inp">
-																  <input type="number" class="input-styled" name="Jumlah" placeholder="Jumlah (Rp)" required />
-																</div>
-															  </div>
-															  
-															  <!-- Dropdown untuk sumber (jika jenis = pengeluaran) -->
-															  <div class="col-md-6" id="dropdownSumberContainer">
-																<div class="single_billing_inp select-wrapper">
-																  <select class="" id="bySumber">
-																	<option value="">Pilih Sumber</option>
-																  </select>
-																</div>
-															  </div>
-															  
-															  <!-- Input manual sumber (jika jenis ≠ pengeluaran) -->
-															  <div class="col-md-6" id="inputSumberContainer" style="display: none;">
-																<div class="single_billing_inp">
-																  <input type="text" class="input-styled" id="manualSumberInput" placeholder="Masukkan Sumber" />
-																</div>
-															  </div>
-															  
-															  <!-- Hidden input yang akan disubmit ke server -->
-															  <input type="text" name="Sumber" id="inputSumber" hidden />
-															  
-															<div class="col-12 acprof_subbtn">
-																<button type="submit" class="default_btn rounded small" id="submitButton">Simpan Data</button>
+											</div>
+											<div class="acprof_info_wrap shadow_sm">
+												<h4 class="text_xl mb-3">Catat Transaksi</h4>
+												<form id="dataForm">
+													<div class="row">
+														<div class="col-md-6">
+															<div class="single_billing_inp select-wrapper">
+																<select class="" id="JenisTransaksi">
+																	<option>Pilih Jenis</option>
+																</select>
 															</div>
 														</div>
-													</form>
-												</div>
+														<div class="col-md-6">
+															<div class="single_billing_inp select-wrapper">
+																<select class="" id="keteranganDropdown">
+																	<option>Pilih Keterangan</option>
+																</select>
+															</div>
+														</div>
+														<div class="col-md-6">
+															<div class="single_billing_inp select-wrapper">
+																<select class="" id="enumDropdown">
+																	<option>Pilih Subkategori</option>
+																</select>
+															</div>
+														</div>
+														<div class="col-md-6" id="loanShow" style="display: none;">
+															<div class="single_billing_inp select-wrapper">
+																<select class="" id="loanDropdown">
+																	<option>Pilih Hutang</option>
+																</select>
+															</div>
+														</div>
+														<input type="text" name="Jenis" id="inputJenis" hidden>
+														<input type="text" name="Kategori" id="inputKategori" hidden>
+														<input type="text" name="Subkategori" id="inputSubkategori" hidden>
+														<div class="col-md-6">
+															<div class="single_billing_inp">
+																<input type="text" class="input-styled" name="Keterangan" placeholder="Keterangan" required />
+															</div>
+														</div>
+														<div class="col-md-6">
+															<div class="single_billing_inp">
+															  <input type="number" class="input-styled" name="Jumlah" placeholder="Jumlah (Rp)" required />
+															</div>
+														  </div>
+														  
+														  <!-- Dropdown untuk sumber (jika jenis = pengeluaran) -->
+														  <div class="col-md-6" id="dropdownSumberContainer">
+															<div class="single_billing_inp select-wrapper">
+															  <select class="" id="bySumber">
+																<option value="">Pilih Sumber</option>
+															  </select>
+															</div>
+														  </div>
+														  
+														  <!-- Input manual sumber (jika jenis ≠ pengeluaran) -->
+														  <div class="col-md-6" id="inputSumberContainer" style="display: none;">
+															<div class="single_billing_inp">
+															  <input type="text"  class="input-styled" id="manualSumberInput" value="-" placeholder="Masukkan Sumber" />
+															</div>
+														  </div>
+
+														  <div class="col-md-6" id="DataLain" style="display: none;">
+															<div class="single_billing_inp">
+															  <h5 class="text-black">Tanggal Jatuh Tempo</h5>
+																<input type="date" class="input-styled" id="DataLainInput" placeholder="Masukkan Tanggal Pembayaran" />
+															</div>
+														  </div>
+
+														  <div class="col-md-6" id="DataLainInput" style="display: none;">
+															<div class="single_billing_inp">
+															  <input type="text"  class="input-styled" id="manualDataLain" placeholder="MAasukan Data" />
+															</div>
+														  </div>
+														  
+														  <!-- Hidden input yang akan disubmit ke server -->
+														  <input type="text" name="Sumber" id="inputSumber" hidden /> 
+														  <input type="text" name="DataLain" id="inputDataaLain" hidden />
+														  
+														<div class="col-12 acprof_subbtn">
+															<button type="submit" class="default_btn rounded small" id="submitButton">Simpan Data</button>
+														</div>
+													</div>
+												</form>
 											</div>
 										</div>
 									</div>
@@ -393,6 +412,8 @@
 				</div>
 			</div>
 		</div>
+	
+	
 		<script>
 			if ('serviceWorker' in navigator) {
 				navigator.serviceWorker.register('service-worker.js')
@@ -408,7 +429,8 @@
 		<script src="assets/js/jquery.nice-select.min.js"></script>
 		<script src="assets/sweetalert2/sweetalert2.js"></script>
 		<script src="assets/js/app.js"></script>
-		<script>
+		<script src="app-transaksi-page.js"></script>
+		<!-- <script>
 		//	https://script.google.com/macros/s/AKfycbyBfKNeW5yhAyL8BdaJo6AhkbVfEPeorcqOMjPElrCCZJU9sQpCKpWwGAAqSYqKSqFw2g/exec
 			const spreadsheetUrl = "https://script.google.com/macros/s/AKfycbyBfKNeW5yhAyL8BdaJo6AhkbVfEPeorcqOMjPElrCCZJU9sQpCKpWwGAAqSYqKSqFw2g/exec?dataset=accdta"; 
 			const savedUser = localStorage.getItem('user');
@@ -452,6 +474,7 @@
 					confirmButtonText: 'Sip!'
 				  });
 				  form.reset();
+				  resetDivDisplay();
 				}  
 				submitButton.disabled = false;
       			submitButton.textContent = "Simpan Data"
@@ -463,8 +486,8 @@
 					icon: 'warning',
 					confirmButtonText: 'Sorry!'
 				  });
-		  	submitButton.disabled = false;
-      		submitButton.textContent = "Simpan Data"
+		  			submitButton.disabled = false;
+      				submitButton.textContent = "Simpan Data"
 				  console.log(err);
 				  document.getElementById("result").innerText = "❌ Terjadi kesalahan.";
 				});
@@ -472,45 +495,49 @@
 			</script>
 			<script>
 			function PenampilDropDown(data) {
-				const jenisDropdown = document.getElementById("JenisTransaksi");
-				  const kelompokDropdown = document.getElementById("keteranganDropdown");
-				  const enumDropdown = document.getElementById("enumDropdown");
-				  const sumberDropdown = document.getElementById("bySumber");
-				  const manualSumberInput = document.getElementById("manualSumberInput");
-				  const inputSumber = document.getElementById("inputSumber");
-		  
-				  const inputJenis = document.getElementById("inputJenis");
-				  const inputKategori = document.getElementById("inputKategori");
-				  const inputSubkategori = document.getElementById("inputSubkategori");
+					const jenisDropdown = document.getElementById("JenisTransaksi");
+				  	const kelompokDropdown = document.getElementById("keteranganDropdown");
+				  	const enumDropdown = document.getElementById("enumDropdown");
+				  	const sumberDropdown = document.getElementById("bySumber");
+				  	const manualSumberInput = document.getElementById("manualSumberInput");
+				  	const inputSumber = document.getElementById("inputSumber");
+				
+				  	const inputLoanData = document.getElementById("loanDropdown");
+				  	const showLoan = document.getElementById("loanShow");
+				  	const inputJenis = document.getElementById("inputJenis");
+				  	const inputKategori = document.getElementById("inputKategori");
+				  	const inputSubkategori = document.getElementById("inputSubkategori");
 
-				  const dropdownSumberContainer = document.getElementById("dropdownSumberContainer");
-				  const inputSumberContainer = document.getElementById("inputSumberContainer");
+				  	const dropdownSumberContainer = document.getElementById("dropdownSumberContainer");
+				  	const inputSumberContainer = document.getElementById("inputSumberContainer");
+					  
+				  	const DataLain = document.getElementById("DataLain");
+					const inputDataaLain = document.getElementById("inputDataaLain");
 
-				  data.bySumber.forEach(sumber => {
-				  const opt = document.createElement("option");
-				  opt.value = sumber;
-				  opt.textContent = sumber;
-				  sumberDropdown.appendChild(opt);
-				});
-					
+				  	data.bySumber.forEach(sumber => {
+				  		const opt = document.createElement("option");
+				  		opt.value = sumber;
+				  		opt.textContent = sumber;
+				  		sumberDropdown.appendChild(opt);
+					});
+
 					sumberDropdown.addEventListener("change", function () {
 						inputSumber.value = this.value;
 					});
-					
 					
 					manualSumberInput.addEventListener("input", function () {
 						inputSumber.value = this.value;
 					});
 				  
+				  	Object.keys(data.byJenis).forEach(jenis => {
+						const opt = document.createElement("option");
+						opt.value = jenis;
+						opt.textContent = jenis;
+						jenisDropdown.appendChild(opt);
+						$('.preloader').fadeOut(500, function(){ $('.preloader').remove(); } );
+				  	});
 				  
-				  Object.keys(data.byJenis).forEach(jenis => {
-					const opt = document.createElement("option");
-					opt.value = jenis;
-					opt.textContent = jenis;
-					jenisDropdown.appendChild(opt);
-					$('.preloader').fadeOut(500, function(){ $('.preloader').remove(); } );
-				  });
-				  jenisDropdown.addEventListener("change", function () {
+					jenisDropdown.addEventListener("change", function () {
 					  const selectedJenis = this.value;
 					  inputJenis.value = selectedJenis; 
 					  
@@ -539,7 +566,7 @@
   						  inputSumberContainer.style.display = "none";
   						  manualSumberInput.required = false;
   						  inputSumber.value = sumberDropdown.value || "";
-						}else{
+						} else{
   						  sumberDropdown.style.display = "none";
   						  dropdownSumberContainer.style.display = "none";
   						  inputSumberContainer.style.display = "block";
@@ -596,23 +623,49 @@
 								opt.textContent = keterangan;
 								enumDropdown.appendChild(opt);
 							});
-						}
+						} 
+						const DataLoanJsn = data.byLoan.map(item => item.KeteranganLoan);
+						DataLoanJsn.forEach(KeteranganLoan =>{
+							const opt = document.createElement("option");
+								opt.value = KeteranganLoan;
+								opt.textContent = KeteranganLoan;
+								inputLoanData.appendChild(opt);
+						})
 					});
 					
 					enumDropdown.addEventListener("change", function () {
 						const selectedSubkategori = this.value;
+						console.log(selectedSubkategori)
 						inputSubkategori.value = selectedSubkategori;
-						inputSumber=inputKategori.value;
 						manualSumberInput.value = inputKategori.value;
+
+						if (selectedSubkategori.toLowerCase() === "pinjaman pribadi") {
+							DataLain.style.display = "block"
+						} else if (inputJenis.value.toLowerCase() === "pengeluaran" && selectedSubkategori.toLowerCase() === "pribadi"){
+							showLoan.style.display="block"
+						}
 					});
+
+					inputLoanData.addEventListener("change", function(){
+						const inputloadval = this.value;
+						inputSubkategori.value = inputloadval;
+
+					})
+					document.getElementById("DataLainInput").addEventListener("change", function () {
+						const selectedDate = this.value; 
+						document.getElementById("inputDataaLain").value = selectedDate;
+					});
+
 					sumberDropdown.addEventListener("change", function () {
 						inputSumber.value = this.value;
+						console.log(inputSumber.value)
 					});
-					
+
 					manualSumberInput.addEventListener("input", function () {
 						inputSumber.value = this.value;
 					});
-			}
+			}	
+			
 			function ambildaatadrop(){
 			const spreadsheetUrl = "https://script.google.com/macros/s/AKfycbyBfKNeW5yhAyL8BdaJo6AhkbVfEPeorcqOMjPElrCCZJU9sQpCKpWwGAAqSYqKSqFw2g/exec?dataset=bckdata";		
 			const datalocaldrop = localStorage.getItem('data-drop');
@@ -644,6 +697,19 @@
                 })
                 .catch(err => {console.error('Gagal ambil data:', err); document.getElementById("loadingOverlay").style.display = "none";});
         });
+		function resetDivDisplay() {
+    		const divsToHide = [
+        "DataLainInput",
+        "DataLain",
+        "inputSumberContainer",
+		"loanShow"
+    		];
+
+    		divsToHide.forEach(id => {
+        		const el = document.getElementById(id);
+        		if (el) el.style.display = "none";
+    		});
+		}
 			</script>
 				<script>
 					document.getElementById("LogOutSistem").addEventListener("click", function (e) {
@@ -651,6 +717,6 @@
 					  localStorage.clear(); 
 					  window.location.href = "index.html"; 
 					});
-				  </script>	
-				</body>
-			</html>
+				  </script>	 -->
+	</body>
+</html>
