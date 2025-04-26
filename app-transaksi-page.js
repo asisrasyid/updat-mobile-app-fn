@@ -1,5 +1,7 @@
 // Global constants and variables
-const SPREADSHEET_URL = "https://script.google.com/macros/s/AKfycbyBfKNeW5yhAyL8BdaJo6AhkbVfEPeorcqOMjPElrCCZJU9sQpCKpWwGAAqSYqKSqFw2g/exec";
+const spid = localStorage.getItem('spid');
+const SPREADSHEET_URL = `https://script.google.com/macros/s/AKfycbxX0U_DDwXQ9WjTlytdzk1O2ZJk2eu-7nivoCMBAlaZts0mCDvO3u2va-xV60Wi-bak_Q/exec?spid=${spid}`;
+//ini yang lama const SPREADSHEET_URL = "https://script.google.com/macros/s/AKfycbyBfKNeW5yhAyL8BdaJo6AhkbVfEPeorcqOMjPElrCCZJU9sQpCKpWwGAAqSYqKSqFw2g/exec";
 
 // Check user authentication
 document.addEventListener('DOMContentLoaded', function() {
@@ -46,7 +48,7 @@ function initializeFormData() {
 
 // Fetch dropdown data from server
 function fetchDropdownData() {
-  fetch(`${SPREADSHEET_URL}?dataset=bckdata`)
+  fetch(`${SPREADSHEET_URL}&dataset=bckdata`)
     .then(res => res.json())
     .then(data => {
       localStorage.setItem('data-drop', JSON.stringify(data));
@@ -62,7 +64,7 @@ function fetchDropdownData() {
 function refreshData() {
   document.getElementById("loadingOverlay").style.display = "flex";
   
-  fetch(`${SPREADSHEET_URL}?dataset=bckdata`)
+  fetch(`${SPREADSHEET_URL}&dataset=bckdata`)
     .then(res => res.json())
     .then(data => {
       localStorage.setItem('data-drop', JSON.stringify(data));
@@ -171,12 +173,12 @@ function populateSourceDropdown(data, elements) {
 
 // Populate transaction types
 function populateTransactionTypes(data, elements) {
-  Object.keys(data.byJenis).forEach(jenis => {
-    const opt = document.createElement("option");
-    opt.value = jenis;
-    opt.textContent = jenis;
-    elements.jenisDropdown.appendChild(opt);
-  });
+    Object.keys(data.byJenis).forEach(jenis => {
+      const opt = document.createElement("option");
+      opt.value = jenis;
+      opt.textContent = jenis;
+      elements.jenisDropdown.appendChild(opt);
+    });
 }
 
 // Setup event listeners for all dropdowns
@@ -225,18 +227,20 @@ function setupDropdownEventListeners(data, elements) {
 // Handle transaction type change
 function handleTransactionTypeChange(selectedJenis, data, elements) {
   elements.inputJenis.value = selectedJenis;
-  
   // Reset dropdowns based on transaction type
   if (selectedJenis.toLowerCase() === "perpindahan") {
+    //alert(selectedJenis.toLowerCase())
     elements.kelompokDropdown.innerHTML = '<option>Pilih Asal</option>';
     elements.enumDropdown.innerHTML = '<option>Pilih Tujuan</option>';
-  } else if (selectedJenis.toLowerCase() === "pemasukan"){
-    elements.kelompokDropdown.innerHTML = '<option>Pilih Kelompok</option>';
-    elements.enumDropdown.innerHTML = '<option>Pilih Keterangan</option>';
-    elements.sumberDropdown.innerHTML = '<option>Tujuan</option>'
-  } {
-    elements.kelompokDropdown.innerHTML = '<option>Pilih Kelompok</option>';
-    elements.enumDropdown.innerHTML = '<option>Pilih Keterangan</option>';
+  } 
+  //else if (selectedJenis.toLowerCase() === "pemasukan"){
+    //elements.kelompokDropdown.innerHTML = '<option>Pilih Kelompok</option>';
+    //elements.enumDropdown.innerHTML = '<option>Pilih Kategori</option>';
+    //elements.sumberDropdown.innerHTML = '<option value=""> Tujuan </option>'
+  //} 
+  else {
+    elements.kelompokDropdown.innerHTML = '<option> Pilih Kategori</option>';
+    elements.enumDropdown.innerHTML = '<option>Pilih Sub Kategori</option>';
   }
   
   // Reset values
@@ -258,7 +262,6 @@ function handleTransactionTypeChange(selectedJenis, data, elements) {
     elements.manualSumberInput.required = true;
     elements.inputSumber.value = elements.manualSumberInput.value;
   }
-  
   // Populate group dropdown based on transaction type
   if (data.byJenis[selectedJenis] && selectedJenis.toLowerCase() === "perpindahan") {
     data.bySumber.forEach(kelompok => {

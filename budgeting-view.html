@@ -394,7 +394,9 @@
 		<script src="assets/js/theme-manager.js"></script>
 		<script>
 			// Cek login
-			const SPREADSHEET_URL = "https://script.google.com/macros/s/AKfycbyBfKNeW5yhAyL8BdaJo6AhkbVfEPeorcqOMjPElrCCZJU9sQpCKpWwGAAqSYqKSqFw2g/exec";
+			const spid = localStorage.getItem('spid');
+			const SPREADSHEET_URL = `https://script.google.com/macros/s/AKfycbxX0U_DDwXQ9WjTlytdzk1O2ZJk2eu-7nivoCMBAlaZts0mCDvO3u2va-xV60Wi-bak_Q/exec?spid=${spid}`;
+			//const SPREADSHEET_URL = "https://script.google.com/macros/s/AKfycbyBfKNeW5yhAyL8BdaJo6AhkbVfEPeorcqOMjPElrCCZJU9sQpCKpWwGAAqSYqKSqFw2g/exec";
 			const savedUser = localStorage.getItem('user');
 			const outputElements = document.querySelectorAll('.output');
 			if (savedUser) {
@@ -404,7 +406,7 @@
 			}
 
 			function fetchDropdownData() {
-  				fetch(`${SPREADSHEET_URL}?dataset=data-budget`)
+  				fetch(`${SPREADSHEET_URL}&dataset=data-budget`)
     			.then(res => res.json())
     			.then(data => {
 					localStorage.setItem('budgetData', JSON.stringify(data.values));

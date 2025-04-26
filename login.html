@@ -157,6 +157,8 @@
 		<script src="assets/sweetalert2/sweetalert2.js"></script>
 		<script src="assets/js/app.js"></script>
 		<script>
+			
+			const spredurtl = 'https://script.google.com/macros/s/AKfycbxX0U_DDwXQ9WjTlytdzk1O2ZJk2eu-7nivoCMBAlaZts0mCDvO3u2va-xV60Wi-bak_Q/exec'
 			$('.preloader').fadeOut(500, function(){ $('.preloader').remove(); } );
 			const submitButton = document.getElementById("submitbutton");   
 			document.getElementById("submitbutton").addEventListener("click", function(event) {
@@ -169,16 +171,19 @@
 		  
 			  const usernamedtVal = usernamedt.value;
 			  const pasdtVal = pasdt.value;
-			  fetch(`https://script.google.com/macros/s/AKfycbyBfKNeW5yhAyL8BdaJo6AhkbVfEPeorcqOMjPElrCCZJU9sQpCKpWwGAAqSYqKSqFw2g/exec?dataset=login&usr=${usernamedtVal}&psr=${pasdtVal}`)
+			  fetch(`${spredurtl}?dataset=login&usr=${usernamedtVal}&psr=${pasdtVal}`)
 				.then(response => response.json())
 				.then(data => {
 					if (data.success) {
 						submitButton.disabled = false;
 						submitButton.textContent = "Login";
 						const user = data.data.nama;
+						const spid = data.data.spreedSheetId
         				const dt = data.data;
+						console.log(data.data);
 
      				   localStorage.setItem('user', user);
+					   localStorage.setItem('spid', spid);
      				   localStorage.setItem('dt', JSON.stringify(dt)); // Simpan sebagai string JSON
 						$('.preloader').remove();
      				   window.location.href = "index.html";

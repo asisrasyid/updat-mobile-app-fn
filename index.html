@@ -465,9 +465,11 @@
 		<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 		<script> 
 			// Configuration and Globals
+const spid = localStorage.getItem('spid');
+const SPREADSHEET_URL = `https://script.google.com/macros/s/AKfycbxX0U_DDwXQ9WjTlytdzk1O2ZJk2eu-7nivoCMBAlaZts0mCDvO3u2va-xV60Wi-bak_Q/exec?spid=${spid}`;
 const CONFIG = {
   urls: {
-    base: "https://script.google.com/macros/s/AKfycbyBfKNeW5yhAyL8BdaJo6AhkbVfEPeorcqOMjPElrCCZJU9sQpCKpWwGAAqSYqKSqFw2g/exec?dataset=",
+    base: `${SPREADSHEET_URL}&dataset=`,
     account: "accdta",
     transactions: "resTrx",
     savingPlans: "trgSave",
