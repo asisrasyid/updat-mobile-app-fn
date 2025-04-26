@@ -466,7 +466,10 @@
 		<script> 
 			// Configuration and Globals
 const spid = localStorage.getItem('spid');
-const SPREADSHEET_URL = `https://script.google.com/macros/s/AKfycbxX0U_DDwXQ9WjTlytdzk1O2ZJk2eu-7nivoCMBAlaZts0mCDvO3u2va-xV60Wi-bak_Q/exec?spid=${spid}`;
+const id = localStorage.getItem('id')
+const email = localStorage.getItem('email')
+
+const SPREADSHEET_URL = `https://script.google.com/macros/s/AKfycbxX0U_DDwXQ9WjTlytdzk1O2ZJk2eu-7nivoCMBAlaZts0mCDvO3u2va-xV60Wi-bak_Q/exec?spid=${spid}&id=${id}&email=${email}`;
 const CONFIG = {
   urls: {
     base: `${SPREADSHEET_URL}&dataset=`,
@@ -512,15 +515,15 @@ async function fetchData(endpoint) {
   try {
     const response = await fetch(url);
     const data = await response.json();
-    
     if (data && data.values) {
-      return data.values;
+		return data.values;
     } else if (data && data.value) {
       return data.value;
     } else {
       return data;
     }
   } catch (error) {
+	window.location.href = "login.html";
     console.error(`Failed to fetch ${endpoint} data:`, error);
     return [];
   }

@@ -799,7 +799,13 @@
 		<script src="assets/js/theme-manager.js"></script>
 		<script>
 			const spid = localStorage.getItem('spid');
-			const SPREADSHEET_URL = `https://script.google.com/macros/s/AKfycbxX0U_DDwXQ9WjTlytdzk1O2ZJk2eu-7nivoCMBAlaZts0mCDvO3u2va-xV60Wi-bak_Q/exec?spid=${spid}`;
+const id = localStorage.getItem('id')
+const email = localStorage.getItem('email')
+
+const SPREADSHEET_URL = `https://script.google.com/macros/s/AKfycbxX0U_DDwXQ9WjTlytdzk1O2ZJk2eu-7nivoCMBAlaZts0mCDvO3u2va-xV60Wi-bak_Q/exec?spid=${spid}&id=${id}&email=${email}`;
+
+			//const spid = localStorage.getItem('spid');
+			//const SPREADSHEET_URL = `https://script.google.com/macros/s/AKfycbxX0U_DDwXQ9WjTlytdzk1O2ZJk2eu-7nivoCMBAlaZts0mCDvO3u2va-xV60Wi-bak_Q/exec?spid=${spid}`;
 
 			// Cek apakah aplikasi berjalan dari server web
 			if (window.location.protocol === 'http:' || window.location.protocol === 'https:') {

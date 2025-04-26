@@ -183,6 +183,8 @@
 						console.log(data.data);
 
      				   localStorage.setItem('user', user);
+					   localStorage.setItem('id', data.data.id);
+					   localStorage.setItem('email', data.data.email);
 					   localStorage.setItem('spid', spid);
      				   localStorage.setItem('dt', JSON.stringify(dt)); // Simpan sebagai string JSON
 						$('.preloader').remove();

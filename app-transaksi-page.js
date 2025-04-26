@@ -1,6 +1,14 @@
 // Global constants and variables
 const spid = localStorage.getItem('spid');
-const SPREADSHEET_URL = `https://script.google.com/macros/s/AKfycbxX0U_DDwXQ9WjTlytdzk1O2ZJk2eu-7nivoCMBAlaZts0mCDvO3u2va-xV60Wi-bak_Q/exec?spid=${spid}`;
+const id = localStorage.getItem('id')
+const email = localStorage.getItem('email')
+
+const SPREADSHEET_URL = `https://script.google.com/macros/s/AKfycbxX0U_DDwXQ9WjTlytdzk1O2ZJk2eu-7nivoCMBAlaZts0mCDvO3u2va-xV60Wi-bak_Q/exec?spid=${spid}&id=${id}&email=${email}`;
+
+
+
+//const spid = localStorage.getItem('spid');
+//const SPREADSHEET_URL = `https://script.google.com/macros/s/AKfycbxX0U_DDwXQ9WjTlytdzk1O2ZJk2eu-7nivoCMBAlaZts0mCDvO3u2va-xV60Wi-bak_Q/exec?spid=${spid}`;
 //ini yang lama const SPREADSHEET_URL = "https://script.google.com/macros/s/AKfycbyBfKNeW5yhAyL8BdaJo6AhkbVfEPeorcqOMjPElrCCZJU9sQpCKpWwGAAqSYqKSqFw2g/exec";
 
 // Check user authentication
