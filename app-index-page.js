@@ -243,7 +243,7 @@ function displayLoanData(data) {
 <div class="fw-bold ${rancolo}">${formatRupiah(item.nilaiHutang)}</div>
 <div class="d-flex gap-3"> 
   <div class="small text-success fw-semibold"> 
-    ${item.jatuhTempo ? formatDate(item.jatuhTempo) : "Tanggal Kosong"}
+    ${item.jenis ==="Piutang" ? "Piutang" : "Hutang"}
   </div>
   <div class="small text-danger fw-semibold">${item.status}</div>
 </div>
