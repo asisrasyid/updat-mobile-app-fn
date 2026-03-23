@@ -1,0 +1,14 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(rm -f account-change-password.html account-edit-payment-method.html account-order-history.html account-profile-info.html account-return-details.html html.html wish-list.html settup-fn.html style2.css)",
+      "Bash(rm -rf assets/css/jquery-ui.css assets/css/slick.css assets/css/nice-select.css assets/css/responsive.css assets/images/preloader.gif)",
+      "Bash(cd:*)",
+      "Bash(rm -f app-index-page.js app-transaksi-page.js assets/css/style.css assets/js/app.js)",
+      "Bash(ls *.html *.js css/ js/)",
+      "Bash(rm -f app-page-index.js input-transaksi.js)",
+      "Bash(rm -rf js/core)",
+      "Bash(ls *.html)"
+    ]
+  }
+}

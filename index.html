@@ -1,487 +1,255 @@
 <!DOCTYPE html>
-<html lang="en">
-	<head>
-		<meta charset="UTF-8" />
-		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
-		<title>Managament Finance</title>
-		<link rel="manifest" href="manifest.json" />
-		<meta name="theme-color" content="#4CAF50" />
-  		<meta name="mobile-web-app-capable" content="yes">
-		<meta name="apple-mobile-web-app-capable" content="yes">
-		<meta name="apple-mobile-web-app-status-bar-style" content="default">
-		<link rel="icon" href="https://cdn-icons-png.flaticon.com/512/906/906334.png" />
+<html lang="id">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
+  <meta name="theme-color" content="#080D1A" />
+  <meta name="description" content="E-FinMen — Aplikasi Manajemen Keuangan Pribadi" />
+  <title>E-FinMen — Dashboard</title>
 
-		<!-- all css -->
-		<link rel="stylesheet" href="assets/css/bootstrap.min.css" />
-		<link rel="stylesheet" href="assets/css/jquery-ui.css" />
-		<link rel="stylesheet" href="assets/css/slick.css" />
-		<link rel="stylesheet" href="assets/css/line-awesome.css" />
-		<link rel="stylesheet" href="assets/css/nice-select.css" />
-		<link rel="stylesheet" href="assets/css/style.css" />
-		<link rel="stylesheet" href="assets/css/responsive.css" />
-		<link rel="stylesheet" href="style2.css"/>
-		<style>
-			/* Custom sidebar modal */
-			.modal.right .modal-dialog {
-				position: fixed;
-				right: 0;
-				margin: 0;
-				height: 100%;
-				width: 400px;
-				max-width: 100%;
-			}
-			.modal.right .modal-content {
-				height: 100%;
-				border: 0;
-				border-radius: 0;
-			}
-			.modal.right .modal-header {
-				background-color: #f8f9fa;
-			}
-		</style>
-	</head>
+  <!-- PWA Manifest -->
+  <link rel="manifest" href="manifest.json" />
 
-	<body>
-		<div id="loadingOverlay" style="display:none;">
-            <div class="spinner"></div>
+  <!-- Favicon -->
+  <link rel="icon" type="image/png" href="https://cdn-icons-png.flaticon.com/512/2830/2830284.png" />
+  <link rel="apple-touch-icon" href="https://cdn-icons-png.flaticon.com/512/2830/2830284.png" />
+
+  <!-- Line Awesome Icons -->
+  <link rel="stylesheet"
+    href="https://maxst.icons8.com/vue-static/landings/line-awesome/line-awesome/1.3.0/css/line-awesome.min.css" />
+
+  <!-- App CSS -->
+  <link rel="stylesheet" href="css/app.css" />
+</head>
+<body>
+
+  <!-- ======================================================
+       PRELOADER
+       ====================================================== -->
+  <div class="preloader">
+    <div class="preloader__brand">E<span>Fin</span>Men</div>
+    <div class="preloader__ring"></div>
+  </div>
+
+  <!-- ======================================================
+       LOADING OVERLAY
+       ====================================================== -->
+  <div id="loadingOverlay" class="loading-overlay" style="display:none;">
+    <div class="spinner"></div>
+    <div class="loading-overlay__text">Memuat data...</div>
+  </div>
+
+  <!-- ======================================================
+       HEADER
+       ====================================================== -->
+  <header class="app-header app-header--dark" id="appHeader">
+    <div class="app-header__left">
+      <div class="app-header__logo">E<span>Fin</span>Men</div>
+    </div>
+    <div class="app-header__right">
+      <button class="header-btn" id="btnRefresh" title="Refresh">
+        <i class="las la-sync-alt"></i>
+      </button>
+      <button class="header-btn" id="btnLogout" title="Keluar">
+        <i class="las la-power-off"></i>
+      </button>
+    </div>
+  </header>
+
+  <!-- ======================================================
+       HERO
+       ====================================================== -->
+  <div class="hero">
+    <div class="hero__inner">
+      <div class="hero__greeting">Selamat datang,</div>
+      <div class="hero__name user-name">Pengguna</div>
+
+      <div class="hero__balance-label">Total Saldo Bersih</div>
+      <div class="hero__balance" id="heroBalance">Rp &mdash;</div>
+      <div class="hero__balance-sub">
+        <span class="dot"></span>
+        <span>Diperbarui baru saja</span>
+      </div>
+
+      <!-- Hero Quick Pills -->
+      <div class="hero-pills">
+        <div class="hero-pill">
+          <div class="hero-pill__icon hero-pill__icon--income">
+            <i class="las la-arrow-down"></i>
           </div>
-		<!-- Preloader -->
-		<div class="preloader">
-			<img src="assets/images/preloader.gif" alt="preloader" />
-		</div>
+          <div class="hero-pill__label">Pemasukan</div>
+          <div class="hero-pill__value" id="heroPemasukan">Rp &mdash;</div>
+        </div>
+        <div class="hero-pill">
+          <div class="hero-pill__icon hero-pill__icon--expense">
+            <i class="las la-arrow-up"></i>
+          </div>
+          <div class="hero-pill__label">Pengeluaran</div>
+          <div class="hero-pill__value" id="heroPengeluaran">Rp &mdash;</div>
+        </div>
+        <div class="hero-pill">
+          <div class="hero-pill__icon hero-pill__icon--saving">
+            <i class="las la-piggy-bank"></i>
+          </div>
+          <div class="hero-pill__label">Tabungan</div>
+          <div class="hero-pill__value" id="heroTabungan">Rp &mdash;</div>
+        </div>
+      </div>
+    </div>
+  </div>
 
-		<!-- Settings -->
-		<div class="theme_settings">
-			<button type="button" id="settings_toggler">
-				<i class="las la-cog"></i>
-			</button>
-			<h3>Settings</h3>
+  <!-- ======================================================
+       CONTENT AREA
+       ====================================================== -->
+  <div class="content-area">
 
-			<h5>Primary Colors</h5>
-			<div class="setting_colors">
-				<button data-color="#FD3D57" class="prime_1 change_prime_color">
-					<i class="icon las la-check"></i>
-				</button>
-				<button data-color="#3498db" class="prime_2 change_prime_color">
-					<i class="icon las la-check"></i>
-				</button>
-				<button data-color="#1abc9c" class="prime_3 change_prime_color">
-					<i class="icon las la-check"></i>
-				</button>
-				<button data-color="#F79F1F" class="prime_4 change_prime_color">
-					<i class="icon las la-check"></i>
-				</button>
-			</div>
+    <!-- Stat Grid (4 cards: pemasukan, pengeluaran, tabungan, saldo bersih) -->
+    <div class="stat-grid" style="margin-bottom:20px;">
 
-			<h5>Secondary Colors</h5>
-			<div class="setting_colors">
-				<button data-color="#18181b" class="second_1 change_sec_color">
-					<i class="icon las la-check"></i>
-				</button>
-				<button data-color="#1e293b" class="second_2 change_sec_color">
-					<i class="icon las la-check"></i>
-				</button>
-				<button data-color="#374151" class="second_3 change_sec_color">
-					<i class="icon las la-check"></i>
-				</button>
-				<button data-color="#44403c" class="second_4 change_sec_color">
-					<i class="icon las la-check"></i>
-				</button>
-			</div>
-            <h5>System shortcut</h5>
-			<div class="mt-2">                 
-				<button type="button" id="pembahruandata" class="default_btn_filter">
-					 Reload
-				</button>
-			</div>
-			<h5>Filter Data</h5>
-			<div class="mt-2">
-				<button class="default_btn_filter">Week</button>
-				<button class="default_btn_filter">Month</button>
-				<button class="default_btn_filter">Year</button> 
-				</div>
-			</div>
-		</div>
-		<!-- top header -->
-		<header class="home-3">
-			<div class="container">
-				<div class="d-flex align-items-center justify-content-sm-between">
-					<div class="logo">
-					</div>
-					<div class="search_wrap d-none d-lg-block">
-					</div>
-					<div class="header_icon d-flex align-items-center ms-auto ms-sm-0">
-						<div class="shopcart">
-						</div>
-						<div class="position-relative myacwrap home-1">
-							<a href="javascript:void(0)" class="icon_wrp text-center myacc">
-								<span class="icon">
-									<i class="las la-user-circle" style="font-size: 30px;"></i>
-								</span>
-								<span class="icon_text">Account</span>
-							</a>
-							<div class="myacc_cont">
-								<div class="ac_links">
-									<a href="account.html" class="myac">
-										<i class="lar la-id-card"></i>
-										My Account
-									</a>
-									<a href="settup-fn.html">
-										<i class="las la-robot"></i>
-										Setting
-									</a>
-									<a href="javascript:void(0)" id="LogOutSistem">
-										<i class="las la-power-off"></i>
-										Log out
-									</a>
-								</div>
-							</div>
-						</div>
-					</div>
-				</div>
-			</div>
-		</header>
-		<!-- mobile bottom bar -->
-		<div class="mobile_bottombar d-block d-lg-none">
-			<div class="header_icon">
-				<a href="index.html" class="icon_wrp text-center">
-					<span class="icon">
-						<i class="las la-chart-bar"></i>
-					</span>
-					<span class="icon_text">Dashboard</span>
-				</a>
-				<a href="javascript:void(0)" class="icon_wrp text-center open_menu">
-					<span class="icon">
-						<i class="las la-bars"></i>
-					</span>
-					<span class="icon_text">Menu</span>
-				</a>
-				<a href="Transaksi-save.html" class="icon_wrp text-center">
-					<span class="icon">
-						<i class="las la-edit"></i>
-					</span>
-					<span class="icon_text">Simpan Transaksi</span>
-				</a>
-			</div>
-		</div>
+      <div class="stat-card">
+        <div class="stat-card__icon stat-card__icon--income">
+          <i class="las la-arrow-down"></i>
+        </div>
+        <div class="stat-card__label">Pemasukan</div>
+        <div class="stat-card__value" id="totalPemasukan">Rp &mdash;</div>
+      </div>
 
-		<!-- mobile menu -->
-		<div class="mobile_menwrap d-lg-none" id="mobile_menwrap">
-			<div class="mobile_menu_2">
-				<h5 class="mobile_title">
-					Menu
-					<span class="sidebarclose" id="menuclose">
-						<i class="las la-times"></i>
-					</span>
-				</h5>
-				<ul>
-					<li class="">
-						<a href="index.html">Dashboard</a>
-					</li>
+      <div class="stat-card">
+        <div class="stat-card__icon stat-card__icon--expense">
+          <i class="las la-arrow-up"></i>
+        </div>
+        <div class="stat-card__label">Pengeluaran</div>
+        <div class="stat-card__value" id="totalPengeluaran">Rp &mdash;</div>
+      </div>
 
-					<li class="">
-						<a href="plan-saveing.html">Saveing-Plan</a>
-						<!-- <div class="submn">
-							<a href="shop-list.html">List View</a>
-							<a href="shop-grid.html">Grid View</a>
-							<a href="shop-grid-2.html">Grid View 2</a>
-							<a href="wish-list.html">Wishlist</a>
-							<a href="shopping-cart.html">Shopping cart</a>
-							<a href="product-view.html">Product view</a>
-						</div> -->
-					</li>
-					<li class=""> 
-						<a href="budgeting-view.html">Budgeting</a>
-						<!-- <div class="submn">
-							<a href="account.html">My account</a>
-							<a href="login.html">Login</a>
-							<a href="register.html">Register</a>
-							<a href="forgot-password.html">Forgot password</a>
-						</div> -->
-					</li>
-					<li class="">
-						<a href="riwayat-transaksi.html">Riyawat Transaksi</a>
-						<!-- <div class="submn">
-							<a href="account.html">My account</a>
-							<a href="login.html">Login</a>
-							<a href="register.html">Register</a>
-							<a href="forgot-password.html">Forgot password</a>
-						</div> -->
-					</li>
-					<!-- <li class="">
-						<a href="">Setting </a>
-						<div class="submn">
-							<a href="about-us.html">about us</a>
-							<a href="contact-us.html">Contact us</a>
-							<a href="track-order.html">Track order</a>
-							<a href="faq.html">FAQ</a>
-							<a href="404.html">404</a>
-							<a href="checkout.html">Checkout</a>
-							<a href="payment.html">Payment</a>
-							<a href="order-completed.html">Order complete</a>
-						</div>
-					</li> -->
-				</ul>
-			</div>
-		</div>
+      <div class="stat-card">
+        <div class="stat-card__icon stat-card__icon--saving">
+          <i class="las la-piggy-bank"></i>
+        </div>
+        <div class="stat-card__label">Tabungan</div>
+        <div class="stat-card__value" id="totalTabungan">Rp &mdash;</div>
+      </div>
 
-		<!-- hero area -->	
-		<div class="container-lg home_2_hero_wrp home-3 mt-4">
-			<div class="row">
-				<div class="col-xl-9">
-					<div class="home_2_hero">
-						<div class="container">
-							<div class="hero_slider_active">
-								<div class="single_hero_slider">
-									<div class="hero_content m-4">
-										<p>Jangan Lupa isi Catatan Keuangannya</p>
-										<h1>
-											Hallo! <strong class="output"></strong><br class="d-block d-sm-none" />
-											Semangat yaa!
-										</h1>
-										<div class="hero_btn">
-											<a class="default_btn small rounded" href="Transaksi-save.html">Catat Transaksi</a>
-										</div>
-									</div>
-								</div>
-								<div class="single_hero_slider">
-									<div class="container">
-										<div class="hero_content">
-											<p><strong class="output"></strong> dicatat ya Pengeluarannya</p>
-											<h1>Punya rencana Menabung? yuk buat!</h1>
-											<div class="hero_btn">
-												<a class="default_btn small rounded" href="plan-saveing.html">Rencanan Tabungan</a>
-											</div>
-										</div>
-									</div>
-								</div>
-								<div class="single_hero_slider">
-									<div class="container">
-										<div class="hero_content">
-											<p>coba cek deh <strong class="output"></strong></p>
-											<h1>Pengeluarannya sudah sesuai rencana ?</h1>
-											<div class="hero_btn">
-												<a class="default_btn small rounded" href="budgeting-view.html">Data Transaksi</a>
-											</div>
-										</div>
-									</div>
-								</div>
-							</div>
-						</div>
-					</div>
-				</div>
-				<div class="col-xl-3">
-					<!-- Summary Cards -->
-					<div class="card mt-2">
-						<div class="card-body p-2">
-							<div class="row g-2">
-								<div class="col-6">
-									<div class="d-flex align-items-center p-2 rounded" style="background: rgba(78, 115, 223, 0.1);">
-										<div class="flex-shrink-0">
-											<i class="las la-money-bill fa-lg text-primary"></i>
-										</div>
-										<div class="flex-grow-1 ms-2">
-											<div class="small text-muted">Pemasukan</div>
-											<div class="fw-bold text-primary" id="totalPemasukan">Rp 0</div>
-										</div>
-									</div>
-								</div>
-								<div class="col-6">
-									<div class="d-flex align-items-center p-2 rounded" style="background: rgba(28, 200, 138, 0.1);">
-										<div class="flex-shrink-0">
-											<i class="las la-shopping-cart fa-lg text-success"></i>
-										</div>
-										<div class="flex-grow-1 ms-2">
-											<div class="small text-muted">Pengeluaran</div>
-											<div class="fw-bold text-success" id="totalPengeluaran">Rp 0</div>
-										</div>
-									</div>
-								</div>
-								<div class="col-6">
-									<div class="d-flex align-items-center p-2 rounded" style="background: rgba(54, 185, 204, 0.1);">
-										<div class="flex-shrink-0">
-											<i class="las la-piggy-bank fa-lg text-info"></i>
-										</div>
-										<div class="flex-grow-1 ms-2">
-											<div class="small text-muted">Tabungan</div>
-											<div class="fw-bold text-info" id="totalTabungan">Rp 0</div>
-										</div>
-									</div>
-								</div>
-								<div class="col-6">
-									<div class="d-flex align-items-center p-2 rounded" style="background: rgba(246, 194, 62, 0.1);">
-										<div class="flex-shrink-0">
-											<i class="las la-wallet fa-lg text-warning"></i>
-										</div>
-										<div class="flex-grow-1 ms-2">
-											<div class="small text-muted">Sisa Budget</div>
-											<div class="fw-bold text-warning" id="sisaBudget">Rp 0</div>
-										</div>
-									</div>
-								</div>
-							</div>
-						</div>
-					</div>
+      <div class="stat-card">
+        <div class="stat-card__icon stat-card__icon--indigo">
+          <i class="las la-wallet"></i>
+        </div>
+        <div class="stat-card__label">Saldo Bersih</div>
+        <div class="stat-card__value" id="sisaBudget">Rp &mdash;</div>
+      </div>
 
-					<div class="card mt-2">
-						<h4 class="text-dark card-header bg-white">Saldo Terkini</h4>
-						<div class="card-body p-2">
-							<div class="row g-2" id="dataaccount">
-							</div>
-						</div>
-					</div>
-					<div class="card mt-2">
-						<h4 class="text-dark card-header bg-white">List Hutang</h4>
-						<div class="card-body p-2">
-							<div class="row g-2" id="DataHutang">
-							</div>
-						</div>
-					</div>
-					<div class="shop_cart_wrap wishlist single_shop_cart_index">
-						<ul class="nav nav-tabs" id="financeTab" role="tablist">
-							<li class="nav-item" role="presentation">
-								<button class="nav-link active" id="savings-tab" data-bs-toggle="tab" data-bs-target="#savings" type="button" role="tab">
-									Rencana Tabungan
-								</button>
-							</li>
-							<li class="nav-item" role="presentation">
-								<button class="nav-link" id="budget-tab" data-bs-toggle="tab" data-bs-target="#budget" type="button" role="tab">
-									Budgeting
-								</button>
-							</li>
-						</ul>
-						<div class="tab-content p-3" id="financeTabContent">
-							<div class="tab-pane fade show active" id="savings" role="tabpanel">
-								<div id="data-container">
-									<!-- Rencana tabungan akan ditampilkan di sini -->
-								</div>
-								<div class="shop_cart_wrap wishlist single_shop_cart_index">
-									<div class="row justify-content-center">
-										<a class="default_btn small rounded" href="plan-saveing.html">Lihat Rencanan Tabungan</a>
-									</div>
-								</div>
-							</div>
-							<div class="tab-pane fade" id="budget" role="tabpanel">
-								<div id="budget-container">
-									<!-- Progress budget akan ditampilkan di sini -->
-								</div>
-								<div class="shop_cart_wrap wishlist single_shop_cart_index">
-									<div class="row justify-content-center">
-										<a class="default_btn small rounded" href="plan-saveing.html">Lihat Budgeting</a>
-									</div>
-								</div>
-							</div>
-						</div>
-					</div>
-				</div>
-			</div>
-		</div>
+    </div>
 
-		<!-- Dashboard Summary -->
-		<section class="container-lg mt-3 >
-			<!-- Charts Row -->
-				<div class="row">
-					<!-- Distribusi Pengeluaran -->
-					<div class="col-12 col-sm-6 h-100">
-						<div class="card m-0 mb-4">
-							<div class="card-header bg-white py-3 d-flex justify-content-between align-items-center">
-								<h4 class="m-0 text-dark">Distribusi Pengeluaran</h6>
-								<span class="badge bg-primary">Bulan Ini</span>
-							</div>
-							<div class="card-body">
-								<div class="Pengeluaran-distribution">
-									<!-- Items will be populated by JavaScript -->
-								</div>
-							</div>
-						</div>
-					</div>
+    <!-- Rekening -->
+    <div class="section">
+      <div class="section-title">
+        Rekening
+        <a href="#">Lihat Semua</a>
+      </div>
+      <div class="account-scroll" id="accountScroll">
+        <!-- rendered by JS -->
+      </div>
+    </div>
 
-					<!-- Tren Keuangan -->
-					<div class="col-12 col-sm-6 h-100">
-						<div class="card mb-4">
-							<div class="card-header  bg-white py-3 d-flex justify-content-between align-items-center">
-								<h4 class="m-0 text-dark">Tren Keuangan</h6>
-								<div class="dropdown">
-									<button class="btn btn-link dropdown-toggle" type="button" id="trendFilterButton" data-bs-toggle="dropdown">
-										<i class="las la-filter"></i> Filter
-									</button>
-									<ul class="dropdown-menu">
-										<li><a class="dropdown-item" href="#" data-period="week">Minggu Ini</a></li>
-										<li><a class="dropdown-item" href="#" data-period="month">Bulan Ini</a></li>
-										<li><a class="dropdown-item" href="#" data-period="year">Tahun Ini</a></li>
-									</ul>
-								</div>
-							</div>
-							<div class="card-body">
-								<div class="trend-list">
-									<!-- Items will be populated by JavaScript -->
-								</div>
-							</div>
-						</div>
-					</div>
-				</div>
+    <!-- Hutang & Piutang -->
+    <div class="section">
+      <div class="section-title">Hutang &amp; Piutang</div>
+      <div class="card">
+        <div class="card-body" id="loanList">
+          <!-- rendered by JS -->
+        </div>
+      </div>
+    </div>
 
-				<!-- Recent Transactions -->
-				<div class="row">
-					<div class="col-12">
-						<div class="card  mb-4">
-							<div class="card-header  bg-white py-3 d-flex justify-content-between align-items-center">
-								<h4 class="m-0 text-dark">Transaksi Terakhir</h6>
-								<div class="dropdown">
-									<button class="btn btn-link dropdown-toggle" id="dropdownMenuButton" data-bs-toggle="dropdown">
-										<i class="las la-filter"></i> Filter
-									</button>
-									<ul class="dropdown-menu">
-										<li><a class="dropdown-item" href="#">Semua</a></li>
-										<li><a class="dropdown-item" href="#">Pemasukan</a></li>
-										<li><a class="dropdown-item" href="#">Pengeluaran</a></li>
-									</ul>
-								</div>
-							</div>
-							<div class="card-body">
-								<div id="recentTransactions" class="transaction-list">
-									<!-- Transactions will be populated by JavaScript -->
-								</div>
-							</div>
-						</div>
-					</div>
-				</div>
-		</section>
-		<div class="modal fade right" id="sidebarModal" tabindex="-1" aria-labelledby="sidebarModalLabel" aria-hidden="true">
-			<div class="modal-dialog">
-			  <div class="modal-content">
-				<div class="modal-header">
-				  <h5 class="modal-title" id="sidebarModalLabel">Detail Pengeluaran <strong id="juduldetail"></strong> </h5>
-				  <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-				</div>
-				<div class="modal-body">
-					<div style="max-height: 90vh; overflow: auto;" id="sidebarContent">
-						<!-- Transactions will be populated by JavaScript -->
-					</div>
-				</div>
-			  </div>
-			</div>
-		  </div>
+    <!-- Target Tabungan -->
+    <div class="section">
+      <div class="section-title">
+        Target Tabungan
+        <a href="plan-saveing.html">Lihat Semua</a>
+      </div>
+      <div id="savingList">
+        <!-- rendered by JS -->
+      </div>
+    </div>
 
-		<!-- copyright -->
-		<div class="copyright_wrap">
-			<div class="container">
-				<div class="row align-items-center">
-					<div class="col-md-6">
-						<p class="copyright_text">2025 | Finance Management</p>
-					</div>
-				</div>
-			</div>
-		</div>
-		<!-- all js -->
-		<script src="assets/js/bootstrap.bundle.min.js"></script>
-		<script src="assets/js/jquery-3.5.1.min.js"></script>
-		<script src="assets/js/jquery-ui.min.js"></script>
-		<script src="assets/js/slick.min.js"></script>
-		<script src="assets/js/jquery.nice-select.min.js"></script>
-		<script src="assets/js/app.js"></script>
-		<script src="assets/js/theme-manager.js"></script>
-		<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
-		<script src="app-index-page.js"></script>
-	</body>
+    <!-- Distribusi Pengeluaran -->
+    <div class="section">
+      <div class="section-title">Distribusi Pengeluaran</div>
+      <div class="card">
+        <div class="card-body" id="distContainer">
+          <!-- rendered by JS -->
+        </div>
+      </div>
+    </div>
+
+    <!-- Tren Bulanan -->
+    <div class="section">
+      <div class="section-title">Tren Bulanan</div>
+      <div class="card">
+        <div class="card-body" id="trendList">
+          <!-- rendered by JS -->
+        </div>
+      </div>
+    </div>
+
+    <!-- Transaksi Terbaru -->
+    <div class="section">
+      <div class="section-title">
+        Transaksi Terbaru
+        <a href="riwayat-transaksi.html">Lihat Semua</a>
+      </div>
+      <div id="recentList">
+        <!-- rendered by JS -->
+      </div>
+    </div>
+
+  </div><!-- /content-area -->
+
+  <!-- ======================================================
+       DETAIL SHEET
+       ====================================================== -->
+  <div class="backdrop" id="backdropDetail"></div>
+  <div class="sheet" id="detailSheet">
+    <div class="sheet__handle"></div>
+    <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:16px;">
+      <div class="sheet__title" id="detailSheetTitle" style="margin-bottom:0;">Detail</div>
+      <button class="btn btn-ghost" id="closeDetailSheet">
+        <i class="las la-times"></i>
+      </button>
+    </div>
+    <div id="detailContent"></div>
+  </div>
+
+  <!-- ======================================================
+       BOTTOM NAVIGATION
+       ====================================================== -->
+  <nav class="app-nav">
+    <a href="index.html" class="nav-item active">
+      <i class="las la-home"></i>
+      <span>Beranda</span>
+    </a>
+    <a href="riwayat-transaksi.html" class="nav-item">
+      <i class="las la-exchange-alt"></i>
+      <span>Riwayat</span>
+    </a>
+    <a href="Transaksi-save.html" class="nav-item nav-item--fab">
+      <i class="las la-plus"></i>
+    </a>
+    <a href="plan-saveing.html" class="nav-item">
+      <i class="las la-piggy-bank"></i>
+      <span>Tabungan</span>
+    </a>
+    <a href="budgeting-view.html" class="nav-item">
+      <i class="las la-wallet"></i>
+      <span>Anggaran</span>
+    </a>
+  </nav>
+
+  <!-- ======================================================
+       SCRIPTS
+       ====================================================== -->
+  <script src="js/core.js"></script>
+  <script src="js/dashboard.js"></script>
+
+</body>
 </html>

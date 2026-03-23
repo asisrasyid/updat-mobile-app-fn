@@ -1,17 +1,22 @@
 {
-    "name": "Finance Management",
-    "short_name": "E-FinMen",
-    "start_url": "/",
-    "display": "standalone",
-    "background_color": "#ffffff",
-    "theme_color": "#4CAF50",
-    "orientation": "portrait",
-    "icons": [
-      {
-        "src": "https://cdn-icons-png.flaticon.com/512/906/906334.png",
-        "sizes": "192x192",
-        "type": "image/png"
-      }
-    ]
-  }
-  
+  "name": "E-FinMen — Finance Management",
+  "short_name": "E-FinMen",
+  "description": "Kelola keuangan pribadi dengan cerdas",
+  "start_url": "/index.html",
+  "display": "standalone",
+  "orientation": "portrait",
+  "background_color": "#080D1A",
+  "theme_color": "#6366F1",
+  "icons": [
+    {
+      "src": "https://cdn-icons-png.flaticon.com/512/906/906334.png",
+      "sizes": "192x192",
+      "type": "image/png"
+    },
+    {
+      "src": "https://cdn-icons-png.flaticon.com/512/906/906334.png",
+      "sizes": "512x512",
+      "type": "image/png"
+    }
+  ]
+}

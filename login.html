@@ -1,218 +1,231 @@
 <!DOCTYPE html>
-<html lang="en">
-	<head>
-		<meta charset="UTF-8" />
-		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
-		<title>Managament Finance</title>
-		<link rel="manifest" href="/updat-mobile-app-fn/manifest.json" />
-  		<meta name="theme-color" content="#4CAF50"/>
-  		<link rel="icon" href="https://cdn-icons-png.flaticon.com/512/906/906334.png" />
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Login — E-FinMen</title>
+  <link rel="manifest" href="manifest.json">
+  <meta name="theme-color" content="#080D1A">
+  <meta name="mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <link rel="icon" href="https://cdn-icons-png.flaticon.com/512/906/906334.png">
+  <link rel="stylesheet" href="assets/css/line-awesome.css">
+  <link rel="stylesheet" href="css/app.css">
+</head>
+<body>
 
-		<!-- all css -->
-		<link rel="stylesheet" href="assets/css/bootstrap.min.css" />
-		<link rel="stylesheet" href="assets/css/jquery-ui.css" />
-		<link rel="stylesheet" href="assets/css/slick.css" />
-		<link rel="stylesheet" href="assets/css/line-awesome.css" />
-		<link rel="stylesheet" href="assets/css/nice-select.css" />
-		<link rel="stylesheet" href="assets/css/style.css" />
-		<link rel="stylesheet" href="assets/css/responsive.css" />
-		<link rel="stylesheet" href="assets/sweetalert2/sweetalert2.css">
-		<style>
-			/* Gaya untuk input (text, number, email, dll) */
-			.input-styled {
-			  width: 100%;
-			  max-width: 300px;
-			  padding: 12px 16px;
-			  border: 2px solid;
-			  border-radius: 10px;
-			  background-color: #f9f9f9;
-			  color: #333;
-			  font-size: 16px;
-			  font-family: 'Segoe UI', sans-serif;
-			  transition: all 0.3s ease;
-			  box-shadow: 0 3px 6px rgba(0, 0, 0, 0.1);
-			}
-			
-			/* Hover & Focus effect */
-			.input-styled:hover,
-			.input-styled:focus {
-			  background-color: #fff;
-			  outline: none;
-			  box-shadow: 0 5px 10px rgba(72, 187, 120, 0.3);
-			}
-			
-			/* Placeholder style */
-			.input-styled::placeholder {
-			  color: #999;
-			  transition: color 0.3s ease;
-			}
-			
-			/* Saat focus, placeholder agak menghilang */
-			.input-styled:focus::placeholder {
-			  color: transparent;
-			}
-			</style>
-	</head>
+  <!-- Preloader -->
+  <div class="preloader" id="preloader">
+    <div class="preloader__brand">E<span>Fin</span>Men</div>
+    <div class="preloader__ring"></div>
+  </div>
 
-	<body style="height:100vh;">
-		<!-- Preloader -->
-		<div class="preloader">
-			<img src="assets/images/preloader.gif" alt="preloader" />
-		</div>
+  <!-- Login Page -->
+  <div class="login-page">
 
-		<!-- Settings -->
-		<div class="theme_settings">
-			<button type="button" id="settings_toggler">
-				<i class="las la-cog"></i>
-			</button>
-			<h3>Themes settings</h3>
+    <!-- Brand / Logo Area -->
+    <div class="login-brand">
+      <div class="login-logo">
+        <div class="login-logo__icon">
+          <i class="las la-chart-line"></i>
+        </div>
+        <div class="login-logo__name">E-<span>Fin</span>Men</div>
+        <div class="login-logo__tagline">Kelola keuanganmu dengan cerdas</div>
+      </div>
+    </div>
 
-			<h5>Primary Colors</h5>
-			<div class="setting_colors">
-				<button data-color="#FD3D57" class="prime_1 change_prime_color">
-					<i class="icon las la-check"></i>
-				</button>
-				<button data-color="#3498db" class="prime_2 change_prime_color">
-					<i class="icon las la-check"></i>
-				</button>
-				<button data-color="#1abc9c" class="prime_3 change_prime_color">
-					<i class="icon las la-check"></i>
-				</button>
-				<button data-color="#F79F1F" class="prime_4 change_prime_color">
-					<i class="icon las la-check"></i>
-				</button>
-			</div>
+    <!-- Form Area -->
+    <div class="login-form-area">
+      <h1 class="login-title">Selamat Datang</h1>
+      <p class="login-subtitle">Masuk ke akun keuanganmu</p>
 
-			<h5>Secondary Colors</h5>
-			<div class="setting_colors">
-				<button data-color="#18181b" class="second_1 change_sec_color">
-					<i class="icon las la-check"></i>
-				</button>
-				<button data-color="#1e293b" class="second_2 change_sec_color">
-					<i class="icon las la-check"></i>
-				</button>
-				<button data-color="#374151" class="second_3 change_sec_color">
-					<i class="icon las la-check"></i>
-				</button>
-				<button data-color="#44403c" class="second_4 change_sec_color">
-					<i class="icon las la-check"></i>
-				</button>
-			</div>
-		</div>
+      <!-- Error Box -->
+      <div id="loginError" style="display:none;" class="form-error">
+        <i class="las la-exclamation-circle" style="font-size:18px;flex-shrink:0;"></i>
+        <span id="loginErrorText">Email atau password salah.</span>
+      </div>
 
-		<!--Login wrap-->
-		<div class="register_wrap section_padding_b" style="height: 100vh; ">
-			<div class="container">
-				<div class="row justify-content-center">
-					<div class="col-xl-5 col-lg-7 col-md-9">
-						<div class="register_form padding_default" style="margin-top: 100px;">
-							<h4 class="title_2">Login</h4>
-							<p class="mb-4 text_md">Login to start the journey</p>
-							<form action="">
-								<div class="row">
-									<div class="col-12">
-										<div class="single_billing_inp">
-											<label>Username <span>*</span></label>
-											<input id="usernamedt" type="email" placeholder="username" class="input-styled" required/>
-										</div>
-									</div>
-									<div class="col-12">
-										<div class="single_billing_inp">
-											<label>Password <span>*</span></label>
-											<input id="pasdt" type="password" placeholder="type password" class="input-styled" required/>
-										</div>
-									</div>
-									<div class="col-12 mt-3">
-										<button id="submitbutton" type="submit" class="default_btn xs_btn rounded px-4 d-block w-100">Login</button>
-									</div>
-								</div>
-							</form>
+      <form id="loginForm" novalidate>
 
-							<div class="dif_regway my-3">
-								<span class="txt">Don't have an account.?</span>
-							</div>
-							<p class="text-center mt-3 mb-0"> <a href="registrasi.html" class="text-color">Register Now</a></p>
-						</div>
-					</div>
-				</div>
-			</div>
-		</div>
+        <!-- Email Field -->
+        <div class="form-group">
+          <label class="label" for="usernamedt">
+            <i class="las la-envelope"></i> Email
+          </label>
+          <div class="input-group">
+            <i class="las la-envelope input-icon"></i>
+            <input
+              id="usernamedt"
+              type="email"
+              class="input"
+              placeholder="nama@email.com"
+              autocomplete="email"
+              inputmode="email"
+              required
+            >
+          </div>
+        </div>
 
-		<!-- footer area -->
-		<footer class="copyright_wrap">
-			<div class="container">
-				<div class="row align-items-center">
-					<div class="col-md-6">
-						<p class="copyright_text">2025 | Finance Management</p>
-					</div>
-				</div>
-			</div>
-		</footer>
-		<!-- all js -->
-		<script src="assets/js/bootstrap.bundle.min.js"></script>
-		<script src="assets/js/jquery-3.5.1.min.js"></script>
-		<script src="assets/js/jquery-ui.min.js"></script>
-		<script src="assets/js/slick.min.js"></script>
-		<script src="assets/js/jquery.nice-select.min.js"></script>
-		<script src="assets/sweetalert2/sweetalert2.js"></script>
-		<script src="assets/js/app.js"></script>
-		<script>
-			
-			const spredurtl = 'https://script.google.com/macros/s/AKfycbxX0U_DDwXQ9WjTlytdzk1O2ZJk2eu-7nivoCMBAlaZts0mCDvO3u2va-xV60Wi-bak_Q/exec'
-			$('.preloader').fadeOut(500, function(){ $('.preloader').remove(); } );
-			const submitButton = document.getElementById("submitbutton");   
-			document.getElementById("submitbutton").addEventListener("click", function(event) {
-			  event.preventDefault(); 
-			  $('.preloader').fadeIn(200);
-			  submitButton.disabled = true;
-			  submitButton.textContent = "Proses Login. . .";
-			  const usernamedt = document.getElementById("usernamedt"); 
-			  const pasdt = document.getElementById("pasdt");
-		  
-			  const usernamedtVal = usernamedt.value;
-			  const pasdtVal = pasdt.value;
-			  fetch(`${spredurtl}?dataset=login&usr=${usernamedtVal}&psr=${pasdtVal}`)
-				.then(response => response.json())
-				.then(data => {
-					if (data.success) {
-						submitButton.disabled = false;
-						submitButton.textContent = "Login";
-						const user = data.data.nama;
-						const spid = data.data.spreedSheetId
-        				const dt = data.data;
-						console.log(data.data);
+        <!-- Password Field -->
+        <div class="form-group">
+          <label class="label" for="pasdt">
+            <i class="las la-lock"></i> Password
+          </label>
+          <div class="input-group">
+            <i class="las la-lock input-icon"></i>
+            <input
+              id="pasdt"
+              type="password"
+              class="input"
+              placeholder="Masukkan password"
+              autocomplete="current-password"
+              required
+              style="padding-right: 48px;"
+            >
+            <button
+              type="button"
+              class="input-suffix"
+              id="togglePass"
+              aria-label="Tampilkan password"
+              style="background:none;border:none;cursor:pointer;padding:4px;color:var(--text-400);font-size:20px;line-height:1;transition:color 0.2s;"
+            >
+              <i class="las la-eye"></i>
+            </button>
+          </div>
+        </div>
 
-     				   localStorage.setItem('user', user);
-					   localStorage.setItem('id', data.data.id);
-					   localStorage.setItem('email', data.data.email);
-					   localStorage.setItem('spid', spid);
-     				   localStorage.setItem('dt', JSON.stringify(dt)); // Simpan sebagai string JSON
-						$('.preloader').remove();
-     				   window.location.href = "index.html";
-     				 } else {
-						submitButton.disabled = false;
-						submitButton.textContent = "Login";
-						$('.preloader').remove();
-     				   Swal.fire({
-     				     title: 'Login Gagal!',
-     				     text: data.message || 'Username atau password salah',
-     				     icon: 'error',
-     				     confirmButtonText: 'Coba Lagi'
-     				   });
-     				 }
-				})
-				.catch(err => {
-					submitButton.disabled = false;
-					submitButton.textContent = "Login";
-					$('.preloader').remove();
-					Swal.fire({
-					title: 'Ups!',
-					text: err,
-					icon: 'warning',
-					confirmButtonText: 'Sorry!'
-				  });
-				});
-			});
-		  </script>
-	</body>
+        <!-- Submit Button -->
+        <button
+          type="submit"
+          id="submitBtn"
+          class="btn btn-primary btn-full btn-lg"
+          style="margin-top: 8px;"
+        >
+          <i class="las la-sign-in-alt"></i>
+          Masuk
+        </button>
+
+      </form>
+
+      <!-- Footer Links -->
+      <div style="text-align:center;margin-top:24px;font-size:14px;color:var(--text-400);">
+        Belum punya akun?
+        <a href="registrasi.html" style="color:var(--indigo-600);font-weight:700;">Daftar</a>
+      </div>
+
+      <div style="text-align:center;margin-top:16px;font-size:12px;color:var(--text-400);">
+        &copy; 2025 E-FinMen &middot; Finance Management
+      </div>
+
+    </div><!-- /.login-form-area -->
+
+  </div><!-- /.login-page -->
+
+  <script>
+    const SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbxX0U_DDwXQ9WjTlytdzk1O2ZJk2eu-7nivoCMBAlaZts0mCDvO3u2va-xV60Wi-bak_Q/exec';
+
+    // Redirect jika sudah login
+    if (localStorage.getItem('user')) {
+      window.location.href = 'index.html';
+    }
+
+    document.addEventListener('DOMContentLoaded', function () {
+      // Sembunyikan preloader
+      const preloader = document.getElementById('preloader');
+      if (preloader) {
+        preloader.classList.add('hide');
+      }
+
+      const form       = document.getElementById('loginForm');
+      const submitBtn  = document.getElementById('submitBtn');
+      const errorBox   = document.getElementById('loginError');
+      const errorText  = document.getElementById('loginErrorText');
+      const togglePass = document.getElementById('togglePass');
+      const pasInput   = document.getElementById('pasdt');
+
+      // ── Toggle password visibility ────────────────────────────────
+      togglePass.addEventListener('click', function () {
+        var isPassword = pasInput.type === 'password';
+        pasInput.type  = isPassword ? 'text' : 'password';
+        togglePass.querySelector('i').className = isPassword
+          ? 'las la-eye-slash'
+          : 'las la-eye';
+      });
+
+      // ── Helper functions ──────────────────────────────────────────
+      function showError(msg) {
+        errorText.textContent = msg;
+        errorBox.style.display = 'flex';
+      }
+
+      function hideError() {
+        errorBox.style.display = 'none';
+      }
+
+      function setLoading(loading) {
+        submitBtn.disabled = loading;
+        if (loading) {
+          submitBtn.innerHTML =
+            '<span class="spinner spinner--sm" style="border-color:rgba(255,255,255,0.3);border-top-color:#fff;"></span>' +
+            ' Memproses...';
+        } else {
+          submitBtn.innerHTML = '<i class="las la-sign-in-alt"></i> Masuk';
+        }
+      }
+
+      // ── Clear error on input ──────────────────────────────────────
+      ['usernamedt', 'pasdt'].forEach(function (id) {
+        document.getElementById(id).addEventListener('input', hideError);
+      });
+
+      // ── Form submit ───────────────────────────────────────────────
+      form.addEventListener('submit', async function (e) {
+        e.preventDefault();
+        hideError();
+
+        var email    = document.getElementById('usernamedt').value.trim();
+        var password = document.getElementById('pasdt').value;
+
+        if (!email || !password) {
+          showError('Email dan password wajib diisi.');
+          return;
+        }
+
+        setLoading(true);
+
+        try {
+          var res  = await fetch(
+            SCRIPT_URL +
+            '?dataset=login' +
+            '&usr=' + encodeURIComponent(email) +
+            '&psr=' + encodeURIComponent(password)
+          );
+          var data = await res.json();
+
+          if (data.success) {
+            var u = data.data;
+            localStorage.setItem('user',  u.nama);
+            localStorage.setItem('id',    u.id);
+            localStorage.setItem('email', u.email);
+            localStorage.setItem('spid',  u.spreedSheetId);
+            localStorage.setItem('dt',    JSON.stringify(u));
+            window.location.href = 'index.html';
+          } else {
+            setLoading(false);
+            showError(data.message || 'Email atau password salah.');
+          }
+        } catch (err) {
+          setLoading(false);
+          showError('Tidak dapat terhubung ke server. Periksa koneksi internet.');
+        }
+      });
+    });
+
+    // ── Service Worker registration ───────────────────────────────
+    if ('serviceWorker' in navigator) {
+      navigator.serviceWorker.register('service-worker.js').catch(function () {});
+    }
+  </script>
+
+</body>
 </html>

@@ -1,36 +1,61 @@
-const CACHE_NAME = 'my-app-cache-v1';
-const urlsToCache = [
-  '/',
+const CACHE_NAME = 'efinmen-v2';
+
+const STATIC_ASSETS = [
   '/index.html',
+  '/login.html',
+  '/Transaksi-save.html',
+  '/riwayat-transaksi.html',
+  '/plan-saveing.html',
   '/budgeting-view.html',
-  'assets/css/bootstrap.min.css',
-	'assets/css/jquery-ui.css',
-	'assets/css/slick.css',
-	'assets/css/line-awesome.css',
-	'assets/css/nice-select.css',
-	'assets/css/style.css',
-	'assets/css/responsive.css',
-  'assets/js/bootstrap.bundle.min.js',
-	'assets/js/jquery-3.5.1.min.js',
-	'assets/js/jquery-ui.min.js',
-	'assets/js/slick.min.js',
-	'assets/js/jquery.nice-select.min.js',
-	'assets/js/app.js',
-	'/assets/sweetalert2/sweetalert2.min.js',
-    '/assets/sweetalert2/sweetalert2.min.css',
-  // Tambahkan file lain seperti logo, script, dll.
+  '/registrasi.html',
+  '/css/app.css',
+  '/js/core.js',
+  '/js/dashboard.js',
+  '/js/transaksi.js',
+  '/assets/css/line-awesome.css',
+  '/manifest.json',
 ];
 
-self.addEventListener("install", (event) => {
-    event.waitUntil(
-      caches.open(cacheName).then((cache) => cache.addAll(filesToCache))
-    );
-  });
-  
-  self.addEventListener("fetch", (event) => {
+self.addEventListener('install', event => {
+  event.waitUntil(
+    caches.open(CACHE_NAME)
+      .then(cache => Promise.allSettled(STATIC_ASSETS.map(u => cache.add(u).catch(() => {}))))
+      .then(() => self.skipWaiting())
+  );
+});
+
+self.addEventListener('activate', event => {
+  event.waitUntil(
+    caches.keys()
+      .then(keys => Promise.all(keys.filter(k => k !== CACHE_NAME).map(k => caches.delete(k))))
+      .then(() => self.clients.claim())
+  );
+});
+
+self.addEventListener('fetch', event => {
+  const { request } = event;
+  const url = new URL(request.url);
+
+  if (request.method !== 'GET') return;
+  if (url.hostname === 'script.google.com') return;
+
+  if (request.mode === 'navigate') {
     event.respondWith(
-      caches.match(event.request).then((response) => {
-        return response || fetch(event.request);
-      })
+      fetch(request).catch(() => caches.match(request).then(r => r || caches.match('/login.html')))
     );
-  });
+    return;
+  }
+
+  event.respondWith(
+    caches.match(request).then(cached => {
+      if (cached) return cached;
+      return fetch(request).then(res => {
+        if (res && res.ok) {
+          const clone = res.clone();
+          caches.open(CACHE_NAME).then(c => c.put(request, clone));
+        }
+        return res;
+      });
+    })
+  );
+});
