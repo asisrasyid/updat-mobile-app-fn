@@ -116,4 +116,9 @@
 - **Deskripsi:** `parseMessage` membaca `parameter.Jenis`, `parameter.Kategori`, dst — padahal form mengirim `inputJenis`, `inputKategori`, `inputSubkategori`, `keterangan` (lowercase), `jumlah` (lowercase), `inputSumber`. Seluruh field dikoreksi sesuai `name` attribute form HTML aktual.
 - **Impact:** Simpan transaksi (Pengeluaran/Pemasukan/Perpindahan) berfungsi. Sebelumnya selalu return error "Data tidak Lengkap".
 
+### [2026-03-24] feat: Edit budget flow — tombol edit + quick increment + POST ke GAS
+- **File:** `budgeting-view.html`
+- **Deskripsi:** Implementasi full flow edit anggaran: (1) tombol edit (ikon pensil) di setiap budget card dengan `data-name` & `data-budget`; (2) bottom sheet `sheetEdit` berisi info kategori + anggaran saat ini, tombol quick-increment (+100K/+250K/+500K/+1Jt), input nilai baru pre-filled; (3) handler `openEditSheet()` via event delegation; (4) submit `editBudgetForm` POST ke GAS dengan `paramcek=editbudget`, `nama`, `nilai`; (5) toast/Swal sukses+gagal, auto-refresh `fetchBudgetData()` setelah simpan. Backdrop menutup kedua sheet.
+- **Impact:** Fitur edit dan increment anggaran per kategori berfungsi penuh end-to-end.
+
 > Entry berikutnya ditambah di bawah saat ada perubahan.
