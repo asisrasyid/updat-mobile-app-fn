@@ -8,8 +8,9 @@
    CONFIG
    ============================================================ */
 const Config = (() => {
-  const SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbxX0U_DDwXQ9WjTlytdzk1O2ZJk2eu-7nivoCMBAlaZts0mCDvO3u2va-xV60Wi-bak_Q/exec';
-
+  const SCRIPT_URL_2 = 'https://script.google.com/macros/s/AKfycbxX0U_DDwXQ9WjTlytdzk1O2ZJk2eu-7nivoCMBAlaZts0mCDvO3u2va-xV60Wi-bak_Q/exec';
+  const SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbz5-k5sVC8Wm-LFGaq2tkKViJtFfvR4fcgGSxpDP9KHjHk_xub1aOFCJtlCZ2qNNWWQ7A/exec';
+ 
   function getUrl() {
     const spid  = localStorage.getItem('spid')  || '';
     const id    = localStorage.getItem('id')    || '';

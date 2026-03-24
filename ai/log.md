@@ -104,4 +104,16 @@
 - **Deskripsi:** Full rewrite Transaksi-save.html. Migrasi ke css/app.css (design system v2). Struktur: preloader, loading-overlay, app-header light (back button + refresh + logout), greeting user, segmented control (#typeSegmented: Pengeluaran/Pemasukan/Pindah), form card (#formCard, border-left accent dinamis), form fields: hidden inputs (paramcek, inputJenis, inputKategori, inputSubkategori, inputSumber, inputDataaLain), JenisTransaksi hidden select, keteranganDropdown, enumDropdown, dropdownSumberContainer (bySumber), inputSumberContainer (manualSumberInput, display:none Perpindahan), keterangan text, jumlah dengan .input-rp prefix, loanShow section (display:none), DataLain section (display:none), submit button full-width. Scripts: sweetalert2 → core.js → transaksi.js. Tanpa Bootstrap, jQuery, file lama.
 - **Impact:** Form transaksi tampil konsisten design system v2 dan dioperasikan oleh transaksi.js.
 
+---
+
+### [2026-03-24] fix: Perbaiki 9 bug di Google Apps Script backend
+- **File:** `js/google._scrip.md`
+- **Deskripsi:** Audit dan perbaikan menyeluruh script GAS backend. Bug yang diperbaiki: (B1) `editbudget` buka sheet `Transaksi` → harusnya `Budgeting`; (B2) typo `e.paramCek.nilai` → `e.parameter.nilai`; (B3) logika validasi `!nama && !nilai` → `!nama || !nilai`; (B4) typo `valuesi[1]` → `values[i][1]`; (B5) variabel `keterangan` duplikat `enumKeterangan` di `simpanBudget` → pisah ke param `kelompok`; (B6) `saveToSheet()` di `simpanBudget` hilang arg SHEET_ID; (B7) blok `Regis` di doGet kosong sehingga handler registrasi unreachable → pindahkan logika ke blok `Regis`; (B8) validasi gagal di doGet return `success: true` padahal gagal → `success: false`; (B9) duplikat blok login di dalam auth-validated else (dead code) → hapus, ekstrak ke `handleLogin()`. Refactor: helper `_json()`, fungsi `handleLogin()`, `handleRegis()`, `getBckdata()` sebagai fungsi terpisah. Tambah mapping tabel dataset ↔ sheet nama sebagai dokumentasi.
+- **Impact:** Semua endpoint CRUD backend kini berfungsi benar. Registrasi user, edit budget, simpan transaksi, dan validasi session semuanya diperbaiki.
+
+### [2026-03-24] fix: parseMessage GAS — field name mismatch form vs backend
+- **File:** `js/google._scrip.md`
+- **Deskripsi:** `parseMessage` membaca `parameter.Jenis`, `parameter.Kategori`, dst — padahal form mengirim `inputJenis`, `inputKategori`, `inputSubkategori`, `keterangan` (lowercase), `jumlah` (lowercase), `inputSumber`. Seluruh field dikoreksi sesuai `name` attribute form HTML aktual.
+- **Impact:** Simpan transaksi (Pengeluaran/Pemasukan/Perpindahan) berfungsi. Sebelumnya selalu return error "Data tidak Lengkap".
+
 > Entry berikutnya ditambah di bawah saat ada perubahan.
